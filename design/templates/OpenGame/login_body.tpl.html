@@ -1,0 +1,220 @@
+<script type="text/javascript">
+  // var password, password2;
+  var L_sys_login_password_show = '{LA_sys_login_password_show}';
+  var L_sys_login_password_hide = '{LA_sys_login_password_hide}';
+</script>
+
+<div id="log_main">
+  <div id="log_title">{L_sys_supernova}: {L_sys_universe} "{C_game_name}"</div>
+  <div>
+    {L_adm_opt_galaxies}: <font color="red">{C_game_maxGalaxy}</font> - {L_adm_opt_systems}: <font color="red">{C_game_maxSystem}</font> - {L_adm_opt_planets}: <font color="red">{C_game_maxPlanet}</font>
+  </div>
+  <div>
+    {L_adm_opt_speed}:
+    {L_adm_opt_game_gspeed} <font color="red">x{C_game_speed}</font> -
+    {L_adm_opt_game_fspeed} <font color="red">x{C_fleet_speed}</font> -
+    {L_adm_opt_game_pspeed} <font color="red">x{C_resource_multiplier}</font>
+  </div>
+  <div>
+    {L_log_online}: <font color="red">{online_users}</font> - {L_log_lastreg}: <font color="red">{last_user}</font> - {L_log_numbreg}: <font color="red">{C_users_amount}</font><br>
+  </div>
+  <div id="log_description">{L_log_desc}</div>
+
+
+  <div id="log_error">
+    {F_LOGIN_MESSAGE}
+  </div>
+  <!-- IF F_LOGIN_STATUS == LOGIN_ERROR_USERNAME || F_LOGIN_STATUS == PASSWORD_RESTORE_ERROR_WRONG_EMAIL -->
+  <div id="login_offer">
+    <span class="link" onclick="$('#login_container').tabs({selected: 1});">{L_login_register_offer}</span>
+  </div>
+  <!-- ENDIF -->
+
+  <!-- IF F_LOGIN_STATUS == LOGIN_ERROR_PASSWORD || F_LOGIN_STATUS == REGISTER_ERROR_EMAIL_EXISTS -->
+  <div id="password_offer">
+    <span class="link" onclick="$('#login_container').tabs({selected: 2});">{L_login_password_restore_offer}</span>
+  </div>
+  <!-- ENDIF -->
+
+  <div id="login_container">
+    <ul>
+      <li><a class="nohover" href="#tab_login">{L_log_login_page}</a></li>
+      <!-- IF ! GAME_BLITZ -->
+      <li><a class="nohover" href="#tab_register">{L_log_reg}</a></li>
+      <!-- ENDIF -->
+      <li><a class="nohover" href="#tab_password_reset">{L_log_lost_header}</a></li>
+    </ul>
+
+    <div id="tab_login">
+      <form action="{FILENAME}{REQUEST_PARAMS}#tab_login" method="post">
+        <table width="100%" align="center" class="c_c no_border_image">
+          <tr>
+            <td width="30%">
+              {L_login_account_name_or_email}
+            </td>
+            <td>
+              <input name="username" type="text" value="{USERNAME}" maxlength="64" class="log_input" />
+            </td>
+          </tr>
+          <tr>
+            <td>{L_sys_password}</td>
+            <td>
+              <input id="login_password" name="password" type="password" value="{PASSWORD}" maxlength="32" class="log_input" /><br />
+              <input class="password_show" type="button" value="{L_sys_login_password_show}" show_element="password" />
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <input name="rememberme" type="checkbox" value="1"> {L_Remember_me}
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <input name="lang" type="hidden" value="{LANG}" />
+              <input name="login" type="submit" value="{L_log_enter}" /><br />
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+
+    <!-- IF ! GAME_BLITZ -->
+    <div id="tab_register">
+      <form name="registerForm" method="POST" action="{FILENAME}{REQUEST_PARAMS}#tab_register" onsubmit="changeAction('register');" >
+        <input type="hidden" name="id_ref" value="{id_ref}">
+        <table width="100%" align="center" class="no_border_image">
+          <tbody>
+          <tr style="margin-bottom: 10px;">
+            <td colspan="2" class="markup c_j">
+              {L_log_reg_text0} <!-- IF URL_RULES --><a href="{URL_RULES}" target="_blank" style="color: red; text-decoration: underline; font-face: bold;"><!-- ENDIF -->{L_reg_with_rules}<!-- IF URL_RULES --></a><!-- ENDIF -->. {L_log_reg_text1}
+            </td>
+          </tr>
+
+          <tr>
+            <th width="50%">{L_sys_email}</th>
+            <th width="50%"><input name="email" type="text" value="{EMAIL}" size="20" maxlength="64" /></th>
+          </tr>
+          <tr>
+            <th colspan="2">
+              {L_login_register_email_hint}
+            </th>
+          </tr>
+
+          <tr>
+            <th>{L_sys_password}</th>
+            <th>
+              <input id="register_password" name="password" type="password" value="{PASSWORD}" size="20" maxlength="32" class="log_input" /><br />
+              <input class="password_show" type="button" value="{L_sys_login_password_show}" show_element="password" />
+            </th>
+          </tr>
+
+          <tr>
+            <th>{L_sys_password_repeat}</th>
+            <th>
+              <input id="register_password_repeat" name="password_repeat" type="password" value="{PASSWORD_REPEAT}" size="20" maxlength="32" class="log_input" /><br />
+              <input class="password_show" type="button" value="{L_sys_login_password_show}" show_element="password_repeat" />
+            </th>
+          </tr>
+          <tr>
+            <th colspan="2">
+              <input name="lang" type="hidden" value="{LANG}" />
+              <input name="register" type="submit" value="{L_signup}" />
+            </th>
+          </tr>
+          </tbody>
+        </table>
+      </form>
+    </div>
+    <!-- ENDIF -->
+
+    <div id="tab_password_reset">
+      <form action="{FILENAME}{REQUEST_PARAMS}#tab_password_reset" method="post">
+        <table width="340" align="center" class="no_border_image">
+          <tbody>
+          <tr>
+            <td colspan="2" class="markup c_j">{L_log_lost_description1}</td>
+          </tr>
+          <tr>
+            <th nowrap>{L_E-Mail}</th>
+            <th><input name="email" type="text" value="{EMAIL}" size="20" maxlength="64" /></th>
+          </tr>
+          <tr>
+            <th colspan=2><input name="password_reset" type="submit" value="{L_log_lost_send_mail}" /></th>
+          </tr>
+          </tbody>
+        </table>
+      </form>
+      <form action="{FILENAME}{REQUEST_PARAMS}#tab_password_reset" method="post">
+        <table width="340" align="center" class="no_border_image">
+          <tbody>
+          <tr>
+            <td colspan="2" class="markup c_j">{L_log_lost_description2}</td>
+          </tr>
+          <tr>
+            <th>{L_log_lost_code}</th>
+            <th><input name="password_reset_code" type="text" size="{D_LOGIN_PASSWORD_RESET_CONFIRMATION_LENGTH}" maxlength="{D_LOGIN_PASSWORD_RESET_CONFIRMATION_LENGTH}" /></th>
+          </tr>
+          <tr>
+            <input name="lang" type="hidden" value="{LANG}" />
+            <th colspan=2><input name="password_reset_confirm" type="submit" value="{L_log_lost_reset_pass}" /></th>
+          </tr>
+          </tbody>
+        </table>
+      </form>
+  </div>
+
+    </div>
+
+  <!-- IF .language -->
+  <div id="log_menu">
+    <table class="markup c_c no_border_image"><tr>
+      <!-- BEGIN language -->
+      <td style="padding: 0px 8px">
+        <a href="{FILENAME}?lang={language.LANG_NAME_ISO2}&id_ref={id_ref}">
+          <img src="language/{language.LANG_NAME_ISO2}/{language.LANG_FLAG_MEDIUM}" /><br />
+          {language.LANG_NAME_NATIVE}
+        </a>
+      </td>
+      <!-- END language -->
+    </tr>
+    </table>
+  </div>
+  <!-- ENDIF -->
+
+  <div id="login_external">
+    <form method="get" action="{FILENAME}?lang={LANG}&id_ref={id_ref}">
+      <input type="submit" name="{D_AUTH_LOGIN_EXTERNAL_NAME}" value="{D_AUTH_VKONTAKTE}" />
+    </form>
+  </div>
+
+  <div id="login_menu">
+    <div class="menu_line">
+      <!-- IF URL_RULES -->
+      <a href="{URL_RULES}">{L_log_rules}</a>
+      <!-- ENDIF -->
+      <!-- IF URL_FAQ -->
+      <a href="{URL_FAQ}">{L_log_faq}</a>
+      <!-- ENDIF -->
+      <!-- IF URL_FORUM -->
+      <a href="{URL_FORUM}">{L_log_forums}</a>
+      <!-- ENDIF -->
+    </div>
+
+
+    <div class="menu_line">
+      <a href="server_info.php?lang={LANG}">{L_log_cred}</a>
+      <a href="announce.php?lang={LANG}">{L_log_news}</a>
+    </div>
+
+
+    <div class="menu_line">
+      <a href="stat.php?lang={LANG}">{L_log_stat_menu}</a>
+      <a href="banned.php?lang={LANG}">{L_log_banned}</a>
+      <a href="index.php?page=contact&lang={LANG}">{L_log_contacts}</a>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $("#login_container").tabs().show();
+</script>

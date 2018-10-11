@@ -1,0 +1,202 @@
+<!-- INCLUDE _result_message -->
+
+<script type="text/javascript" src="js/planet_manage.min.js?{C_var_db_update}"></script>
+
+<br />
+
+<table width=519 style="max-width: 33em">
+  <tr>
+    <th class="c_c" nowrap>
+      <div class="contFJ">
+        <div>
+          <a href="galaxy.php?mode=0&galaxy={PLANET_GALAXY}&system={PLANET_SYSTEM}" class="link">[{PLANET_GALAXY}:{PLANET_SYSTEM}:{PLANET_PLANET}]</a>
+          {PLANET_TYPE_TEXT}
+          "{PLANET_NAME}"
+        </div>
+        <button onclick="sn_redirect('overview.php');return false;"><span class="ok">{L_ov_return}</span></button>
+      </div>
+    </th>
+  </tr>
+  <tr>
+    <th>
+      <form action="overview.php?mode=manage" method="POST" class="contF">
+        <input type="hidden" name="planet_id" value="{PLANET_ID}">
+
+        <div style="min-width: 11em;">{L_ov_new_name}</div>
+        <input type="text" name="new_name" size=25 maxlength=20 value="{PLANET_NAME}">
+
+        <input type="submit" name="rename" value="{L_ov_rename}">
+      </form>
+    </th>
+  </tr>
+  <!-- IF PLANET_TYPE == 1 -->
+  <tr>
+    <th>
+      <form action="overview.php?mode=manage" method="POST">
+        <input type="hidden" name="planet_id" value="{PLANET_ID}">
+        <div class="contF">
+          <div>
+            <img src="{I_icon_help_32}" class="link" onclick="document.location='infos.php?gid={D_UNIT_PLANET_DENSITY}'" />
+          </div>
+          <div>
+            {L_ov_core_type_current}: "{PLANET_CORE_TEXT}"<br />
+              <label for="density_type">{L_ov_core_change_to}</label>
+              <select name="density_type" id="density_type">
+                <!-- BEGIN densities -->
+                <!-- IF PLANET_DENSITY_INDEX == densities.ID -->
+                <!-- DEFINE $DENSITY_SELECTED = 'selected current="1"' -->
+                <!-- ELSE -->
+                <!-- DEFINE $DENSITY_SELECTED = '' -->
+                <!-- ENDIF -->
+                <option value="{densities.ID}" rest="{densities.REST}" html="{densities.COST_TEXT}" html_class="{densities.COST_TEXT_CLASS}" {$DENSITY_SELECTED}>
+                  {densities.TEXT} - {densities.COST_TEXT} {L_sys_dark_matter_sh}
+                </option>
+                <!-- END densities -->
+              </select>
+          </div>
+          <button type="submit" id="transmute_button" name="transmute" value="transmute" disabled="disabled">
+            {L_sys_change}<br />
+            {L_sys_for} <span id="transmutation_cost" class="zero">0</span> {L_sys_dark_matter_sh}
+          </button>
+        </div>
+      </form>
+    </th>
+  </tr>
+  <!-- ENDIF -->
+  <tr>
+    <td class="c_c">
+      <!-- INCLUDE planet_sector_bar -->
+      <!-- INCLUDE planet_sector_buy -->
+    </td>
+  </tr>
+
+  <tr>
+    <th class="c_l" colspan=4>{L_sys_governor}</th>
+  </tr>
+  <tr>
+    <td class="c_c">
+      <table class="markup" width="100%">
+        <tr>
+          <td>
+            <!-- DEFINE $PLANET_ID = '{PLANET_ID}' -->
+            <!-- INCLUDE planet_governor -->
+          </td>
+          <td>
+            <!-- BEGIN governors -->
+            <div class="planet-manage-governor-hire-container">
+              <div class="planet-manage-governor-hire-image-container link" onclick="document.location='infos.php?gid={governors.ID}'">
+                <img src="{I_[governors.ID]}" align="top" class="w100" />
+                <span class="posT a75">{governors.NAME}</span>
+                <span class="posB a75">
+                  {governors.LEVEL}<!-- IF governors.LEVEL_PLUS --><span class="zero"><!-- IF governors.LEVEL_PLUS > 0 -->+<!-- ENDIF -->{governors.LEVEL_PLUS}</span><!-- ENDIF -->
+                  <!-- IF governors.MAX --> / {governors.MAX}<!-- ENDIF -->
+                </span>
+                <span class="unit-icon-info-container">
+                  <div class="icon-info-cover">&nbsp;</div>
+                </span>
+              </div>
+              <br />
+              <a href="infos.php?gid={governors.ID}"></a><br />
+              <!-- IF governors.MAX && governors.LEVEL >= governors.MAX -->
+              <span class="negative">{L_sys_maximum_level}</span>
+              <!-- ELSEIF governors.COST <= DARK_MATTER -->
+              <!-- IF ! PLANET_GOVERNOR_ID || governors.ID == PLANET_GOVERNOR_ID -->
+              <a href="overview.php?mode=manage&hire={governors.ID}" class="positive button_pseudo">{L_mrc_hire_for} {governors.COST} {L_sys_dark_matter_sh}</a>
+              <!-- ELSE -->
+              <a onclick="if(confirm('{L_ov_mrc_confirm_1} {PLANET_GOVERNOR_NAME} {L_ov_mrc_confirm_2} {PLANET_GOVERNOR_LEVEL} {L_ov_mrc_confirm_3} {governors.NAME} {L_ov_mrc_confirm_4}'))window.location='overview.php?mode=manage&hire={governors.ID}';return false;" class="positive button_pseudo">{L_mrc_hire_for} {governors.COST} {L_sys_dark_matter_sh}</a>
+              <!-- ENDIF -->
+              <!-- ELSE -->
+              <span class="negative">{L_mrc_hire_for} {governors.COST} {L_sys_dark_matter_sh}</span>
+              <!-- ENDIF -->
+            </div>
+            <!-- END governors -->
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+
+
+
+  <tr>
+    <th class="c_l" colspan=4>{L_ov_manage_special}</th>
+  </tr>
+  <!-- IF PLANET_TYPE == 1 -->
+  <!-- IF ! IS_CAPITAL -->
+  <tr>
+    <th colspan="3">
+      <!-- IF CAN_CAPITAL -->
+      <!-- ELSE -->
+      <!-- DEFINE $CAPITAL_DISABLED = 'disabled="disabled"' -->
+      <!-- ENDIF -->
+
+      <a id="planet_make_capital"
+         message="{L_ov_capital} {PLANET_NAME_JS}?"
+         href="overview.php?mode=manage&action=make_capital&planet_id={PLANET_ID}"
+         class="button_pseudo" {$CAPITAL_DISABLED}
+      >
+        {L_ov_capital}<br />
+        {L_sys_for} {CAPITAL_COST_TEXT} {L_sys_dark_matter_sh}
+      </a>
+    </th>
+  </tr>
+  <!-- ENDIF -->
+
+  <tr>
+    <td class="c_l subheader" colspan="3">
+      {L_ov_teleport}
+    </td>
+  </tr>
+  <tr>
+    <!-- IF CAN_TELEPORT -->
+    <th nowrap colspan="3">
+      <form action="overview.php?mode=manage&action=planet_teleport" method="POST" id="planet_teleport_form">
+        <input type="hidden" name="planet_id" value="{PLANET_ID}">
+        <!--<div style="display: flex; justify-content: space-around; align-content: space-around;">-->
+        <div class="contF">
+          <div>
+            {L_ov_teleport_new_coordinates}<br/>
+            <input type="text" name="new_galaxy" maxlength=3 value="{PLANET_GALAXY}" class="coordinate"> :
+            <input type="text" name="new_system" maxlength=3 value="{PLANET_SYSTEM}" class="coordinate"> :
+            <input type="text" name="new_planet" maxlength=3 value="{PLANET_PLANET}" class="coordinate">
+          </div>
+
+          <button type="submit" name="teleport" value="teleport">
+            {L_ov_teleport}<br />
+            {L_sys_for} {TELEPORT_COST_TEXT} {L_sys_dark_matter_sh}
+          </button>
+        </div>
+      </form>
+    </th>
+    <!-- ELSE -->
+    <th colspan="3" class="error">
+      {CAN_NOT_TELEPORT_MSG}
+    </th>
+    <!-- ENDIF -->
+  </tr>
+  <!-- ENDIF -->
+
+  <tr>
+    <td class="c_l subheader" colspan="3">
+      {L_colony_abandon}
+    </td>
+  </tr>
+  <tr>
+    <!--<th>{L_colony_abandon}</th>-->
+    <th colspan="3">
+      <form action="overview.php?mode=manage&action=planet_abandon" method="POST" id="planet_abandon_form">
+        <input type="hidden" name="planet_id" value="{PLANET_ID}">
+        <div class="contF">
+          <div>
+            {L_ov_password}<br />
+            <input type="password" name="abandon_confirm" maxlength="32" value="" />
+          </div>
+
+          <input type="submit" name="abandon" value="{L_colony_abandon}" class="h100"/>
+        </div>
+      </form>
+    </th>
+  </tr>
+</table>
+
+<!-- INCLUDE page_hint -->

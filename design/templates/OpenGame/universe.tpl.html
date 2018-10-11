@@ -1,0 +1,321 @@
+<script type="text/javascript" src="js/sn_universe.min.js?{C_var_db_update}"></script>
+<script type="text/javascript" src="js/sn_ajax_send_fleet.min.js?{C_var_db_update}"></script>
+<!-- INCLUDE fleet_javascript -->
+
+<script type="text/javascript"><!--
+var uni_missile_planet = 0;
+var uni_user_galaxy = "{curPlanetG}";
+var uni_user_system = "{curPlanetS}";
+var uni_user_planet = "{curPlanetP}";
+var uni_user_planet_type = "{curPlanetPT}";
+var uni_galaxy = {galaxy};
+var uni_system = {system};
+
+var user_id = {USER_ID};
+var game_user_count = {userCount};
+var game_ally_count = {ALLY_COUNT};
+
+var opt_uni_avatar_user = '{opt_uni_avatar_user}';
+var opt_uni_avatar_ally = '{opt_uni_avatar_ally}';
+var opt_uni_tooltip_time = parseInt('{opt_uni_tooltip_time}') ? parseInt('{opt_uni_tooltip_time}') : 500;
+
+var uni_phalanx = '{PLANET_PHALANX}';
+var uni_spies = '{ACT_SPIO}';
+var uni_death_stars = '{deathStars}';
+var uni_missiles = parseInt('{MIPs}') ? parseInt('{MIPs}') : 0;
+var PLANET_RECYCLERS = {PLANET_RECYCLERS};
+
+var MT_MISSILE = {D_MT_MISSILE};
+var MT_RECYCLE = {D_MT_RECYCLE};
+var PT_DEBRIS = {D_PT_DEBRIS};
+var PLAYER_OPTION_UNIVERSE_OLD = parseInt('{PLAYER_OPTION_UNIVERSE_OLD}') ? parseInt('{PLAYER_OPTION_UNIVERSE_OLD}') : 0;
+
+jQuery.extend(language, {
+  sys_ships: '{L_uni_incoming_fleets}',
+  sys_planet: '{L_sys_planet_type[D_PT_PLANET]}',
+  sys_moon: '{L_sys_planet_type[D_PT_MOON]}',
+  sys_planet_short: '{L_sys_planet_type_sh[D_PT_PLANET]}',
+  sys_moon_short: '{L_sys_planet_type_sh[D_PT_MOON]}',
+});
+
+var users = new Array();
+<!-- BEGIN users --><!-- IF users.ID -->
+users[{users.ID}] = {
+  name: '{users.NAME_JS}',
+  rank: '{users.RANK}',
+  ally_id: parseInt('{users.ALLY_ID}') ? parseInt('{users.ALLY_ID}') : 0,
+  ally_tag: '{users.ALLY_TAG}',
+  ally_title: '{users.ALLY_TITLE}',
+  avatar: '{users.AVATAR}'
+};
+<!-- ENDIF --><!-- END users -->
+
+var allies = new Array();
+<!-- BEGIN alliances --><!-- IF alliances.ID -->
+allies[{alliances.ID}] = {
+  'name': '{alliances.NAME_JS}',
+  'rank' : '{alliances.RANK}',
+  'members': '{alliances.MEMBERS}',
+  'url': '{alliances.URL}',
+  avatar: '{alliances.AVATAR}'
+};
+<!-- ENDIF --><!-- END alliances -->
+
+var uni_row = new Array();
+<!-- BEGIN galaxyrow --><!-- IF galaxyrow.PLANET_NUM -->
+uni_row[{galaxyrow.PLANET_NUM}] = {
+  owner: '{galaxyrow.USER_ID}',
+  planet: '{galaxyrow.PLANET_NUM}',
+  planet_name: '{galaxyrow.PLANET_NAME_JS}',
+  planet_image: '{galaxyrow.PLANET_IMAGE}',
+  planet_fleet_id: '{galaxyrow.PLANET_FLEET_ID}',
+  planet_diameter: '{galaxyrow.PLANET_DIAMETER}',
+  planet_destroyed: '{galaxyrow.PLANET_DESTROYED}',
+
+  moon_name: '{galaxyrow.MOON_NAME_JS}',
+  moon_diameter: '{galaxyrow.MOON_DIAMETER}',
+  moon_image: '{galaxyrow.MOON_IMAGE}',
+  moon_fleet_id: '{galaxyrow.MOON_FLEET_ID}',
+
+  debris: '{galaxyrow.DEBRIS}',
+  debris_metal: '{galaxyrow.DEBRIS_METAL}',
+  debris_crystal: '{galaxyrow.DEBRIS_CRYSTAL}',
+  debris_reserved: '{galaxyrow.DEBRIS_RESERVED}',
+  debris_reserved_percent: '{galaxyrow.DEBRIS_RESERVED_PERCENT}',
+  debris_will_gather: '{galaxyrow.DEBRIS_WILL_GATHER}',
+  debris_will_gather_percent: '{galaxyrow.DEBRIS_WILL_GATHER_PERCENT}',
+  debris_gather_total: '{galaxyrow.DEBRIS_GATHER_TOTAL}',
+  debris_gather_total_percent: '{galaxyrow.DEBRIS_GATHER_TOTAL_PERCENT}',
+};
+<!-- ENDIF --><!-- END galaxyrow -->
+// --></script>
+
+<!-- IF UNIVERSE_SCAN_MODE -->
+  <!-- DEFINE $SCAN_CLASS = 'uni_scan' -->
+  <!-- DEFINE $SCAN_CLASS_NO_BORDER = 'no_border_image' -->
+<!-- ENDIF -->
+<br />
+<!-- INCLUDE universe_navigation -->
+
+<!-- IF PLAYER_OPTION_UNIVERSE_OLD || UNIVERSE_SCAN_MODE -->
+  <!-- INCLUDE universe_old -->
+<!-- ELSE -->
+  <!-- INCLUDE universe_new -->
+<!-- ENDIF -->
+
+<form id="uni_missile_form" style="display: none;" name="uni_missile_form" method=POST>
+  <br>
+  <table style="border: 2em solid red">
+    <tr>
+      <td class=c colspan=3>
+         <span class="fl">{L_gm_launch} [{galaxy}:{system}:<span id="uni_missile_planet">{planet}</span>]</span>
+         <span class="fr">{L_gal_mis_rest}<span id="missile2">{MIPs}</span></span>
+      </td>
+    </tr>
+    <tr>
+      <th class=c>{L_gal_mis_toLaunch} <input type=text value="{MIPs}" name="SendMI" id="SendMI" size=7 maxlength=7 /></th>
+      <th class=c>{L_gm_target}
+        <select name=Target>
+          <option value=0 selected>{L_gm_all}</option>
+          <!-- BEGIN defense_active -->
+          <option value={defense_active.ID}>{defense_active.NAME}</option>
+          <!-- END defense_active -->
+        </select>
+      </th>
+      <th class=c>
+        <input type="button" value="{L_gal_mis_launch}" onclick="doit({D_MT_MISSILE}, uni_missile_planet, {D_PT_PLANET}, document.uni_missile_form.SendMI.value);jQuery('#uni_missile_form').hide();">
+      </th>
+    </tr>
+  </table>
+</form>
+
+<span style="display: none">
+  <span id="legend_template">
+    <table class="legend_template no_border_image">
+      <tr><th class="c_l" colspan=2>{L_sys_planet}</th></tr>
+      <tr class=myplanet><td colspan=2>{L_uni_legend_myplanet}</td></tr>
+      <tr class=allymember><td colspan=2>{L_uni_legend_allyplanet}</td></tr>
+
+      <tr><th class="c_l" colspan=2>{L_sys_player}</th></tr>
+      <tr><td>{L_sys_birthday}</td><td><span class="birthday">&nbsp;</span></td></tr>
+      <tr><td colspan="2"><span class=vacation>{L_Way_vacation}</span></td></tr>
+      <tr class=protected><td>{L_uni_protected_player}</td><td>{L_uni_protected_player_shortcut}</td></tr>
+      <tr class=noob><td>{L_Weak_player}</td><td>{L_weak_player_shortcut}</td></tr>
+      <tr class=strong><td>{L_Strong_player}</td><td>{L_strong_player_shortcut}</td></tr>
+      <tr class="banned"><td colspan="2">{L_Pendent_user}</td></tr>
+      <tr class=player_active><td>{L_Active}</td><td>{L_active_shortcut}</td></tr>
+      <tr class=inactive><td>{L_Inactive_7_days}</td><td>{L_inactif_7_shortcut}</td></tr>
+      <tr class=longinactive><td>{L_Inactive_28_days}</td><td>{L_inactif_28_shortcut}</td></tr>
+      <!-- IF SHOW_ADMIN -->
+      <tr class=admin><td>{L_user_level[3]}</td><td>{L_user_level_shortcut[3]}</td></tr>
+      <tr class=admin><td>{L_user_level[2]}</td><td>{L_user_level_shortcut[2]}</td></tr>
+      <tr class=admin><td>{L_user_level[1]}</td><td>{L_user_level_shortcut[1]}</td></tr>
+      <!-- ENDIF -->
+
+      <tr><th class="c_l" colspan=2>{L_Actions}</th></tr>
+      <tr><td>{L_gl_espionner}</td><td><img src="design/images/icon_espionage.png" border=0 style="height: 1.5em" /> </td></tr>
+      <tr><td>{L_gl_mipattack}</td><td><img src="design/images/icon_missile.png" border=0 style="height: 1.5em" /></td></tr>
+      <tr><td>{L_stat_details}</td><td><img src="{I_menu_empire_emperor}" border=0 style="height: 1.5em" /></td></tr>
+      <tr><td>{L_gl_sendmess}</td><td><img src="design/images/icon_mail.gif" border=0 style="height: 1.5em" /></td></tr>
+      <tr><td>{L_gl_buddyreq}</td><td><img src="{I_icon_buddy}" border=0 style="height: 1.5em" /></td></tr>
+      <tr><td>{L_gl_stats}</td><td><img src="design/images/icon_statistics.png" border=0  style="height: 1.5em" /></td></tr>
+    </table>
+  </span>
+
+  <span id="planet_template">
+    <table class="planet_template no_border_image">
+      <tr>
+        <th class="c_c" colspan="2">
+          [{galaxy}:{system}:[PLANET_POS]]&nbsp;[PLANET_TYPE_TEXT_SHORT]&nbsp;[PLANET_NAME]
+        </th>
+      </tr>
+
+      <tr>
+        <td class="c_c">
+          <div class="uni_popup_planet">
+            <img src="{I_PLANET_IMAGE_SMALL}" />
+            <div>&empty; [PLANET_DIAMETER]</div>
+          </div>
+        </td>
+
+        <td class="c_c" planet_planet="[PLANET_POS]" planet_type="[PLANET_TYPE]">
+          <div class="owndeploy button_pseudo" style="[HIDE_PLANET_RELOCATE]" go="fleet" mission="{D_MT_RELOCATE}">{L_type_mission[D_MT_RELOCATE]}</div>
+          <div class="owntransport button_pseudo" go="fleet" mission="{D_MT_TRANSPORT}">{L_type_mission[D_MT_TRANSPORT]}</div>
+          <div class="ownhold button_pseudo" style="[HIDE_PLANET_HOLD]" go="fleet" mission="{D_MT_HOLD}">{L_type_mission[D_MT_HOLD]}</div>
+          <div class="owndestroy button_pseudo" style="[HIDE_PLANET_DESTROY]" go="fleet" mission="{D_MT_DESTROY}">{L_type_mission[D_MT_DESTROY]}</div>
+          <div class="ownattack button_pseudo" style="[HIDE_PLANET_ATTACK]" go="fleet" mission="{D_MT_ATTACK}">{L_type_mission[D_MT_ATTACK]}</div>
+          <div class="ownespionage button_pseudo" style="[HIDE_PLANET_SPY]" onclick="doit({D_MT_SPY}, [PLANET_POS], [PLANET_TYPE], {ACT_SPIO});">{L_type_mission[D_MT_SPY]}</div>
+          <div class="ownmissile button_pseudo" style="[HIDE_PLANET_MISSILE]">{L_type_mission[D_MT_MISSILE]}</div>
+          <div class="button_pseudo" style="[HIDE_PLANET_PHALANX]" go="phalanx" target="_blank">{L_gl_phalanx}</div>
+        </td>
+      </tr>
+    </table>
+
+    [FLEET_TABLE]
+  </span>
+
+  <span id="debris_template">
+    <table width=100% class="debris_template no_border_image">
+      <tr><th class="c_c" colspan="4">[{galaxy}:{system}:[CURRENT_PLANET]] {L_sys_planet_type[D_PT_DEBRIS]}</th></tr>
+      <tr><td class="c_c" rowspan="7"><img src="{I_debris}" style="width: 7em; font-size: 1em;" /></td></tr>
+
+      <tr>
+        <th class="c_l">{L_gl_ressource}</th>
+        <th class="c_r">[DEBRIS]</th>
+        <th class="c_r">100%</th>
+      </tr>
+      <tr>
+        <td class="c_l">{L_sys_metal}</td>
+        <td class="c_r">[DEBRIS_METAL]</td>
+        <td class="c_r">[DEBRIS_METAL_PERCENT]%</td>
+      </tr>
+      <tr>
+        <td class="c_l">{L_sys_crystal}</td>
+        <td class="c_r">[DEBRIS_CRYSTAL]</td>
+        <td class="c_r">[DEBRIS_CRYSTAL_PERCENT]%</td>
+      </tr>
+
+      <tr>
+        <th class="c_l">{L_uni_debris_recyclable}</th>
+        <th class="c_r">[DEBRIS_GATHER_TOTAL]</th>
+        <th class="c_r">[DEBRIS_GATHER_TOTAL_PERCENT]%</th>
+      </tr>
+      <tr>
+        <td class="c_l">{L_uni_debris_incoming_recyclers}</td>
+        <td class="c_r">[DEBRIS_RESERVED]</td>
+        <td class="c_r">[DEBRIS_RESERVED_PERCENT]%</td>
+      </tr>
+      <tr>
+        <td class="c_l">{L_uni_debris_on_planet}</td>
+        <td class="c_r">[DEBRIS_WILL_GATHER]</td>
+        <td class="c_r">[DEBRIS_WILL_GATHER_PERCENT]%</td>
+      </tr>
+
+      <tr class="link c_c" style="[HIDE_RECYCLER_LINK]" >
+        <th colspan="4">
+          <div class="button_pseudo ownharvest" planet_planet="[CURRENT_PLANET]">
+            {L_uni_recyclers_send}
+          </div>
+        </th>
+      </tr>
+    </table>
+  </span>
+
+  <span id="user_template">
+    <table class="user_template no_border_image">
+      <tr>
+        <th class="c_c" colspan="[USER_COLSPAN]">
+          [USER_NAME]
+        </th>
+      </tr>
+      <tr>
+        <td class="c_c subheader" style="[HIDE_USER_ALLY]" colspan="[USER_COLSPAN]">
+          [USER_ALLY_NAME]<br />
+          [USER_ALLY_TITLE]
+        </td>
+      </tr>
+      <tr>
+        <td class="c_c" style="[HIDE_USER_AVATAR]">
+          <div><img src="{D_SN_ROOT_VIRTUAL}images/avatar/avatar_[USER_ID].png" style="width: 9em;" /></div>
+        </td>
+        <td class="c_c" user_id="[USER_ID]">
+          <div class="button_pseudo" go="stat" rank="[USER_RANK]">
+            {L_gl_stats}: {L_Place} [USER_RANK]/{userCount}
+          </div>
+          <div class="button_pseudo" go="imperator">
+            {L_stat_details}
+          </div>
+          <div class="button_pseudo" go="messages" mode="write">
+            {L_gl_sendmess}
+          </div>
+          <div class="button_pseudo" go="buddy">
+            {L_gl_buddyreq}
+          </div>
+        </td>
+      </tr>
+    </table>
+  </span>
+
+  <span id="ally_template">
+    <table class="ally_template no_border_image">
+      <tr>
+        <th class="c_c" colspan="[ALLY_COLSPAN]">
+          [ALLY_NAME]
+        </th>
+      </tr>
+      <tr>
+        <td class="c_c" rowspan="4" style="[HIDE_ALLY_AVATAR]">
+          <img src="{D_SN_ROOT_VIRTUAL}images/avatar/ally_[ALLY_ID].png" style="width: 9em;" />
+        </td>
+        <td class="c_c">
+          {L_gal_sys_members}&nbsp;[ALLY_MEMBERS]
+        </td>
+      </tr>
+      <tr>
+        <td class="c_c" ally_id="[ALLY_ID]">
+          <div class="button_pseudo" go="stat" rank="[ALLY_RANK]" who="2">
+            {L_gl_stats}: {L_Place}&nbsp;[ALLY_RANK]/{ALLY_COUNT}
+          </div>
+          <div class="button_pseudo" go="alliance" mode="ainfo">
+            {L_gl_ally_internal}
+          </div>
+          <a class="link" style="[HIDE_ALLY_URL]" href="[ALLY_URL]" target="_new">{L_gl_ally_web}</a>
+        </td>
+      </tr>
+    </table>
+  </span>
+
+  <span id="message_template">
+    <table>
+      <tr>
+        <td class="c_c [CLASS]" style="padding: 0.5em 1em;">
+          [MESSAGE]
+        </td>
+      </tr>
+    </table>
+  </span>
+</span>
+
+<!-- IF ! UNIVERSE_SCAN_MODE -->
+<!-- INCLUDE page_hint -->
+<!-- ENDIF -->

@@ -1,0 +1,17 @@
+<div class="admin_message_box border_image_small">
+  <div class="header">{TITLE}</div>
+  <div class="cell">{MESSAGE}</div>
+  <!-- IF REDIRECT_TO -->
+  <div class="subheader">
+    <a id="js_redirect" href="{REDIRECT_TO}" class="link">{L_sys_click_here_to_continue}</a>
+  </div>
+  <!-- ENDIF -->
+</div>
+
+<!-- IF TIMEOUT -->
+<script type="text/javascript">
+  setTimeout(function () {
+    document.getElementById("js_redirect").click();
+  }, Math.intVal("{TIMEOUT}" * 1000));
+</script>
+<!-- ENDIF -->

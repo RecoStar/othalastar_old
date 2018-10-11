@@ -1,0 +1,27 @@
+<!-- IF ! $RESULT_TABLE_EXISTS -->
+  <!-- BEGIN result -->
+    <!-- IF result.MESSAGE -->
+      <!-- IF ! $RESULT_TABLE_EXISTS -->
+        <!-- DEFINE $RESULT_TABLE_EXISTS = 'true' -->
+        <div class="border_image_small" id="global_status_window">
+          <div class="header">{L_sys_result_operation}</div>
+          <div class="cell">
+            <ul id="global_status_list">
+      <!-- ENDIF -->
+        <!-- IF result.STATUS == 0 -->
+          <!-- DEFINE $RESULT_CLASS = 'positive' -->
+        <!-- ELSEIF result.STATUS == 1 -->
+          <!-- DEFINE $RESULT_CLASS = 'warning' -->
+        <!-- ELSE -->
+          <!-- DEFINE $RESULT_CLASS = 'error' -->
+        <!-- ENDIF -->
+            <li class="{$RESULT_CLASS}">{result.MESSAGE}</li>
+    <!-- ENDIF -->
+  <!-- END result -->
+
+  <!-- IF $RESULT_TABLE_EXISTS -->
+            </ul>
+          </div>
+        </div>
+  <!-- ENDIF -->
+<!-- ENDIF -->

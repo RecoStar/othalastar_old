@@ -1,0 +1,202 @@
+<!-- DEFINE $OVERVIEW = true -->
+<script type="text/javascript" src="js/sn_ajax_send_fleet.min.js?{C_var_db_update}"></script>
+<script type="text/javascript">
+  var MT_SPY = {D_MT_SPY};
+  var MT_COLONIZE = {D_MT_COLONIZE};
+  var MT_RECYCLE = {D_MT_RECYCLE};
+  var MT_MISSILE = {D_MT_MISSILE};
+  var uni_galaxy = "{PLANET_GALAXY}";
+  var uni_system = "{PLANET_SYSTEM}";
+  jQuery.extend(language, {
+    ov_rename: '{LA_ov_rename}',
+    sys_confirm: '{LA_sys_confirm}',
+    sys_cancel: '{LA_sys_cancel}',
+  });
+</script>
+
+<script type="text/javascript" src="js/planet_manage.min.js?{C_var_db_update}"></script>
+
+<div id="dialog-rename-planet" title="{L_ov_planet_rename_dialog_title}" style="display: none; background-color: #344566;">
+  <form action="overview.php" method="POST" id="dialog-rename-planet-form" style="margin: 1em; text-align: center;">
+    <label for="planet_new_name">{L_ov_new_name}</label><br/><br/>
+    <input type="text" name="new_name" id="planet_new_name" size=32 maxlength=32 value="{PLANET_NAME}" />
+    <input type="hidden" name="rename" value="1" />
+    <input type="hidden" name="cp" />
+  </form>
+</div>
+
+<br />
+<h2>[{PLANET_GALAXY}:{PLANET_SYSTEM}:{PLANET_PLANET}] {PLANET_TYPE_TEXT} "{PLANET_NAME}"</h2>
+
+<table align="center" class="markup">
+  <tr>
+    <th valign="top">
+      <!--&lt;!&ndash; IF NEW_MESSAGES || NEW_LEVEL_MINER || NEW_LEVEL_RAID &ndash;&gt;-->
+        <!--<table class="border_image_small planet_overview-info">-->
+          <!--&lt;!&ndash; IF NEW_MESSAGES > 0 &ndash;&gt;-->
+            <!--<tr><th colspan="2"><a href="messages.php" class="link">-->
+              <!--{L_ov_you_have}-->
+              <!--&lt;!&ndash; IF NEW_MESSAGES == 1 &ndash;&gt;-->
+                <!--{L_ov_new_message}-->
+              <!--&lt;!&ndash; ELSE &ndash;&gt;-->
+                <!--{NEW_MESSAGES} {L_ov_new_messages}-->
+              <!--&lt;!&ndash; ENDIF &ndash;&gt;-->
+            <!--</a></th></tr>-->
+          <!--&lt;!&ndash; ENDIF &ndash;&gt;-->
+
+          <!--&lt;!&ndash; IF NEW_LEVEL_MINER &ndash;&gt;-->
+            <!--<tr><th colspan=2><a href="dark_matter.php" class="link">{L_ov_rpg_new_level_miner}</a></th></tr>-->
+          <!--&lt;!&ndash; ENDIF &ndash;&gt;-->
+
+          <!--&lt;!&ndash; IF NEW_LEVEL_RAID &ndash;&gt;-->
+            <!--<tr><th colspan=2><a href="dark_matter.php" class="link">{L_ov_rpg_new_level_raid}</a></th></tr>-->
+          <!--&lt;!&ndash; ENDIF &ndash;&gt;-->
+        <!--</table>-->
+      <!--&lt;!&ndash; ENDIF &ndash;&gt;-->
+
+      <table width="522">
+        <tr>
+          <th colspan=5 nowrap class="c_c">
+            <table class="markup" width="100%">
+              <tr>
+                <th class="c_l" nowrap>
+                  <a href="galaxy.php?mode=0&galaxy={PLANET_GALAXY}&system={PLANET_SYSTEM}" class="link">[{PLANET_GALAXY}:{PLANET_SYSTEM}:{PLANET_PLANET}] {PLANET_TYPE_TEXT} "{PLANET_NAME}"</a>
+                </th>
+                <th class="c_r" nowrap width="11em">
+                  <input type="button" name="rename" id="planet_rename" value="{L_ov_rename}" />
+                </th>
+                <th class="c_r" nowrap width="11em">
+                  <button  go="" mode="manage">
+                    <span class="positive">{L_ov_manage}</span>
+                  </button>
+                </th>
+              </tr>
+            </table>
+          </th>
+        </tr>
+
+        <!-- IF GATE_LEVEL -->
+          <tr>
+            <th class="c_c" colspan="2">{L_tech[D_STRUC_MOON_GATE]}</th>
+            <th class="c_c" colspan="3">
+              <a href="jumpgate.php">
+                <!-- IF GATE_JUMP_REST_TIME -->
+                  {L_ov_gate_time_left} <span  id="gate_jump_time" class="error"></span>
+                  <script type="text/javascript"><!--
+                    sn_timers.unshift({id: 'gate_jump_time', type: TIMER_BUILD_QUE_V1, options: {
+                      msg_done: '{L_gate_ready}',
+                      que: [
+                        ['1', '', {GATE_JUMP_REST_TIME}, '1']
+                      ]
+                    }});
+                  // --></script>
+                <!-- ELSE -->
+                  <span class="ok">{L_gate_ready}</span>
+                <!-- ENDIF -->
+              </a>
+            </th>
+          </tr>
+        <!-- ENDIF -->
+
+        <tr>
+          <td class="c_c" width="11em" rowspan="5">
+            <!-- DEFINE $PLANET_ID = '{PLANET_ID}' -->
+            <!-- DEFINE $IS_PLANET_OVERVIEW = 1 -->
+            <!-- INCLUDE planet_governor -->
+          </td>
+
+          <th colspan="4">
+            <!-- INCLUDE planet_sector_bar -->
+            <!-- INCLUDE planet_sector_buy -->
+          </th>
+        </tr>
+
+        <tr>
+          <th colspan="4" id="fleetstatusrow">{L_orb}: {L_sys_metal}: {metal_debris} / {L_sys_crystal}: {crystal_debris}
+            <!-- IF PLANET_RECYCLERS -->
+              <br><button id="ov_recycle" style="cursor: pointer" onclick="doit(MT_RECYCLE, {PLANET_PLANET}, {PLANET_TYPE});"<!-- IF ! PLANET_DEBRIS --> disabled="disabled"<!-- ENDIF -->><span>[ {L_type_mission[8]} ]</span></button>
+              <table id="fleetstatustable" class="no_border_image" cellspacing="0" cellpadding="0"></table>
+            <!-- ENDIF -->
+          </th>
+        </tr>
+        <tr>
+          <th colspan="2">{L_Diameter}&nbsp;{planet_diameter}&nbsp;{L_km}</th>
+          <th colspan="2">
+            {L_sys_planet_density}:&nbsp;{planet_density}&nbsp;{L_sys_planet_density_units}
+          </th>
+        </tr>
+        <tr>
+          <th colspan="4">{L_Temperature}&nbsp;({L_min_avg_max}):&nbsp;{planet_temp_min}&deg;C&nbsp;/&nbsp;{planet_temp_avg}&deg;C&nbsp;/&nbsp;{planet_temp_max}&deg;C</th>
+        </tr>
+
+        <!-- IF PLANET_TYPE == 1 -->
+        <tr>
+          <th colspan="4" nowrap>
+            <form action="overview.php" method="POST">
+              <input type="hidden" name="planet_id" value="{PLANET_ID}">
+
+              <div class="contF">
+              <div>
+                <img src="{I_icon_help_32}" class="link" onclick="document.location='infos.php?gid={D_UNIT_PLANET_DENSITY}'" />
+              </div>
+              <!--<div class="icons icon-info link" style="display: inline-block; vertical-align: middle;" onclick="document.location='infos.php?gid={D_UNIT_PLANET_DENSITY}'"></div> {L_ov_core_type_current} "{PLANET_CORE_TEXT}"<br/>-->
+                <div>
+                  {L_ov_core_type_current}: "{PLANET_CORE_TEXT}"<br />
+                <label for="density_type">{L_ov_core_change_to}</label>
+                <select name="density_type" id="density_type">
+                  <!-- BEGIN densities -->
+                  <option value="{densities.ID}" rest="{densities.REST}" html="{densities.COST_TEXT}" html_class="{densities.COST_TEXT_CLASS}"<!-- IF PLANET_DENSITY_INDEX == densities.ID --> selected current="1"<!-- ENDIF -->>{densities.TEXT}</option>
+                  <!-- END densities -->
+                </select>
+              </div>
+              <div style="display: inline-block; margin-left: 10px;">
+                <button type="submit" id="transmute_button" name="transmute" value="transmute" disabled="disabled">
+                  {L_sys_change}
+                  {L_sys_for} <span id="transmutation_cost" class="zero">0</span> {L_sys_dark_matter_sh}
+                </button>
+
+              </div>
+              </div>
+            </form>
+          </th>
+        </tr>
+        <!-- ENDIF -->
+
+        <tr><td colspan=5 class="c">{L_Planet_menu}</td></tr>
+        <!-- BEGIN ques -->
+          <tr class="c_l">
+            <td class="c_c" width="9em" height=33%>
+              <!-- IF ques.LENGTH -->
+                <!-- DEFINE $QUE_ID = '{ques.ID}' -->
+                <div class="bld_que_container {$ECO_QUE_VERTICAL}">
+                  <!-- INCLUDE que_total -->
+                </div>
+
+                <!-- DEFINE $QUE_ID = '{ques.ID}' -->
+                <!-- INCLUDE eco_queue -->
+              <!-- ELSE -->
+                {ques.NAME}<br>
+              <!-- ENDIF -->
+            </td>
+            <td class="c_l" colspan="4" id="ov_{ques.ID}_que">
+              {L_eco_que_empty}
+            </td>
+          </tr>
+        <!-- END ques -->
+
+        <!-- INCLUDE navbar_resources -->
+      </table>
+
+      <!-- INCLUDE planet_fleet_list -->
+    </th>
+
+    <th valign=top>
+      <table border="0" cellspacing=0 cellpadding=0 width="200" class="markup">
+        <!-- INCLUDE planet_list -->
+      </table>
+    </th>
+  </tr>
+
+</table>
+
+<div id="admin_message"></div>

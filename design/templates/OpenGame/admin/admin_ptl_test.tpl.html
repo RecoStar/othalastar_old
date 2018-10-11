@@ -1,0 +1,138 @@
+<h1>Test is <span id="ptl_global_status"></span></h1>
+
+<table id="ptl_test_table">
+  <tr class="c_c">
+    <th>{Конструкция}</th>
+    <th>{Ожидание}</th>
+    <th>{Результат}</th>
+    <th>{OK?}</th>
+    <th>{Комментарий}</th>
+  </tr>
+  <tr>
+    <td>Testing JS code</td>
+    <td class="ptl_etalon">SAMPLE</td>
+    <td class="ptl_result">RESULT</td>
+    <td class="ptl_status"></td>
+    <th>Self-test - always should FAIL</th>
+  </tr>
+
+  <tr>
+    <th colspan="5" class="c_c">
+      Self-test - does &#123;R_xxx&#125; directives working. IF ANY OF THIS FAIL - OTHER TEST IS WRONG
+    </th>
+  </tr>
+
+<!--
+  <tr>
+    <td>&#123;VAR&#125;</td>
+    <td class="ptl_etalon">VALUE</td>
+    <td class="ptl_result">{VAR}</td>
+    <td class="ptl_status"></td>
+    <th>Root variable VAR for testing</th>
+  </tr>
+  <tr>
+    <td>&#123;RENDER_VAR&#125;</td>
+    <td class="ptl_etalon">&#123;VAR&#125;</td>
+    <td class="ptl_result">{RENDER_VAR}</td>
+    <td class="ptl_status"></td>
+    <th>Renderer for VAR</th>
+  </tr>
+-->
+
+  <tr>
+    <td>&#123;R_[RENDER_VAR]&#125;</td>
+    <td class="ptl_etalon">VALUE</td>
+    <td class="ptl_result">{R_[RENDER_VAR]}</td>
+    <td class="ptl_status"></td>
+    <th>Rendering VAR</th>
+  </tr>
+
+  <!-- DEFINE $VAR = '$VALUE' -->
+<!--
+  <tr>
+    <td>&#123;$VAR&#125;</td>
+    <td class="ptl_etalon">$VALUE</td>
+    <td class="ptl_result">{$VAR}</td>
+    <td class="ptl_status"></td>
+    <th>Defined variable $VAR for testing</th>
+  </tr>
+  <tr>
+    <td>&#123;RENDER_DEFINED_VAR&#125;</td>
+    <td class="ptl_etalon">&#123;$VAR&#125;</td>
+    <td class="ptl_result">{RENDER_DEFINED_VAR}</td>
+    <td class="ptl_status"></td>
+    <th>Renderer for DEFINE-d $VAR</th>
+  </tr>
+-->
+  <tr>
+    <td>&#123;R_[RENDER_DEFINED_VAR]&#125;</td>
+    <td class="ptl_etalon">$VALUE</td>
+    <td class="ptl_result">{R_[RENDER_DEFINED_VAR]}</td>
+    <td class="ptl_status"></td>
+    <th>Rendering DEFINE-d $VAR</th>
+  </tr>
+
+  <!-- BEGIN render_test_block -->
+<!--
+  <tr>
+    <td>&#123;render_test_block.BLOCK_VAR&#125;</td>
+    <td class="ptl_etalon">&#123;VAR&#125;</td>
+    <td class="ptl_result">{render_test_block.BLOCK_VAR}</td>
+    <td class="ptl_status"></td>
+    <th>What we will render now</th>
+  </tr>
+-->
+  <tr>
+    <td>&#123;R_[render_test_block.BLOCK_VAR]&#125;</td>
+    <td class="ptl_etalon">VALUE</td>
+    <td class="ptl_result">{R_[render_test_block.BLOCK_VAR]}</td>
+    <td class="ptl_status"></td>
+    <th>Rendering result for block var "{render_test_block.BLOCK_VAR}"</th>
+  </tr>
+  <!-- END render_test_block -->
+
+  <!-- DEFINE $BLACK = 'black_moon' -->
+  <!-- BEGIN test -->
+  <!-- IF test.HEADER -->
+  <tr>
+    <th colspan="5" class="c_c">
+      {test.HEADER}
+    </th>
+  </tr>
+  <!-- ELSE -->
+  <tr>
+    <td>{test.CONSTRUCTION}</td>
+    <td class="ptl_etalon">{test.EXPECTED}</td>
+    <td class="ptl_result">{R_[test.SAMPLE]}</td>
+    <td class="ptl_status"></td>
+    <th>{test.DESCRIPTION}</th>
+  </tr>
+  <!-- ENDIF -->
+  <!-- END test -->
+
+  <tr>
+    <th colspan="5" class="c_c">
+      Decorators
+    </th>
+  </tr>
+  <!-- INCLUDE admin/tests/_number_color_value -->
+
+</table>
+
+
+<script type="text/javascript">
+  var ptlFailCount = 0;
+
+  function ptlTestResult(element, isOk) {
+    element.text((isOk ? "" : "NOT ") + 'PASSED').css('color', isOk ? 'lightgreen' : 'red');
+  }
+
+  $(".ptl_etalon").each(function () {
+    var parentCell = $(this).parent();
+    var isOk = parentCell.find(".ptl_etalon").html() === parentCell.find(".ptl_result").html();
+    !isOk ? ptlFailCount++ : false;
+    ptlTestResult(parentCell.find(".ptl_status"), isOk);
+  });
+
+  ptlTestResult($("#ptl_global_status"), ptlFailCount == 1);
+</script>

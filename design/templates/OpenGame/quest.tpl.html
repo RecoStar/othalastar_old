@@ -1,0 +1,81 @@
+<h1>{L_qst_quests}</h1>
+<h3>{L_qst_total}:&nbsp;{TOTAL}</h3>
+<!-- IF IN_ADMIN && ! USER_ID -->
+<!-- INCLUDE quest_edit_form -->
+<br>
+<!-- ENDIF -->
+
+<div class="quest_list border_image_large">
+  <div class="quest_filter_wrapper">
+    <label for="filterQuestStatus">{L_qst_filter_by_status}</label>
+    <select name="filterQuestStatus" id="filterQuestStatus">
+      <!-- BEGIN status -->
+      <!-- IF status.ID == PLAYER_OPTION_QUEST_LIST_FILTER -->
+      <!-- DEFINE $STATUS_SELECTED = 'selected' -->
+      <!-- ELSE -->
+      <!-- DEFINE $STATUS_SELECTED = '' -->
+      <!-- ENDIF -->
+      <option value="{status.ID}" {$STATUS_SELECTED}>{status.NAME}</option>
+      <!-- END status -->
+    </select>
+  </div>
+
+  <!-- BEGIN quest -->
+  <!-- IF quest.QUEST_STATUS == QUEST_STATUS_COMPLETE -->
+  <!-- DEFINE $QUEST_CLASS = 'success' -->
+  <!-- ELSEIF quest.QUEST_STATUS == QUEST_STATUS_STARTED -->
+  <!-- DEFINE $QUEST_CLASS = 'notice' -->
+  <!-- ELSE -->
+  <!-- DEFINE $QUEST_CLASS = 'warning' -->
+  <!-- ENDIF -->
+
+  <div class="quest_admin_wrapper border_image_small">
+    <div class="quest_wrapper">
+      <div class="quest_header contFJ header {$QUEST_CLASS}">
+        <div class="quest_name">
+          {quest.QUEST_NAME}
+        </div>
+
+        <div class="quest_status">
+          {quest.QUEST_STATUS_NAME}
+        </div>
+      </div>
+
+      <div class="quest_description cell">
+        {quest.QUEST_DESCRIPTION}
+      </div>
+
+      <div class="quest_details contFJ">
+        <div class="subheader">
+          <ul>
+            {L_qst_conditions}
+            <li class="info">{quest.QUEST_UNIT_AMOUNT}&nbsp;x&nbsp;{quest.QUEST_UNIT_NAME}</li>
+          </ul>
+        </div>
+        <div class="subheader">
+          <ul>
+            {L_qst_rewards}
+            <!-- BEGIN quest_rewards_list -->
+            <li class="ok">{quest_rewards_list.AMOUNT}&nbsp;x&nbsp;{quest_rewards_list.NAME}</li>
+            <!-- END quest_rewards_list -->
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- IF IN_ADMIN && ! USER_ID -->
+    <div class="quest_admin_buttons">
+      <a class="button_pseudo" href="admin/adm_quest.php?mode=edit&id={quest.QUEST_ID}">
+        <img src="design/images/icon_edit.png">
+      </a>
+      <a class="button_pseudo" href="admin/adm_quest.php?mode=copy&id={quest.QUEST_ID}">
+        <img src="design/images/icon_copy.gif">
+      </a>
+      <a class="button_pseudo" href="admin/adm_quest.php?mode=del&id={quest.QUEST_ID}">
+        <img src="design/images/r1.png">
+      </a>
+    </div>
+    <!-- ENDIF -->
+  </div>
+  <!-- END quest -->
+</div>

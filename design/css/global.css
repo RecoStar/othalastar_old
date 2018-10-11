@@ -1,0 +1,426 @@
+/* Boilerplate */
+
+/* Rid of annoying Chrome on Android FontBoositng featurebug */
+body, body * {
+  max-height: 1000000em;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+form, iframe {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+textarea {
+  resize: none;
+}
+
+/* System classes */
+.fl { /* Float left */
+  float: left;
+}
+
+.fr { /* Float right */
+  float: right;
+}
+
+.c_l { text-align: left; }
+.c_r { text-align: right; }
+.c_c { text-align: center; }
+.c_j { text-align: justify; }
+
+.hide { /* Hide */
+  display: none;
+}
+
+.strong { /* strong tag emulation */
+  font-weight: bold;
+}
+
+.debug {
+  text-align: left;
+  background-color: #111111;
+  color: #0A0;
+  font-family: Courier, monospace !important;
+  padding: 0.1em 0;
+  font-weight: 800;
+  font-size: 1em;
+}
+.benchmark {
+  color: white;
+  background-color: #111111;
+  font-size: 0.8em;
+  text-align: left;
+  font-weight: bold;
+  line-height: 1em;
+}
+/* Debug borders */
+.db1, .db2, .db3, .db4 {
+  border: 0.1em solid;
+}
+.db1 {
+  border-color: red;
+}
+.db2 {
+  border-color: yellow;
+}
+.db3 {
+  border-color: green;
+}
+.db4 {
+  border-color: blue;
+}
+
+
+.icon-info-cover {
+  display: inline-block;
+
+  width: 100%; /* 1.454545454545em; */
+  height: 100%; /* 1.454545454545em; */
+
+  background-image: url(../images/icon_help_32x32.png);
+  background-size: cover;
+}
+
+.icons {
+  width: 16px; /* 1.454545454545em; */
+  height: 16px; /* 1.454545454545em; */
+}
+/* Icon file */
+.icons { background-image: url(../images/icons.png); }
+.icon-plus {
+  background-position: 0 0;
+  display: inline-block; vertical-align: middle;
+}
+.icon-minus {
+  background-position: -16px 0;
+  display: inline-block; vertical-align: middle;
+}
+.icon-info {
+  background-position: -32px 0;
+  display: inline-block; vertical-align: middle;
+}
+.icon-cancel {
+  background-position: -48px 0;
+  display: inline-block; vertical-align: middle;
+}
+.icon-gather {
+  background-position: -64px 0;
+  display: inline-block; vertical-align: middle;
+}
+
+.icon_plus:after, .icon_minus:after, .icon_info:after, .icon_gather:after {
+  content: " ";
+
+  display: inline-block;
+
+  position: absolute;
+  top:0;
+  left:0;
+
+  width: 100%;
+  height:100%;
+
+  background-size: contain;
+  background-image: url("../images/icon_plus.png");
+}
+.icon_minus:after {
+  background-image: url("../images/icon_minus.png");
+}
+.icon_info:after {
+  background-image: url("../images/icon_info.png");
+}
+.icon_gather:after {
+  background-image: url("../images/icon_gather.png");
+}
+
+.i_icon_mail, .i_icon_mail_userlist {
+  background-image: url(../images/icon_mail.gif);
+  background-size: contain;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+}
+.i_icon_delete_userlist {
+  background-image: url(../images/r1.png);
+  background-size: contain;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+}
+.i_icon_impers_userlist {
+  background-image: url(../images/icon_impersonate.gif);
+  background-size: contain;
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+}
+.icon-info_empire {
+  background-position: -32px 0;
+  display: inline-block; vertical-align: middle;
+}
+
+/* Partially transparent background for over-planet-image icons */
+.icon_alpha, .alpha75, .a75 {
+  background: rgb(0, 0, 0); /* Fallback for web browsers that doesn't support RGBa */
+  background: rgba(0, 0, 0, 0.75); /* RGBa with 0.75 opacity */
+}
+.alpha50, .a50 {
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.50);
+}
+.alpha25, .a25 {
+  background: rgb(0, 0, 0);
+  background: rgba(0, 0, 0, 0.25);
+}
+
+/* Full element opacity with background */
+.opacity75, .o75 {
+  opacity: 0.75;
+  filter: alpha(opacity=75); /* For IE8 and earlier */
+}
+.opacity50, .o50 {
+  opacity: 0.50;
+  filter: alpha(opacity=50); /* For IE8 and earlier */
+}
+.opacity25, .o25 {
+  opacity: 0.25;
+  filter: alpha(opacity=25); /* For IE8 and earlier */
+}
+
+.percent33 {
+  width: 33%;
+  height: 33%;
+}
+.percent66 {
+  width: 66%;
+  height: 66%;
+}
+.percent100 {
+  width: 100%;
+  height: 100%;
+}
+
+.w100 {
+  width: 100%;
+}
+
+.h100 {
+  height: 100%;
+}
+
+.h2em {
+  height: 2em;
+}
+
+/* Absolute Positioning */
+
+/* Fill container - usually images */
+.posFill {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  width: 100%;
+  height: 100%;
+}
+/* Top of container, full width, centered */
+.posT {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  width: 100%;
+
+  text-align: center;
+  vertical-align: middle;
+}
+
+.posLT {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.posRT {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+/* Bottom of container, full width, centered */
+.posB {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+
+  text-align: center;
+  vertical-align: middle;
+}
+
+.posLB {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+.posRB {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+/* Containers ======================================================================================================= */
+/* Container Flex - Base Flex Container */
+/* One-line vertically centered, space distributed non-wrapping  */
+.contF,
+.contFJ,
+.contFS,
+.contFC
+{
+  display: flex;
+
+  justify-content: space-around;
+  align-content: space-around;
+
+  align-items: center;
+}
+
+/* Container Flex Justify */
+/* Replacement for float-left + float-right: Flex, non-wrapping, one-line vertically centered, item justified  */
+.contFJ {
+  text-align: left;
+  justify-content: space-between;
+}
+.contFS {
+  text-align: left;
+  justify-content: flex-start;
+}
+.contFE {
+  text-align: right;
+  justify-content: flex-end;
+}
+/* CONTainer Flex Center*/
+.contFC {
+  justify-content: center;
+  align-items: center;
+}
+
+.flexW {
+  flex-wrap: wrap;
+}
+
+/*.FW {*/
+  /*flex-wrap: wrap;*/
+/*}*/
+
+
+body.blitz_ {
+  background-image: none;
+  background-color: black;
+  background-repeat: no-repeat;
+  background-size: 100% auto ;
+  background-position: bottom 0 right 0;
+}
+
+@media only screen and (max-width: 479px) {
+}
+
+@media only screen and (min-width: 480px) {
+  body.blitz_ {
+    background-image: url(../images/background_blitz_0500.jpg);
+  }
+}
+
+@media only screen and (min-width: 580px) {
+  body.blitz_ {
+    background-image: url(../images/background_blitz_0600.jpg);
+  }
+}
+
+/* Desktops and laptops medium-res */
+@media only screen and (min-width: 760px) {
+  body.blitz_ {
+    background-image: url(../images/background_blitz_0800.jpg);
+  }
+}
+
+/* Desktops and laptops ----------- */
+@media only screen and (min-width: 950px) {
+  body.blitz_ {
+    background-image: url(../images/background_blitz_1024.jpg);
+  }
+}
+
+@media only screen and (min-width: 1224px) {
+  body.blitz_ {
+    background-image: url(../images/background_blitz_1280.jpg);
+  }
+}
+
+/* Large screens ----------- */
+@media only screen and (min-width: 1550px) {
+  body.blitz_ {
+    background-image: url(../images/background_blitz_1600.jpg);
+  }
+}
+
+@media only screen and (min-width: 1824px) {
+  body.blitz_ {
+    background-image: url(../images/background_blitz_1920.jpg);
+  }
+}
+
+.image_close {
+  width: 1.454545em;
+  height: 1.454545em;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.strike {
+  text-decoration: line-through;
+}
+
+.no_select {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
+}
+
+/* General wrapper class  */
+.flexible_wrapper
+{
+  display: flex;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+
+  flex-basis: 0.1%;
+  flex-grow: 1;
+  flex-shrink: 1;
+}
+/* Add 'wrap' class to break points  */
+.flexible_wrapper.wrap
+{
+  flex-wrap: wrap;
+}
+
+.xdebug-var-dump {
+  text-align: left;
+  font-size: 1.5rem;
+  background-color: #222;
+}

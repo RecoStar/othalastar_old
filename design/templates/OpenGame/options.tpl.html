@@ -1,0 +1,613 @@
+<h1>{L_opt_header}</h1>
+<!-- IF CHANGE_PASS -->
+  <!-- IF CHANGE_PASS == -1 -->
+    <h3 class="positive">{L_opt_msg_pass_changed}</h3>
+  <!-- ELSEIF CHANGE_PASS == 1  -->
+    <h3 class="negative">{L_opt_err_pass_wrong}</h3>
+  <!-- ELSEIF CHANGE_PASS == 2  -->
+    <h3 class="negative">{L_opt_err_pass_unmatched}</h3>
+  <!-- ENDIF -->
+<!-- ENDIF -->
+
+<script type="text/javascript">
+  var L_sys_login_password_show = '{LA_sys_login_password_show}';
+  var L_sys_login_password_hide = '{LA_sys_login_password_hide}';
+</script>
+
+<form action="index.php?page=options&mode=change" method="post" name="fOptions" enctype="multipart/form-data">
+  <div id="tab_container" style="font-size: 1em; width: 50em; display: none" class="tabs">
+    <ul>
+      <li><a href="#tab_account">{L_opt_account}</a></li>
+      <li><a href="#tab_interface">{L_opt_int_options}</a></li>
+      <li><a href="#tab_alerts">{L_opt_alerts}</a></li>
+    </ul>
+
+    <div id="tab_account">
+      <table width="100%" class="no_border_image">
+        <!-- IF ADM_PROTECT_PLANETS -->
+        <tr class="c_c">
+          <th colspan="2">
+            <input name="adm_pl_prot" type="checkbox" id="adm_pl_prot" <!-- IF adm_pl_prot -->checked<!-- ENDIF --> />
+            <label for="adm_pl_prot">{L_opt_adm_planet_prot}</label>
+          </th>
+        </tr>
+        <!-- ENDIF -->
+
+        <tr>
+          <th class="c_c" colspan="2">{L_opt_common}</th>
+        </tr>
+        <!-- IF AUTH_PROVIDER -->
+        <tr>
+          <th>{L_opt_account_name}</th>
+          <th width=330>
+            {AUTH_PROVIDER}
+            {ACCOUNT_NAME}
+          </th>
+        </tr>
+        <!-- ENDIF -->
+        <tr>
+          <th>
+            {L_opt_account_name}
+          </th>
+          <th width=330 class="ok">
+            {ACCOUNT_NAME}
+          </th>
+        </tr>
+
+        <tr>
+          <th>
+            {L_opt_game_user_name}
+          </th>
+          <th width=330>
+            <!-- IF SERVER_NAME_CHANGE -->
+              {L_username_old} <span class="ok">{opt_usern_data}</span><br />
+              {L_username_new} <input type="text" name="username" value="{opt_usern_data}" maxlength="32" size="32" <!-- IF ! SERVER_NAME_CHANGE_ENABLED -->disabled<!-- ENDIF -->><br />
+              <input type="checkbox" name="username_confirm" id="username_confirm" value="1" <!-- IF ! SERVER_NAME_CHANGE_ENABLED -->disabled<!-- ENDIF -->> <label for="username_confirm">{L_username_change_confirm}</label>
+              <!-- IF SERVER_NAME_CHANGE_PAY -->
+                {L_username_change_confirm_payed} {DARK_MATTER} {L_sys_dark_matter_sh}
+              <!-- ENDIF -->
+            <!-- ELSE -->
+              {opt_usern_data}
+            <!-- ENDIF -->
+          </th>
+        </tr>
+        <tr>
+          <th>{L_lastpassword}</th>
+          <th>
+            <input id="db_password" name="db_password" size="20" maxlength="32" value="" type="password" />
+            <input class="password_show" type="button" value="{L_sys_login_password_show}" show_element="db_password" />
+          </th>
+        </tr>
+        <tr>
+          <th>{L_newpassword}</th>
+          <th>
+            <input id="newpass1" name="newpass1" size="20" maxlength="32" type="password" />
+            <input class="password_show" type="button" value="{L_sys_login_password_show}" show_element="newpass1" />
+          </th>
+        </tr>
+        <tr>
+          <th>{L_newpasswordagain}</th>
+          <th>
+            <input id="newpass2" name="newpass2" size="20" maxlength="32" type="password">
+            <input class="password_show" type="button" value="{L_sys_login_password_show}" show_element="newpass2" />
+          </th>
+        </tr>
+        <tr title="{L_emaildir_tip}">
+          <th>{L_emaildir}</th>
+          <th>
+            <input name="db_email" maxlength="64" size="20" value="{opt_mail1_data}" type="text"><br />
+            {L_opt_mail_optional_description}
+          </th>
+        </tr>
+        <tr>
+          <th>{L_permanentemaildir}</th>
+          <th>
+            {opt_mail2_data}
+          </th>
+        </tr>
+        <tr>
+          <th>{L_opt_birthday}</th>
+          <th>
+            <!-- IF user_birthday -->
+            {user_birthday}
+            <!-- ELSE -->
+            <input type="text" name="user_birthday" id="user_birthday" size="10" maxlength="10" value="{FMT_DATE}"
+                   onfocus="var user_birthday = document.getElementById('user_birthday');if(user_birthday.value == '{JS_FMT_DATE}') user_birthday.value = '';"
+                   onblur="var user_birthday = document.getElementById('user_birthday');if(user_birthday.value == '') user_birthday.value = '{JS_FMT_DATE}';"
+                    >
+            <!-- ENDIF -->
+          </th>
+        </tr>
+
+        <tr>
+          <th>{L_sys_gender}</th>
+          <th>
+            <!-- IF GENDER -->
+            {GENDER_TEXT}
+            <!-- ELSE -->
+            <select name="gender">
+              <!-- BEGIN gender_list -->
+              <option value="{gender_list.VALUE}"<!-- IF gender_list.SELECTED --> selected<!-- ENDIF -->>{gender_list.NAME}</option>
+              <!-- END gender_list -->
+            </select>
+            <!-- ENDIF -->
+          </th>
+        </tr>
+
+        <tr>
+          <th class="c_c" colspan="2">{L_opt_avatar}</th>
+        </tr>
+        <tr>
+          <th colspan="2">
+            <label for="avatar">{L_opt_upload}</label>&nbsp;<input type="file" name="avatar" size="26" id="avatar" /><br />
+            <div>
+              <!-- IF opt_avatar -->
+              <img src="{D_SN_ROOT_VIRTUAL}/images/avatar/avatar_{USER_ID}.png"><br />
+              <input name="avatar_remove" type="checkbox" id="avatar_remove" /><label for="avatar_remove">{L_opt_avatar_remove}</label>
+              <!-- ELSE -->
+              <a href="http://www.google.com.ar/imghp" target="_blank">{L_opt_avatar_search}</a>
+              <!-- ENDIF -->
+            </div>
+          </th>
+        </tr>
+
+        <tr>
+          <td class="c" colspan="2">{L_delete_vacations}</td>
+        </tr>
+        <tr>
+          <td class="c_l" colspan="2">
+            <input name="opt_time_diff_clear" type="checkbox" id="opt_time_diff_clear" />
+            <label for="opt_time_diff_clear">{L_opt_time_diff_clear}</label><br />
+
+            <script type="text/javascript">
+              jQuery(document).on('click change', '#PLAYER_OPTION_TIME_DIFF_FORCED', function (){
+                $(this).is(":checked") ? jQuery('#opt_time_diff_clear').attr('disabled', 'disabled').removeAttr('checked') : jQuery('#opt_time_diff_clear').removeAttr('disabled');
+              });
+              $('#PLAYER_OPTION_TIME_DIFF_FORCED').change();
+            </script>
+
+            {L_opt_time_diff_explain}<br/>
+            <input name="PLAYER_OPTION_TIME_DIFF_FORCED" type="checkbox" id="PLAYER_OPTION_TIME_DIFF_FORCED" value="1" <!-- IF user_time_diff_forced --> checked="checked" <!-- ENDIF --> />
+            <label for="PLAYER_OPTION_TIME_DIFF_FORCED">{L_opt_time_diff_manual}</label>
+            <input name="PLAYER_OPTION_TIME_DIFF" type="text" id="PLAYER_OPTION_TIME_DIFF" value="{D_SN_CLIENT_TIME_DIFF}" style="width: 60px;" /> <label for="PLAYER_OPTION_TIME_DIFF">{L_sys_sec}</label><br/>
+          </td>
+        </tr>
+        <!-- IF ! USER_VACATION_DISABLE -->
+        <tr title="{L_vacations_tip}">
+          <th colspan=2>
+            <!-- IF VACATION_NEXT > SN_TIME_NOW && ! USER_AUTHLEVEL-->
+            {L_opt_vacation_err_timeout}<br />
+            {L_opt_vacation_next} {VACATION_NEXT_TEXT}
+            <!-- ELSE -->
+            <span class="fl"><input id="vacation" name="vacation" type="checkbox" {opt_modev_data} /> <label for="vacation">{L_mode_vacations} {L_opt_vacation_min} <span id="vacancy_to"></span></label></span>
+            <!-- ENDIF -->
+          </th>
+        </tr>
+        <!-- ENDIF -->
+      </table>
+    </div>
+
+    <div id="tab_interface" class="tabs">
+      <ul id="tabs_interface-subtabs">
+        <li><a href="#tab_interface-common">{L_opt_common}</a></li>
+        <li><a href="#tab_interface-tutorial">{L_opt_tutorial}</a></li>
+        <!-- IF MENU_CUSTOMIZE -->
+        <li><a href="#tab_interface-menu">{L_menu_customize_customization}</a></li>
+        <!-- ENDIF -->
+        <li><a href="#tab_interface-navbar">{L_opt_navbar_title}</a></li>
+        <li><a href="#tab_interface-universe">{L_opt_universe_title}</a></li>
+        <li><a href="#tab_interface-fleet">{L_option_fleets}</a></li>
+      </ul>
+
+      <div id="tab_interface-common">
+        <table class="no_border_image">
+          <tr class="c_c">
+            <th colspan="2">
+              <input type="hidden" name="options[{D_PLAYER_OPTION_SOUND_ENABLED}]" value="0" />
+              <input type="checkbox" id="sound_enabled" name="options[{D_PLAYER_OPTION_SOUND_ENABLED}]" value="1"<!-- IF sound_enabled --> checked<!-- ENDIF --> />
+              <label for="sound_enabled">{L_opt_sound_enabled}</label>
+            </th>
+          </tr>
+
+          <tr class="c_c">
+            <th colspan="2">
+              <input type="hidden" name="options[{D_PLAYER_OPTION_ANIMATION_DISABLED}]" value="0" />
+              <input type="checkbox" id="PLAYER_OPTION_ANIMATION_DISABLED" name="options[{D_PLAYER_OPTION_ANIMATION_DISABLED}]" value="1"<!-- IF PLAYER_OPTION_ANIMATION_DISABLED --> checked<!-- ENDIF --> />
+              <label for="PLAYER_OPTION_ANIMATION_DISABLED">{L_PLAYER_OPTION_ANIMATION_DISABLED}</label>
+            </th>
+          </tr>
+
+          <tr class="c_c">
+            <th colspan="2">
+              <input type="hidden" name="options[{D_PLAYER_OPTION_PROGRESS_BARS_DISABLED}]" value="0" />
+              <input type="checkbox" id="PLAYER_OPTION_PROGRESS_BARS_DISABLED" name="options[{D_PLAYER_OPTION_PROGRESS_BARS_DISABLED}]" value="1"<!-- IF PLAYER_OPTION_PROGRESS_BARS_DISABLED --> checked<!-- ENDIF --> />
+              <label for="PLAYER_OPTION_PROGRESS_BARS_DISABLED">{L_PLAYER_OPTION_PROGRESS_BARS_DISABLED}</label>
+            </th>
+          </tr>
+          <tr>
+            <th class="c_c" colspan="2">{L_opt_common}</th>
+          </tr>
+          <tr>
+            <th>{L_opt_language}</th>
+            <th>
+              <select name="langer">
+                <!-- BEGIN languages -->
+                <option value="{languages.VALUE}"<!-- IF languages.SELECTED --> selected<!-- ENDIF -->>[{languages.VALUE}] {languages.NAME}</option>
+                <!-- END languages -->
+              </select>
+            </th>
+          </tr>
+          <tr>
+            <th>{L_skins_example}</th>
+            <th><input name="design"{opt_sskin_data} style="display:none" type="checkbox" id="design" />
+              <select name="skin_name" size="1">
+                <!-- BEGIN skin_list -->
+                <option value="{skin_list.VALUE}"<!-- IF skin_list.SELECTED --> selected<!-- ENDIF -->>{skin_list.NAME}</option>
+                <!-- END skin_list -->
+              </select>
+            </th>
+          </tr>
+
+          <tr>
+            <td class="c_l" colspan="2">
+              <input type="hidden" name="options[{D_PLAYER_OPTION_DESIGN_DISABLE_BORDERS}]" value="0" />
+              <input type="checkbox" name="options[{D_PLAYER_OPTION_DESIGN_DISABLE_BORDERS}]" value="1" id="PLAYER_OPTION_DESIGN_DISABLE_BORDERS" <!-- IF PLAYER_OPTION_DESIGN_DISABLE_BORDERS -->checked="checked" <!-- ENDIF -->/>
+              <label for="PLAYER_OPTION_DESIGN_DISABLE_BORDERS">{L_PLAYER_OPTION_DESIGN_DISABLE_BORDERS}</label>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="c_l" colspan="2">
+              <input type="hidden" name="options[{D_PLAYER_OPTION_TECH_TREE_TABLE}]" value="0" />
+              <input type="checkbox" name="options[{D_PLAYER_OPTION_TECH_TREE_TABLE}]" value="1" id="PLAYER_OPTION_TECH_TREE_TABLE" <!-- IF PLAYER_OPTION_TECH_TREE_TABLE -->checked="checked" <!-- ENDIF -->/>
+
+              <label for="PLAYER_OPTION_TECH_TREE_TABLE">{L_PLAYER_OPTION_TECH_TREE_TABLE}</label>
+            </td>
+          </tr>
+
+          <tr>
+            <th colspan="2" nowrap>
+              {L_opt_planet_sort_title}
+              <select name="options[{D_PLAYER_OPTION_PLANET_SORT}]">
+                <!-- BEGIN planet_sort_options -->
+                <option value="{planet_sort_options.VALUE}"<!-- IF planet_sort_options.SELECTED --> selected<!-- ENDIF -->>{planet_sort_options.NAME}</option>
+                <!-- END planet_sort_options -->
+              </select>
+
+              <label for="planet_sort_inverse">{L_sys_sort_inverse}</label>
+              <input type="hidden" name="options[{D_PLAYER_OPTION_PLANET_SORT_INVERSE}]" value="0" />
+              <input type="checkbox" name="options[{D_PLAYER_OPTION_PLANET_SORT_INVERSE}]" value="1" id="planet_sort_inverse" <!-- IF PLAYER_OPTION_PLANET_SORT_INVERSE -->checked="checked" <!-- ENDIF -->/>
+            </th>
+          </tr>
+          <!-- IF .options_3 -->
+          <!-- BEGIN options_3 -->
+          <!-- IF options_3.NAME != 'opt_int_navbar_resource_force' -->
+          <tr>
+            <!-- IF options_3.TYPE == 'integer' -->
+            <td class="c_c"><label for="{options_3.NAME}">{options_3.TEXT}</label></td>
+            <td class="c_c">
+              <input type="text" id="{options_3.NAME}" name="{options_3.NAME}" value="{options_3.VALUE}" />
+              <!-- IF options_3.HINT --><br />{options_3.HINT}<!-- ENDIF -->
+            </td>
+            <!-- ELSE -->
+            <td class="c_l" colspan="2">
+              <input type="checkbox" id="{options_3.NAME}" name="{options_3.NAME}" value="1" <!-- IF options_3.VALUE --> checked<!-- ENDIF --> />
+              <label for="{options_3.NAME}">{options_3.TEXT}</label>
+            </td>
+            <!-- ENDIF -->
+          </tr>
+          <!-- ENDIF -->
+          <!-- END options_3 -->
+          <!-- ENDIF -->
+          <tr>
+            <td class="c_l" colspan="2">
+              <input type="hidden" name="options[{D_PLAYER_OPTION_BUILD_AUTOCONVERT_HIDE}]" value="0" />
+              <input type="checkbox" name="options[{D_PLAYER_OPTION_BUILD_AUTOCONVERT_HIDE}]" value="1" id="build_autoconvert_hide" <!-- IF PLAYER_OPTION_BUILD_AUTOCONVERT_HIDE -->checked="checked" <!-- ENDIF -->/>
+              <label for="build_autoconvert_hide">{L_opt_build_autoconvert_hide}</label>
+            </td>
+          </tr>
+
+        </table>
+      </div>
+
+      <div id="tab_interface-tutorial">
+        <table class="no_border_image c_l">
+          <tr>
+            <td class="">
+              <input type="hidden" name="options[{D_PLAYER_OPTION_TUTORIAL_DISABLED}]" value="0" />
+              <input type="checkbox" id="PLAYER_OPTION_TUTORIAL_DISABLED" name="options[{D_PLAYER_OPTION_TUTORIAL_DISABLED}]" value="1"<!-- IF PLAYER_OPTION_TUTORIAL_DISABLED --> checked<!-- ENDIF --> />
+              <label for="PLAYER_OPTION_TUTORIAL_DISABLED">{L_PLAYER_OPTION_TUTORIAL_DISABLED}</label>
+            </td>
+          </tr>
+
+          <!--<tr>-->
+            <!--<td class="c_l">-->
+              <!--<input type="hidden" name="options[{D_PLAYER_OPTION_TUTORIAL_WINDOWED}]" value="0" />-->
+              <!--<input type="checkbox" id="PLAYER_OPTION_TUTORIAL_WINDOWED" name="options[{D_PLAYER_OPTION_TUTORIAL_WINDOWED}]" value="1"&lt;!&ndash; IF PLAYER_OPTION_TUTORIAL_WINDOWED &ndash;&gt; checked&lt;!&ndash; ENDIF &ndash;&gt; />-->
+              <!--<label for="PLAYER_OPTION_TUTORIAL_WINDOWED">{L_PLAYER_OPTION_TUTORIAL_WINDOWED}</label>-->
+            <!--</td>-->
+          <!--</tr>-->
+
+          <tr>
+            <td class="c_l">
+              <input type="hidden" name="options[{D_PLAYER_OPTION_TUTORIAL_CURRENT}]" value="{PLAYER_OPTION_TUTORIAL_CURRENT}" />
+              <input type="checkbox" id="PLAYER_OPTION_TUTORIAL_CURRENT" name="options[{D_PLAYER_OPTION_TUTORIAL_CURRENT}]" value="{C_tutorial_first_item}" />
+              <label for="PLAYER_OPTION_TUTORIAL_CURRENT">{L_PLAYER_OPTION_TUTORIAL_CURRENT}</label>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <!-- IF MENU_CUSTOMIZE -->
+      <div id="tab_interface-menu">
+        <!-- INCLUDE ../../../modules/menu_customize/design/templates/OpenGame/menu_customize_options -->
+      </div>
+      <!-- ENDIF -->
+
+      <div id="tab_interface-navbar">
+        <table class="no_border_image">
+          <tr>
+            <th class="c_j" colspan="2">{L_opt_navbar_description}</th>
+          </tr>
+
+          <tr>
+            <th class="c_c" colspan="2">
+              {L_opt_navbar_resourcebar_description}
+            </th>
+          </tr>
+          <!-- IF .options_3 -->
+          <!-- BEGIN options_3 -->
+          <!-- IF options_3.NAME == 'opt_int_navbar_resource_force' -->
+          <tr>
+            <!-- IF options_3.TYPE == 'integer' -->
+            <td class="c_c"><label for="{options_3.NAME}">{options_3.TEXT}</label></td>
+            <td class="c_c">
+              <input type="text" id="{options_3.NAME}" name="{options_3.NAME}" value="{options_3.VALUE}" />
+              <!-- IF options_3.HINT --><br />{options_3.HINT}<!-- ENDIF -->
+            </td>
+            <!-- ELSE -->
+            <td class="c_l" colspan="2">
+              <input type="checkbox" id="{options_3.NAME}" name="{options_3.NAME}" value="1" <!-- IF options_3.VALUE --> checked<!-- ENDIF --> />
+              <label for="{options_3.NAME}">{options_3.TEXT}</label>
+            </td>
+            <!-- ENDIF -->
+          </tr>
+          <!-- ENDIF -->
+          <!-- END options_3 -->
+          <!-- ENDIF -->
+          <tr>
+            <td class="c_l" colspan="2">
+              <input type="hidden" name="options[{D_PLAYER_OPTION_NAVBAR_PLANET_VERTICAL}]" value="0" />
+              <input type="checkbox" name="options[{D_PLAYER_OPTION_NAVBAR_PLANET_VERTICAL}]" value="1" id="PLAYER_OPTION_NAVBAR_PLANET_VERTICAL" <!-- IF PLAYER_OPTION_NAVBAR_PLANET_VERTICAL -->checked="checked" <!-- ENDIF -->/>
+              <label for="PLAYER_OPTION_NAVBAR_PLANET_VERTICAL">{L_PLAYER_OPTION_NAVBAR_PLANET_VERTICAL}</label>
+            </td>
+          </tr>
+          <tr>
+            <td class="c_l" colspan="2">
+              <input type="hidden" name="options[{D_PLAYER_OPTION_NAVBAR_PLANET_DISABLE_STORAGE}]" value="0" />
+              <input type="checkbox" name="options[{D_PLAYER_OPTION_NAVBAR_PLANET_DISABLE_STORAGE}]" value="1" id="PLAYER_OPTION_NAVBAR_PLANET_DISABLE_STORAGE" <!-- IF PLAYER_OPTION_NAVBAR_PLANET_DISABLE_STORAGE -->checked="checked" <!-- ENDIF -->/>
+              <label for="PLAYER_OPTION_NAVBAR_PLANET_DISABLE_STORAGE">{L_PLAYER_OPTION_NAVBAR_PLANET_DISABLE_STORAGE}</label>
+            </td>
+          </tr>
+          <tr>
+            <td class="c_l" colspan="2">
+              <input type="hidden" name="options[{D_PLAYER_OPTION_NAVBAR_PLANET_OLD}]" value="0" />
+              <input type="checkbox" name="options[{D_PLAYER_OPTION_NAVBAR_PLANET_OLD}]" value="1" id="PLAYER_OPTION_NAVBAR_PLANET_OLD" <!-- IF PLAYER_OPTION_NAVBAR_PLANET_OLD -->checked="checked" <!-- ENDIF -->/>
+              <label for="PLAYER_OPTION_NAVBAR_PLANET_OLD">{L_PLAYER_OPTION_NAVBAR_PLANET_OLD}</label>
+            </td>
+          </tr>
+
+          <tr>
+            <th class="c_c" colspan="2">
+              {L_opt_navbar_buttons_title}
+            </th>
+          </tr>
+          <tr>
+            <td class="c_l" colspan="2">
+              <input type="hidden" name="options[{D_PLAYER_OPTION_NAVBAR_RESEARCH_WIDE}]" value="0" />
+              <input type="checkbox" name="options[{D_PLAYER_OPTION_NAVBAR_RESEARCH_WIDE}]" value="1" id="PLAYER_OPTION_NAVBAR_RESEARCH_WIDE" <!-- IF PLAYER_OPTION_NAVBAR_RESEARCH_WIDE -->checked="checked" <!-- ENDIF -->/>
+              <label for="PLAYER_OPTION_NAVBAR_RESEARCH_WIDE">{L_PLAYER_OPTION_NAVBAR_RESEARCH_WIDE}</label>
+            </td>
+          </tr>
+          <tr>
+            <td class="c_l" colspan="2">
+              <input type="hidden" name="options[{D_PLAYER_OPTION_NAVBAR_DISABLE_RESEARCH}]" value="0" />
+              <input type="checkbox" name="options[{D_PLAYER_OPTION_NAVBAR_DISABLE_RESEARCH}]" value="1" id="PLAYER_OPTION_NAVBAR_DISABLE_RESEARCH" <!-- IF PLAYER_OPTION_NAVBAR_DISABLE_RESEARCH -->checked="checked" <!-- ENDIF -->/>
+              <label for="PLAYER_OPTION_NAVBAR_DISABLE_RESEARCH">{L_PLAYER_OPTION_NAVBAR_DISABLE_RESEARCH}</label>
+            </td>
+          </tr>
+          <tr>
+            <td class="c_l" colspan="2">
+              <input type="hidden" name="options[{D_PLAYER_OPTION_NAVBAR_DISABLE_PLANET}]" value="0" />
+              <input type="checkbox" name="options[{D_PLAYER_OPTION_NAVBAR_DISABLE_PLANET}]" value="1" id="PLAYER_OPTION_NAVBAR_DISABLE_PLANET" <!-- IF PLAYER_OPTION_NAVBAR_DISABLE_PLANET -->checked="checked" <!-- ENDIF -->/>
+              <label for="PLAYER_OPTION_NAVBAR_DISABLE_PLANET">{L_PLAYER_OPTION_NAVBAR_DISABLE_PLANET}</label>
+            </td>
+          </tr>
+          <tr>
+            <td class="c_l" colspan="2">
+              <input type="hidden" name="options[{D_PLAYER_OPTION_NAVBAR_DISABLE_HANGAR}]" value="0" />
+              <input type="checkbox" name="options[{D_PLAYER_OPTION_NAVBAR_DISABLE_HANGAR}]" value="1" id="PLAYER_OPTION_NAVBAR_DISABLE_HANGAR" <!-- IF PLAYER_OPTION_NAVBAR_DISABLE_HANGAR -->checked="checked" <!-- ENDIF -->/>
+              <label for="PLAYER_OPTION_NAVBAR_DISABLE_HANGAR">{L_PLAYER_OPTION_NAVBAR_DISABLE_HANGAR}</label>
+            </td>
+          </tr>
+          <tr>
+            <td class="c_l" colspan="2">
+              <input type="hidden" name="options[{D_PLAYER_OPTION_NAVBAR_DISABLE_EXPEDITIONS}]" value="0" />
+              <input type="checkbox" name="options[{D_PLAYER_OPTION_NAVBAR_DISABLE_EXPEDITIONS}]" value="1" id="PLAYER_OPTION_NAVBAR_DISABLE_EXPEDITIONS" <!-- IF PLAYER_OPTION_NAVBAR_DISABLE_EXPEDITIONS -->checked="checked" <!-- ENDIF -->/>
+              <label for="PLAYER_OPTION_NAVBAR_DISABLE_EXPEDITIONS">{L_PLAYER_OPTION_NAVBAR_DISABLE_EXPEDITIONS}</label>
+            </td>
+          </tr>
+          <tr>
+            <td class="c_l" colspan="2">
+              <input type="hidden" name="options[{D_PLAYER_OPTION_NAVBAR_DISABLE_FLYING_FLEETS}]" value="0" />
+              <input type="checkbox" name="options[{D_PLAYER_OPTION_NAVBAR_DISABLE_FLYING_FLEETS}]" value="1" id="PLAYER_OPTION_NAVBAR_DISABLE_FLYING_FLEETS" <!-- IF PLAYER_OPTION_NAVBAR_DISABLE_FLYING_FLEETS -->checked="checked" <!-- ENDIF -->/>
+              <label for="PLAYER_OPTION_NAVBAR_DISABLE_FLYING_FLEETS">{L_PLAYER_OPTION_NAVBAR_DISABLE_FLYING_FLEETS}</label>
+            </td>
+          </tr>
+          <tr>
+            <td class="c_l" colspan="2">
+              <input type="hidden" name="options[{D_PLAYER_OPTION_NAVBAR_DISABLE_QUESTS}]" value="0" />
+              <input type="checkbox" name="options[{D_PLAYER_OPTION_NAVBAR_DISABLE_QUESTS}]" value="1" id="PLAYER_OPTION_NAVBAR_DISABLE_QUESTS" <!-- IF PLAYER_OPTION_NAVBAR_DISABLE_QUESTS -->checked="checked" <!-- ENDIF -->/>
+              <label for="PLAYER_OPTION_NAVBAR_DISABLE_QUESTS">{L_PLAYER_OPTION_NAVBAR_DISABLE_QUESTS}</label>
+            </td>
+          </tr>
+          <tr>
+            <td class="c_l" colspan="2">
+              <input type="hidden" name="options[{D_PLAYER_OPTION_NAVBAR_DISABLE_META_MATTER}]" value="0" />
+              <input type="checkbox" name="options[{D_PLAYER_OPTION_NAVBAR_DISABLE_META_MATTER}]" value="1" id="PLAYER_OPTION_NAVBAR_DISABLE_META_MATTER" <!-- IF PLAYER_OPTION_NAVBAR_DISABLE_META_MATTER -->checked="checked" <!-- ENDIF -->/>
+              <label for="PLAYER_OPTION_NAVBAR_DISABLE_META_MATTER">{L_PLAYER_OPTION_NAVBAR_DISABLE_META_MATTER}</label>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div id="tab_interface-universe">
+        <table class="no_border_image">
+          <tr>
+            <th class="c_c" colspan="2">{L_galaxyvision_options}</th>
+          </tr>
+          <tr>
+            <td class="c_l" colspan="2">
+              <input type="hidden" name="options[{D_PLAYER_OPTION_UNIVERSE_OLD}]" value="0" />
+              <input type="checkbox" name="options[{D_PLAYER_OPTION_UNIVERSE_OLD}]" value="1" id="PLAYER_OPTION_UNIVERSE_OLD" <!-- IF PLAYER_OPTION_UNIVERSE_OLD -->checked="checked" <!-- ENDIF -->/>
+              <label for="PLAYER_OPTION_UNIVERSE_OLD">{L_PLAYER_OPTION_UNIVERSE_OLD}</label>
+            </td>
+          </tr>
+          <tr>
+            <td class="c_l" colspan="2">
+              <input type="hidden" name="options[{D_PLAYER_OPTION_UNIVERSE_DISABLE_COLONIZE}]" value="0" />
+              <input type="checkbox" name="options[{D_PLAYER_OPTION_UNIVERSE_DISABLE_COLONIZE}]" value="1" id="PLAYER_OPTION_UNIVERSE_DISABLE_COLONIZE" <!-- IF PLAYER_OPTION_UNIVERSE_DISABLE_COLONIZE -->checked="checked" <!-- ENDIF -->/>
+              <label for="PLAYER_OPTION_UNIVERSE_DISABLE_COLONIZE">{L_PLAYER_OPTION_UNIVERSE_DISABLE_COLONIZE}</label>
+            </td>
+          </tr>
+          <!-- IF .options_2 -->
+          <!-- BEGIN options_2 -->
+          <tr>
+            <td class="c_l" colspan="2">
+              <input type="checkbox" id="{options_2.NAME}" name="{options_2.NAME}" value="1" <!-- IF options_2.VALUE --> checked<!-- ENDIF -->>
+              <label for="{options_2.NAME}">{options_2.TEXT}</label>
+            </td>
+          </tr>
+          <!-- END options_2 -->
+          <!-- ENDIF -->
+          <tr title="{L_spy_cant_tip}">
+            <th>{L_spy_cant}</th>
+            <th><input name="options[{D_PLAYER_OPTION_FLEET_SPY_DEFAULT}]" maxlength="2" size="2" value="{PLAYER_OPTION_FLEET_SPY_DEFAULT}" type="text"></th>
+          </tr>
+          <tr>
+            <th>{L_tooltip_time}</th>
+            <th><input name="options[{D_PLAYER_OPTION_TOOLTIP_DELAY}]" maxlength="4" size="4" value="{PLAYER_OPTION_TOOLTIP_DELAY}" type="text"> {L_sys_milliseconds} (0 - по умолчанию)</th>
+          </tr>
+          <tr>
+            <th>{L_shortcut}</th>
+            <td class="c_c" nowrap>
+              <table class="markup">
+                <tr class="c_l">
+                  <td>
+                    <input type="hidden" name="options[{D_PLAYER_OPTION_UNIVERSE_ICON_SPYING}]" value="0" />
+                    <input type="checkbox" name="options[{D_PLAYER_OPTION_UNIVERSE_ICON_SPYING}]" value="1" id="settings_esp" <!-- IF user_settings_esp -->checked="checked" <!-- ENDIF -->/>&nbsp;<label for="settings_esp"><img height="14px" src="design/images/icon_espionage.png" alt="{L_spy}" />&nbsp;{L_spy}</label>
+                  </td>
+                  <td>
+                    <input type="hidden" name="options[{D_PLAYER_OPTION_UNIVERSE_ICON_MISSILE}]" value="0" />
+                    <input type="checkbox" name="options[{D_PLAYER_OPTION_UNIVERSE_ICON_MISSILE}]" value="1" id="settings_mis" <!-- IF user_settings_mis -->checked="checked" <!-- ENDIF -->/>&nbsp;<label for="settings_mis"><img height="14px" src="design/images/icon_missile.png" alt="{L_attack_with_missile}" />&nbsp;{L_attack_with_missile}</label>
+                  </td>
+                </tr>
+                <tr class="c_l">
+                  <td>
+                    <input type="hidden" name="options[{D_PLAYER_OPTION_UNIVERSE_ICON_PM}]" value="0" />
+                    <input type="checkbox" name="options[{D_PLAYER_OPTION_UNIVERSE_ICON_PM}]" value="1" id="settings_wri" <!-- IF user_settings_wri -->checked="checked" <!-- ENDIF -->/>&nbsp;<label for="settings_wri"><img height="14px" src="design/images/icon_mail.gif" alt="{L_write_a_messege}" />&nbsp;{L_write_a_messege}</label>
+                  </td>
+                  <td>
+                    <input type="hidden" name="options[{D_PLAYER_OPTION_UNIVERSE_ICON_PROFILE}]" value="0" />
+                    <input type="checkbox" name="options[{D_PLAYER_OPTION_UNIVERSE_ICON_PROFILE}]" value="1" id="settings_info" <!-- IF user_settings_info -->checked="checked" <!-- ENDIF -->/>&nbsp;<label for="settings_info"><img height="14px" src="{I_menu_empire_emperor}" alt="{L_opt_settings_info}" />&nbsp;{L_opt_settings_info}</label>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div id="tab_interface-fleet">
+        <table class="no_border_image">
+          <tr>
+            <th class="c_c" colspan="2">{L_option_fleet_send}</th>
+          </tr>
+          <tr>
+            <td class="c_l" colspan="2">
+              <input type="hidden" name="options[{D_PLAYER_OPTION_FLEET_SHIP_SELECT_OLD}]" value="0" />
+              <input type="checkbox" name="options[{D_PLAYER_OPTION_FLEET_SHIP_SELECT_OLD}]" value="1" id="PLAYER_OPTION_FLEET_SHIP_SELECT_OLD" <!-- IF PLAYER_OPTION_FLEET_SHIP_SELECT_OLD -->checked="checked" <!-- ENDIF -->/>
+              <label for="PLAYER_OPTION_FLEET_SHIP_SELECT_OLD">{L_PLAYER_OPTION_FLEET_SHIP_SELECT_OLD}</label>
+            </td>
+          </tr>
+          <tr>
+            <td class="c_l" colspan="2">
+              <input type="hidden" name="options[{D_PLAYER_OPTION_FLEET_SHIP_HIDE_CONSUMPTION}]" value="0" />
+              <input type="checkbox" name="options[{D_PLAYER_OPTION_FLEET_SHIP_HIDE_CONSUMPTION}]" value="1" id="PLAYER_OPTION_FLEET_SHIP_HIDE_CONSUMPTION" <!-- IF PLAYER_OPTION_FLEET_SHIP_HIDE_CONSUMPTION -->checked="checked" <!-- ENDIF -->/>
+              <label for="PLAYER_OPTION_FLEET_SHIP_HIDE_CONSUMPTION">{L_PLAYER_OPTION_FLEET_SHIP_HIDE_CONSUMPTION} <img src="{I_icon_ship_consumption_16}" class="icon_1em" /></label>
+            </td>
+          </tr>
+          <tr>
+            <td class="c_l" colspan="2">
+              <input type="hidden" name="options[{D_PLAYER_OPTION_FLEET_SHIP_HIDE_SPEED}]" value="0" />
+              <input type="checkbox" name="options[{D_PLAYER_OPTION_FLEET_SHIP_HIDE_SPEED}]" value="1" id="PLAYER_OPTION_FLEET_SHIP_HIDE_SPEED" <!-- IF PLAYER_OPTION_FLEET_SHIP_HIDE_SPEED -->checked="checked" <!-- ENDIF -->/>
+              <label for="PLAYER_OPTION_FLEET_SHIP_HIDE_SPEED">{L_PLAYER_OPTION_FLEET_SHIP_HIDE_SPEED} <img src="{I_icon_ship_speed_16}" class="icon_1em" /></label>
+            </td>
+          </tr>
+          <tr>
+            <td class="c_l" colspan="2">
+              <input type="hidden" name="options[{D_PLAYER_OPTION_FLEET_SHIP_HIDE_CAPACITY}]" value="0" />
+              <input type="checkbox" name="options[{D_PLAYER_OPTION_FLEET_SHIP_HIDE_CAPACITY}]" value="1" id="PLAYER_OPTION_FLEET_SHIP_HIDE_CAPACITY" <!-- IF PLAYER_OPTION_FLEET_SHIP_HIDE_CAPACITY -->checked="checked" <!-- ENDIF -->/>
+              <label for="PLAYER_OPTION_FLEET_SHIP_HIDE_CAPACITY">{L_PLAYER_OPTION_FLEET_SHIP_HIDE_CAPACITY} <img src="{I_icon_ship_capacity_16}" class="icon_1em" /></label>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+    </div>
+
+
+    <div id="tab_alerts">
+      <table class="no_border_image">
+        <!-- IF .options_1 -->
+        <tr>
+          <th class="c_c" colspan="<!-- IF SERVER_SEND_EMAIL -->3<!-- ELSE -->2<!-- ENDIF -->">{L_opt_alerts}</th>
+        </tr>
+        <!-- BEGIN options_1 -->
+        <tr>
+          <td class="c_c"><label for="{options_1.NAME}">{options_1.TEXT}</label></td>
+          <td class="c_c">
+            <!-- IF options_1.PM != -1 -->
+            <input type="checkbox" id="opt_{options_1.NAME}" name="opt_{options_1.NAME}" value="1" id="{options_1.NAME}"<!-- IF options_1.PM --> checked<!-- ENDIF -->>&nbsp;<label for="opt_{options_1.NAME}"><img src="design/images/icon_mail.gif" alt="{write_a_messege}" />&nbsp;{L_msg_personal_messages}</label>
+            <!-- ENDIF -->&nbsp;
+          </td>
+          <!-- IF config_game_email_pm -->
+          <td class="c_c">
+          <!-- IF options_1.EMAIL != -1 -->
+          <input type="checkbox" id="opt_email_{options_1.NAME}" name="opt_email_{options_1.NAME}" value="1" id="{options_1.NAME}"<!-- IF options_1.EMAIL --> checked<!-- ENDIF -->>&nbsp;<label for="opt_email_{options_1.NAME}">@ e-mail</label>
+          <!-- ENDIF -->&nbsp;
+          </td>
+          <!-- ENDIF -->
+        </tr>
+        <!-- END options_1 -->
+        <!-- ENDIF -->
+      </table>
+    </div>
+  </div>
+
+  <br/>
+  <input value="{L_save_settings}" type="submit" id="save_settings" />
+
+  <input type="hidden" name="refresh" value="1" />
+</form>
+
+<script type="text/javascript"><!--
+//  $("#tab_container").tabs().show();
+  $(".tabs").tabs();
+  $("#tab_container").show();
+// --></script>
+
+<script type="text/javascript"><!--
+  sn_timers.unshift({id: 'vacancy_to', type: TIMER_CLOCK_REALTIME, options: {format: 3, delta: '{C_player_vacation_time}'}});
+  sn_timers.unshift({id: 'delete_on', type: TIMER_CLOCK_REALTIME, options: {format: 3, delta: '{C_player_delete_time}'}});
+// --></script>

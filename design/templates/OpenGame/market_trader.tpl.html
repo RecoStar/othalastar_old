@@ -1,0 +1,66 @@
+<script type="text/javascript">
+  var RES_DARK_MATTER = parseInt('{D_RES_DARK_MATTER}');
+  var RES_METAL = parseInt('{D_RES_METAL}');
+  var C_rpg_cost_trader = parseInt('{C_rpg_cost_trader}');
+  var exchange_to_resource_id = parseInt('{EXCHANGE_TO_RESOURCE_ID}') ? parseInt('{EXCHANGE_TO_RESOURCE_ID}') : 0;
+
+  jQuery.extend(language, {LA_eco_mrk_trader_exchange_dm_confirm: '{LA_eco_mrk_trader_exchange_dm_confirm}'});
+  var eco_market_resources = {};
+</script>
+
+<script type="text/javascript" src="js/market.js?{C_var_db_update}"></script>
+
+<script type="text/javascript">
+  <!-- BEGIN resources -->
+  eco_market_resources[parseInt('{resources.ID}')] = {
+    avail: parseFloat('{resources.AVAIL}'),
+    rate: parseFloat('{resources.RATE}'),
+    start: parseFloat('{resources.AVAIL}') + (parseInt('{resources.ID}') == RES_DARK_MATTER ? C_rpg_cost_trader : 0)
+  };
+  jQuery(document).on('keyup', '#spend{resources.ID}', eco_mrk_trader_recalc);
+  jQuery(document).on('slide slidechange', '#spend{resources.ID}slide', eco_mrk_trader_recalc);
+  <!-- END resources -->
+</script>
+
+<h2>{L_eco_mrk_title}:&nbsp;{L_eco_mrk_trader}</h2>
+<h3 class="warning">{L_eco_mrk_service_cost} <span id="rpg_cost_trader">{C_rpg_cost_trader}</span> {L_sys_dark_matter_sh}</h3>
+
+{message}
+
+<form name="form_trade" method="POST" id="form_trade">
+  <table id="market_trader">
+    <tr class="c_l">
+      <th>{L_sys_resources}</th>
+      <th>{L_eco_mrk_trader_exchange}</th>
+      <th>{L_eco_mrk_trader_left}</th>
+    </tr>
+
+    <!-- BEGIN resources -->
+      <tr>
+        <td class="c_c">
+          <div class="button_pseudo <!-- IF resources.ID == EXCHANGE_TO_RESOURCE_ID -->button_pseudo_pressed<!-- ENDIF -->" resource_id="{resources.ID}" >
+            <input id="resource_{resources.ID}" type="radio" name="exchangeTo"
+                   style="display: none;"
+                   value="{resources.ID}" <!-- IF resources.ID == EXCHANGE_TO_RESOURCE_ID -->checked <!-- ENDIF -->>
+            {resources.NAME}
+          </div>
+          <div class="notice">{L_eco_mrk_trader_course} <span id="course{resources.ID}"></span></div>
+        </td>
+        <td>
+          <script type="text/javascript">
+            sn_ainput_make('spend[{resources.ID}]', {max: {resources.AVAIL}, button_max: true, button_zero: true});
+          </script>
+        </td>
+        <td class="c_r">
+          {resources.AVAIL_TEXT}
+          <div id="res_delta{resources.ID}"></div>
+          <div id="res_left{resources.ID}" style="border-top: 0.2em solid"></div>
+        </td>
+      </tr>
+    <!-- END resources -->
+
+    <tr><th class="c_c" colspan=4 align=center>
+      <input type="submit" id="submit_trade" name="exchange" value="{L_eco_mrk_trader_do}" />
+    </th></tr>
+  </table>
+</form>

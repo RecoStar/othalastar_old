@@ -1,0 +1,48 @@
+<!-- IF ! $PLANET_GOVERNOR_ID -->
+  <!-- DEFINE $PLANET_GOVERNOR_ID = '{PLANET_GOVERNOR_ID}'-->
+<!-- ELSE -->
+  <!-- DEFINE $PLANET_GOVERNOR_ID = ''-->
+<!-- ENDIF -->
+<!-- IF ! $PLANET_GOVERNOR_LEVEL -->
+  <!-- DEFINE $PLANET_GOVERNOR_LEVEL = '{PLANET_GOVERNOR_LEVEL}'-->
+<!-- ELSE -->
+  <!-- DEFINE $PLANET_GOVERNOR_LEVEL = ''-->
+<!-- ENDIF -->
+
+<!-- IF PLANET_GOVERNOR_LEVEL > 0 && $PLANET_GOVERNOR_ID -->
+  <div class="unit_preview" id="unit{production.ID}" unit_id="{production.ID}">
+    <div onclick="document.location='overview.php?mode=manage&cp={$PLANET_ID}'">
+      <span class="posFill">
+        {I_[$PLANET_GOVERNOR_ID]|html|height="100%"}
+      </span>
+
+      <span class="posT icon_alpha">
+        <!-- IF $PLANET_GOVERNOR_NAME -->{$PLANET_GOVERNOR_NAME}<!-- ELSE -->{PLANET_GOVERNOR_NAME}<!-- ENDIF -->
+      </span>
+
+      <span class="posB icon_alpha">
+        <!-- IF $PLANET_GOVERNOR_LEVEL -->
+          {$PLANET_GOVERNOR_LEVEL}<!-- IF PLANET_GOVERNOR_LEVEL_PLUS --><span class="zero"><!-- IF PLANET_GOVERNOR_LEVEL_PLUS > 0 -->+<!-- ENDIF -->{PLANET_GOVERNOR_LEVEL_PLUS}</span><!-- ENDIF -->
+        <!-- ENDIF -->
+        <!-- IF PLANET_GOVERNOR_LEVEL_MAX --> / {PLANET_GOVERNOR_LEVEL_MAX}<!-- ENDIF -->
+      </span>
+    </div>
+
+    <span class="unit-icon-info-container" onclick="document.location='infos.php?gid={$PLANET_GOVERNOR_ID}'">
+      <div class="icon-info-cover">&nbsp;</div>
+    </span>
+  </div>
+<!-- ELSE -->
+  {L_sys_governor_none}
+<!-- ENDIF -->
+
+
+<!-- IF $IS_PLANET_OVERVIEW -->
+<a class="button_pseudo" href="overview.php?mode=manage&cp={$PLANET_ID}">
+  <!-- IF PLANET_GOVERNOR_LEVEL > 0 && $PLANET_GOVERNOR_ID -->
+  {L_sys_governor_upgrade_or_change}
+  <!-- ELSE -->
+  {L_sys_governor_hire}
+  <!-- ENDIF -->
+</a>
+<!-- ENDIF -->

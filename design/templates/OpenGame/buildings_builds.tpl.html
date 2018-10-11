@@ -1,0 +1,459 @@
+<h1>{PAGE_HEADER}</h1>
+
+<script type="text/javascript">
+var production = [];
+var require = [];
+var grants = [];
+var STACKABLE = Math.intVal('{STACKABLE}');
+var TEMPORARY = Math.intVal('{TEMPORARY}');
+var CAN_AUTOCONVERT = Math.intVal('{CAN_AUTOCONVERT}');
+var MARKET_AUTOCONVERT_COST = Math.intVal('{MARKET_AUTOCONVERT_COST}');
+var DARK_MATTER = Math.intVal('{DARK_MATTER}');
+
+var ALLY_ID = Math.intVal('{ALLY_ID}');
+var PLANET_ID = Math.intVal('{PLN_ID}');
+
+var que_id = Math.intVal('{QUE_ID}');
+
+var UNIT_TECHNOLOGIES = Math.intVal('{D_UNIT_TECHNOLOGIES}');
+
+$.extend(language, {
+  eco_que_clear_dialog_title: '{LA_eco_que_clear_dialog_title}',
+  eco_que_clear_dialog_text: '{LA_eco_que_clear_dialog_text}',
+
+  eco_que_artifact_dialog_title: '{LA_eco_que_artifact_dialog_title}',
+  eco_que_artifact_dialog_text: '{LA_eco_que_artifact_dialog_text}',
+
+  level: '{LA_level}',
+  level_short: '{LA_sys_level_short}',
+  bld_create: '{LA_bld_create}',
+  bld_destroy: '{LA_bld_destroy}',
+  construction_time: '{LA_ConstructionTime}',
+  eco_price: '{LA_eco_price}',
+  eco_left: '{LA_eco_left}',
+  eco_left_fleet: '{LA_sys_fleet_and}',
+
+  sys_resources: '{LA_sys_resources}',
+  sys_metal: '{LA_sys_metal}',
+  sys_crystal: '{LA_sys_crystal}',
+  sys_deuterium: '{LA_sys_deuterium}',
+  sys_energy: '{LA_sys_energy}',
+  sys_dark_matter: '{LA_sys_dark_matter}',
+  energy: '{LA_sys_energy}',
+  shield: '{LA_sys_ship_shield}',
+  armor: '{LA_sys_ship_armour}',
+  weapon: '{LA_sys_ship_weapon}',
+  speed: '{LA_sys_ship_speed}',
+  consumption: '{LA_sys_ship_consumption}',
+  capacity: '{LA_sys_ship_capacity}',
+
+  'sys_expeditions': '{LA_sys_expeditions}',
+  'sys_colonies': '{LA_sys_colonies}',
+
+  'No_requirements': '{LA_No_requirements}',
+
+  'eco_bld_unit_info_extra_show': '{LA_eco_bld_unit_info_extra_show}',
+  'eco_bld_unit_info_extra_hide': '{LA_eco_bld_unit_info_extra_hide}',
+  'eco_bld_unit_info_extra_none': '{LA_eco_bld_unit_info_extra_none}',
+
+  'eco_bld_autoconvert_explain': '{LA_eco_bld_autoconvert_explain}'.replace(/\\r\\n/g, '\r\n'),
+  'eco_bld_autoconvert_dark_matter_none': '{LA_eco_bld_autoconvert_dark_matter_none}'.replace(/\\r\\n/g, '\r\n').format(sn_format_number(MARKET_AUTOCONVERT_COST - DARK_MATTER)),
+  'eco_bld_autoconvert_confirm': '{LA_eco_bld_autoconvert_confirm}'.replace(/\\r\\n/g, '\r\n').format(sn_format_number(MARKET_AUTOCONVERT_COST, 0)),
+});
+
+planet = {
+  fleet_own: Math.intVal('{FLEET_OWN_COUNT}'),
+
+  metal: Math.floatVal('{METAL}'),
+  crystal: Math.floatVal('{CRYSTAL}'),
+  deuterium: Math.floatVal('{DEUTERIUM}'),
+  dark_matter: Math.floatVal('{DARK_MATTER}'),
+
+  metal_incoming: Math.floatVal('{METAL_INCOMING}'),
+  crystal_incoming: Math.floatVal('{CRYSTAL_INCOMING}'),
+  deuterium_incoming: Math.floatVal('{DEUTERIUM_INCOMING}'),
+  dark_matter_incoming: 0,
+
+  que_has_place: Math.intVal('{QUE_HAS_PLACE}'),
+  que_has_fields: Math.intVal('{QUE_HAS_FIELDS}'),
+  fields_free: Math.intVal('{FIELDS_FREE})'),
+};
+
+<!-- BEGIN production -->
+  <!-- IF production.S_FIRST_ROW -->
+  var production_id_first = Math.intVal('{production.ID}');
+  <!-- ENDIF -->
+
+  <!-- IF .production.require -->
+  require[Math.intVal('{production.ID}')] = [
+    <!-- BEGIN require -->
+    {
+      name: '{require.NAME}',
+      requerements_met: Math.intVal('{require.REQUEREMENTS_MET}'),
+      level_require: Math.intVal('{require.LEVEL_REQUIRE}'),
+      level: Math.intVal('{require.LEVEL}'),
+      level_basic: Math.intVal('{require.LEVEL_BASIC}'),
+      level_bonus: Math.intVal('{require.LEVEL_BONUS}'),
+      id: Math.intVal('{require.ID}'),
+    },
+    <!-- END require -->
+  ];
+  <!-- ENDIF -->
+
+  <!-- IF .production.grants -->
+  grants[Math.intVal('{production.ID}')] = [
+    <!-- BEGIN grants -->
+    {
+      name: '{grants.NAME}',
+      requerements_met: Math.intVal('{grants.REQUEREMENTS_MET}'),
+      level_require: Math.intVal('{grants.LEVEL_REQUIRE}'),
+      level: Math.intVal('{grants.LEVEL}'),
+      level_basic: Math.intVal('{grants.LEVEL_BASIC}'),
+      level_bonus: Math.intVal('{grants.LEVEL_BONUS}'),
+      id: Math.intVal('{grants.ID}'),
+    },
+    <!-- END grants -->
+  ];
+  <!-- ENDIF -->
+
+  production[Math.intVal('{production.ID}')] = {
+    id: Math.intVal('{production.ID}'),
+    name: '{production.NAME}',
+    'unit_type': '{production.UNIT_TYPE}',
+    'image': '{I_[production.ID]}',
+    level: Math.intVal('{production.LEVEL}'),
+    level_bonus: '{production.LEVEL_BONUS}',
+    change: Math.floorVal('{production.CHANGE}'),
+    description: '{production.DESCRIPTION}',
+    unit_busy: '{production.UNIT_BUSY}',
+    can_build: '{production.CAN_BUILD}',
+    can_autoconvert: Math.intVal('{production.CAN_AUTOCONVERT}'),
+    autoconvert_amount: Math.intVal('{production.AUTOCONVERT_AMOUNT}'),
+
+    metal: '{production.METAL}',
+    crystal: '{production.CRYSTAL}',
+    deuterium: '{production.DEUTERIUM}',
+    dark_matter: '{production.DARK_MATTER}',
+    time: '{production.TIME}',
+    time_seconds: Math.intVal('{production.TIME_SECONDS}'),
+    build_can: '{production.BUILD_CAN}',
+    build_result: '{production.BUILD_RESULT}',
+
+    destroy_metal: '{production.DESTROY_METAL}',
+    destroy_crystal: '{production.DESTROY_CRYSTAL}',
+    destroy_deuterium: '{production.DESTROY_DEUTERIUM}',
+    destroy_time: '{production.DESTROY_TIME}',
+    destroy_can: '{production.DESTROY_CAN}',
+    destroy_result: '{production.DESTROY_RESULT}',
+
+    map_is_resource: '{production.MAP_IS_RESOURCE}',
+
+    <!-- IF .production.resource -->
+    resource_map: [
+      <!-- BEGIN resource -->
+      {
+        'shield': ('{resource.ACTUAL_SHIELD}'),
+        'armor': ('{resource.ACTUAL_ARMOR}'),
+        'weapon': ('{resource.ACTUAL_WEAPON}'),
+        'speed': ('{resource.ACTUAL_SPEED}'),
+        'consumption': ('{resource.ACTUAL_CONSUMPTION}'),
+        'capacity': ('{resource.ACTUAL_CAPACITY}'),
+
+        'level': Math.floorVal('{resource.LEVEL}'),
+        'sys_metal': Math.floorVal('{resource.R901}'),
+        'metal_diff': Math.floorVal('{resource.D901}'),
+        'sys_crystal': Math.floorVal('{resource.R902}'),
+        'crystal_diff': Math.floorVal('{resource.D902}'),
+        'sys_deuterium': Math.floorVal('{resource.R903}'),
+        'deuterium_diff': Math.floorVal('{resource.D903}'),
+        'sys_energy': Math.floorVal('{resource.R904}'),
+        'energy_diff': Math.floorVal('{resource.D904}'),
+
+        'sys_colonies': Math.intVal('{resource.RCOLONIES_MAX}'),
+        'sys_colonies_diff': Math.intVal('{resource.DCOLONIES_MAX}'),
+        'sys_expeditions': Math.intVal('{resource.REXPEDITIONS_MAX}'),
+        'sys_expeditions_diff': Math.intVal('{resource.DEXPEDITIONS_MAX}'),
+      },
+      <!-- END resource -->
+    ]
+    <!-- ENDIF -->
+  };
+<!-- END production -->
+</script>
+
+<script type="text/javascript" src="js/build_unit.min.js?{C_var_db_update}"></script>
+
+<!-- DEFINE $QUE_ID = '{QUE_ID}' -->
+<!-- INCLUDE eco_queue -->
+
+<table class="markup" width="100%">
+<tr>
+  <td align="center" valign="top">
+    <table id="unit_table">
+      <tr class="c_c">
+        <th>
+          {L_sys_sort}
+          <select name="sort_elements" id="sort_elements">
+            <!-- BEGIN sort_values -->
+            <option value="{sort_values.VALUE}"<!-- IF sort_values.VALUE == SORT_OPTION --> selected<!-- ENDIF -->>{sort_values.TEXT}</option>
+            <!-- END sort_values -->
+          </select>
+          {L_sys_sort_inverse} <input type="checkbox" name="sort_elements_inverse" id="sort_elements_inverse" value="1"<!-- IF SORT_OPTION_INVERSE --> checked<!-- ENDIF -->/>
+        </th>
+      </tr>
+
+      <!-- IF ! U_opt_int_struc_vertical && $QUE_NOT_EMPTY -->
+      <tr>
+        <td class="c_c">
+          <!-- INCLUDE eco_bld_queue_list -->
+        </td>
+      </tr>
+      <!-- ENDIF -->
+
+      <!-- IF SHOW_SECTORS -->
+      <tr>
+        <th class="c_c">
+          <table class="markup noborder" width="100%">
+            <tr>
+              <th class="c_l">
+                {L_bld_theyare} {L_bld_cellfree} {FIELDS_FREE}
+                (<!-- IF FIELDS_QUE != 0 --><span class="zero">{FIELDS_QUE}</span>/<!-- ENDIF --><span class="negative">{FIELDS_CURRENT}</span>/<span class="positive">{FIELDS_MAX}</span>)
+              </th>
+              <th class="c_r">
+                <!-- INCLUDE planet_sector_buy -->
+              </th>
+            </tr>
+          </table>
+        </th>
+      </tr>
+      <!-- ENDIF -->
+
+      <!-- IF METAL > 99999999999 || CRYSTAL > 9999999999 || DEUTERIUM > 9999999999 || METAL < -9999999999 || CRYSTAL < -999999999 || DEUTERIUM < -999999999-->
+        <!-- DEFINE $FONT_SIZE = '0.8em' -->
+      <!-- ELSE -->
+        <!-- DEFINE $FONT_SIZE = '1.0em' -->
+      <!-- ENDIF -->
+
+      <tr>
+        <td>
+          <div id="unit_info">
+            <div id="unit_balance_wrapper">
+              <div id="unit_balance"></div>
+            </div>
+            <div id="unit_description_wrapper">
+              <div id="unit_description_wrapper_cell">
+                <div id="unit_info_image_outer">
+                  <div id="unit_info_image_wrapper">
+                    <img id="unit_info_image" />
+                    <div id="unit_info_name" class="a75"></div>
+                    <span class="unit-icon-info-container link" go="info" unit_id="" id="unit_info_wiki">
+                      <div class="icon-info-cover">&nbsp;</div>
+                    </span>
+                    <div id="unit_info_level" class="a75"></div>
+                  </div>
+                </div>
+                <div id="unit_description_wrapper_inner">
+                  <div id="unit_info_description"></div>
+                  <div id="unit_require_wrapper">
+                    <div class="c_l neutral">{L_wiki_requrements}</div>
+                    <ul id="unit_require"></ul>
+                  </div>
+                  <div id="unit_grants_wrapper">
+                    <div class="c_l neutral">{L_wiki_grants}</div>
+                    <ul id="unit_grants"></ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <form action="buildings.php" method="post" id="form_unit">
+            <input type="hidden" id="page_file_name" value="buildings.php">
+
+            <input type="hidden" name="mode" id="mode" value="{QUE_ID}" />
+            <input type="hidden" name="ally_id" value="{ALLY_ID}" />
+            <input type="hidden" name="unit_id" id="unit_id" />
+            <input type="hidden" name="action" />
+
+            <!-- IF STACKABLE -->
+              <!-- DEFINE $CLASS_COST_CONTAINER = 'unit_create_stackable' -->
+            <!-- ELSE -->
+              <!-- DEFINE $CLASS_COST_CONTAINER = '' -->
+            <!-- ENDIF -->
+            <div id="unit_cost_container" class="{$CLASS_COST_CONTAINER}" align="left">
+              <div class="wrap">
+                <div id="unit_time_div" align="center">{STRING_BUILD_TIME}<span id="unit_time"></span></div>
+                <table style="font-size: {$FONT_SIZE};" id="unit_cost_table" class="border_image_small">
+                  <tr class="c_c">
+                    <th width=45px>{L_sys_resources}</th>
+                    <th width=65>{L_eco_price}</th>
+                    <th width=65>{L_eco_left}</th>
+                    <th width=65 hide_no_fleet="yes">{L_sys_fleet_and}</th>
+                  </tr>
+                  <tr id="unit_metal" class="c_r">
+                    <td width=45px class="c_c">{L_sys_metal}</td>
+                    <td id="metal_price">0</td>
+                    <td id="metal_left">0</td>
+                    <td id="metal_fleet" hide_no_fleet="yes">0</td>
+                  </tr>
+                  <tr id="unit_crystal" class="c_r">
+                    <td width=45px class="c_c">{L_sys_crystal}</td>
+                    <td id="crystal_price">0</td>
+                    <td id="crystal_left">0</td>
+                    <td id="crystal_fleet" hide_no_fleet="yes">0</td>
+                  </tr>
+                  <tr id="unit_deuterium" class="c_r">
+                    <td width=45px class="c_c">{L_sys_deuterium}</td>
+                    <td id="deuterium_price">0</td>
+                    <td id="deuterium_left">0</td>
+                    <td id="deuterium_fleet" hide_no_fleet="yes">0</td>
+                  </tr>
+                  <tr id="unit_dark_matter" class="c_r">
+                    <td width=45px class="c_c" nowrap style="font-size: 80%">{L_sys_dark_matter}</td>
+                    <td id="dark_matter_price">0</td>
+                    <td id="dark_matter_left">0</td>
+                    <td id="dark_matter_fleet" hide_no_fleet="yes">0</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+
+            <!-- IF STACKABLE -->
+              <!-- DEFINE $CREATE_CLASS = 'unit_create_stackable' -->
+            <!-- ELSE -->
+              <!-- DEFINE $CREATE_CLASS = 'unit_create_level' -->
+            <!-- ENDIF -->
+
+            <!-- IF CAN_AUTOCONVERT -->
+              <!-- DEFINE $CLASS_AUTOCONVERT = 'zero' -->
+            <!-- ELSE -->
+              <!-- DEFINE $CLASS_AUTOCONVERT = 'negative' -->
+            <!-- ENDIF -->
+
+            <div id="unit_create" class="{$CREATE_CLASS}">
+              <!-- IF STACKABLE -->
+                <!-- IF ! PLAYER_OPTION_BUILD_AUTOCONVERT_HIDE -->
+                <div id="unit_create_stackable_autoconvert">
+                  <input type="checkbox" value="1" name="auto_convert" id="auto_convert"/>
+                  <label for="auto_convert" id="auto_convert_label" class="{$CLASS_AUTOCONVERT}">
+                    {L_eco_bld_autoconvert}:
+                    {MARKET_AUTOCONVERT_COST_TEXT} {L_sys_dark_matter_sh}
+                  </label>
+                </div>
+                <!-- ENDIF -->
+
+                <div id="unit_max">
+                  {L_sys_maximum} <span id="unit_max_number">0</span> /
+                  <span id="unit_max_number_autoconvert" class="{$CLASS_AUTOCONVERT}">0</span>
+                </div>
+                <ainput type="text" name="unit_amount" id="unit_amount" max="0"></ainput>
+                <script type="text/javascript">
+                  sn_ainput_make_jquery();
+                </script>
+
+                <button id="unit_create_button" class="unit_create positive">
+                  {STRING_CREATE}
+                </button>
+              <!-- ELSE -->
+              <!-- IF ! PLAYER_OPTION_BUILD_AUTOCONVERT_HIDE -->
+              <button id="unit_create_button_auto" class="unit_create_autoconvert {$CLASS_AUTOCONVERT}">
+                {STRING_CREATE} {LA_level} <span id="unit_create_level_auto"></span><br/>
+                {L_eco_bld_autoconvert}: {MARKET_AUTOCONVERT_COST_TEXT} {L_sys_dark_matter_sh}
+              </button>
+              <!-- ENDIF -->
+
+              <button id="unit_create_button" class="unit_create positive">
+                {STRING_CREATE} {LA_level} <span id="unit_create_level"></span>
+              </button>
+              <!-- ENDIF -->
+            </div>
+
+            <!-- IF ! STACKABLE -->
+              <div id="unit_destroy" style="visibility: hidden">
+                <div id="unit_destroy_resources">&nbsp;</div>
+                <div id="unit_destroy_time">&nbsp;</div>
+                <div class="link negative unit_destroy">{LA_bld_destroy} {LA_level} <span id="unit_destroy_level"></span></div>
+              </div>
+            <!-- ENDIF -->
+          </form>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="c_c">
+        <!-- BEGIN production -->
+            <div class="unit_preview" id="unit{production.ID}" unit_id="{production.ID}">
+              <img src="{I_[production.ID]}" class="unit_preview_image">
+
+              <!-- IF production.TIME_SECONDS -->
+                <span class="a75 time">
+                  {production.TIME}
+                </span>
+              <!-- ENDIF -->
+
+              <span class="a75 <!-- IF STACKABLE -->count<!-- ELSE -->level<!-- ENDIF -->">
+                <!-- IF production.LEVEL_OLD || STACKABLE -->{production.LEVEL_OLD}<!-- IF production.LEVEL_BONUS --><span class="bonus">+{production.LEVEL_BONUS}</span><!-- ENDIF --><!-- ENDIF --><!-- IF production.LEVEL_QUED --><!-- IF production.LEVEL_QUED > 0 -->+<!-- ENDIF -->{production.LEVEL_QUED}<!-- ENDIF -->
+              </span>
+
+              <!-- IF QUE_HAS_PLACE && ! production.UNIT_BUSY && ! STACKABLE && ! TEMPORARY -->
+                <!-- IF QUE_HAS_FIELDS && production.BUILD_CAN && production.BUILD_RESULT == 0 -->
+                  <div class="right_top a75 unit_create icon_plus"></div>
+                <!-- ENDIF -->
+              <!-- ENDIF -->
+
+              <span class="a75 name">
+                {production.NAME}
+              </span>
+
+              <!-- IF     (production.METAL && (production.METAL_REST_NUM > 999999999 || production.METAL_REST_NUM < -99999999)) || (production.CRYSTAL && (production.CRYSTAL_REST_NUM > 999999999)) || production.CRYSTAL_REST_NUM < -99999999 || (production.DEUTERIUM && (production.DEUTERIUM_REST_NUM > 999999999  || production.DEUTERIUM_REST_NUM < -99999999)) -->
+                <!-- DEFINE $FONT_SIZE = '0.8em' -->
+              <!-- ELSEIF (production.METAL && (production.METAL_REST_NUM > 99999999  || production.METAL_REST_NUM < -9999999 )) || (production.CRYSTAL && (production.CRYSTAL_REST_NUM > 99999999 )) || production.CRYSTAL_REST_NUM < -9999999  || (production.DEUTERIUM && (production.DEUTERIUM_REST_NUM > 99999999   || production.DEUTERIUM_REST_NUM < -9999999 )) -->
+                <!-- DEFINE $FONT_SIZE = '0.9em' -->
+              <!-- ELSE -->
+                <!-- DEFINE $FONT_SIZE = '1em' -->
+              <!-- ENDIF -->
+              <span class="a75 resource_container" style="font-size: {$FONT_SIZE};">
+                <!-- IF production.METAL --><div><div class="left"><!-- IF $FONT_SIZE != '1em' -->{L_sys_metal_sh}<!-- ELSE -->{L_sys_metal}<!-- ENDIF --></div><div class="fr"><!-- IF STACKABLE -->{production.METAL_TEXT}<!-- ELSE -->{production.METAL_REST}<!-- ENDIF --></div></div><br><!-- ENDIF -->
+                <!-- IF production.CRYSTAL --><div><div class="left"><!-- IF $FONT_SIZE != '1em' -->{L_sys_crystal_sh}<!-- ELSE -->{L_sys_crystal}<!-- ENDIF --></div><div class="fr"><!-- IF STACKABLE -->{production.CRYSTAL_TEXT}<!-- ELSE -->{production.CRYSTAL_REST}<!-- ENDIF --></div></div><br><!-- ENDIF -->
+                <!-- IF production.DEUTERIUM --><div><div class="left"><!-- IF $FONT_SIZE != '1em' -->{L_sys_deuterium_sh}<!-- ELSE -->{L_sys_deuterium}<!-- ENDIF --></div><div class="fr"><!-- IF STACKABLE -->{production.DEUTERIUM_TEXT}<!-- ELSE -->{production.DEUTERIUM_REST}<!-- ENDIF --></div></div><!-- ENDIF -->
+                <!-- IF production.DARK_MATTER && ! TEMPORARY --><div><div class="left">{L_sys_dark_matter_sh}</div><div class="fr">{production.DARK_MATTER_REST}</div></div><!-- ENDIF -->
+              </span>
+
+
+              <!-- IF production.BUILD_RESULT != 0 -->
+                <span class="a75 unit_preview_image">
+                  <div class="restrict <!-- IF production.BUILD_RESULT == BUILD_AUTOCONVERT_AVAILABLE --><!-- IF DARK_MATTER < MARKET_AUTOCONVERT_COST -->negative<!-- ELSE -->zero<!-- ENDIF --><!-- ENDIF -->">{production.BUILD_RESULT_TEXT}</div>
+                </span>
+              <!-- ENDIF -->
+
+              <!-- IF QUE_HAS_PLACE && ! production.UNIT_BUSY && ! STACKABLE && ! TEMPORARY -->
+                <!-- IF production.LEVEL && production.DESTROY_CAN && production.DESTROY_RESULT == 0 -->
+                  <span class="left_top a75 unit_destroy icon_minus" title="{L_bld_destroy}: {L_sys_metal} {production.DESTROY_METAL}; {L_sys_crystal} {production.DESTROY_CRYSTAL}; {L_sys_deuterium} {production.DESTROY_DEUTERIUM}; {L_sys_time} {production.DESTROY_TIME}"></span>
+                <!-- ENDIF -->
+              <!-- ENDIF -->
+
+              <!-- IF ! ALLY_ID && ! production.DARK_MATTER_ONLY -->
+                <!-- IF production.METAL_REST_NUM < 0 --><!-- DEFINE $METAL_REST_NUM = 'metal="{production.METAL_REST_NUM}"' --><!-- ELSE --><!-- DEFINE $METAL_REST_NUM = '' --><!-- ENDIF -->
+                <!-- IF production.CRYSTAL_REST_NUM < 0 --><!-- DEFINE $CRYSTAL_REST_NUM = 'crystal="{production.CRYSTAL_REST_NUM}"' --><!-- ELSE --><!-- DEFINE $CRYSTAL_REST_NUM = '' --><!-- ENDIF -->
+                <!-- IF production.DEUTERIUM_REST_NUM < 0 --><!-- DEFINE $DEUTERIUM_REST_NUM = 'deuterium="{production.DEUTERIUM_REST_NUM}"' --><!-- ELSE --><!-- DEFINE $DEUTERIUM_REST_NUM = '' --><!-- ENDIF -->
+                <span class="posRB a75 icon_gather" title="{L_flt_gather_all}" {$METAL_REST_NUM} {$CRYSTAL_REST_NUM} {DEUTERIUM_REST_NUM}></span>
+                <!-- ENDIF -->
+
+              <span class="posLB a75 unit_preview_image_icon" go="info">
+                <span class="icon-info-cover"></span>
+              </span>
+            </div>
+        <!-- END production -->
+        </td>
+      </tr>
+    </table>
+  </td>
+  <!-- IF U_opt_int_struc_vertical && $QUE_NOT_EMPTY -->
+  <td width="20px" align="center" valign="top">
+    <!-- INCLUDE eco_bld_queue_list -->
+  </td>
+  <!-- ENDIF -->
+</tr>
+</table>
+
+<!-- INCLUDE page_hint -->

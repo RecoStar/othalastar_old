@@ -1,0 +1,3670 @@
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {  }
+/* Smartphones (landscape) ----------- */
+@media only screen and (min-width : 321px) {  }
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width : 320px) {  }
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {  }
+/* iPads (landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {  }
+/* iPads (portrait) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {  }
+/* Desktops and laptops medium-res */
+@media only screen and (min-width : 760px) {  }
+/* Desktops and laptops ----------- */
+@media only screen and (min-width : 1224px) {  }
+/* Large screens ----------- */
+@media only screen and (min-width : 1824px) {  }
+/* iPhone 4+ ----------- */
+@media only screen and (-webkit-min-device-pixel-ratio : 1.5), only screen and (min-device-pixel-ratio : 1.5) {  }
+
+
+
+/* TEMPLATE BOILERPLATE ********************************************************************************************* */
+html {
+  font-size: 68.75%;
+  /*font-size: 100%;*/
+}
+
+body {
+  font-family: Tahoma, sans-serif;
+  font-size: 1em;
+  font-weight: bold;
+  line-height: 1.1;
+
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-position: top;
+  background-size: cover;
+}
+
+/* #__page = #__menu + #__navbar_wrapper */
+#__page {
+  display: flex;
+}
+#__menu {
+}
+/* #__navbar_wrapper = #navbar_container + #__content_wrapper*/
+#__navbar_wrapper {
+  flex-basis: 100%;
+  flex-shrink: 1;
+  flex-grow: 1;
+}
+#navbar_container {
+}
+/* #__content_wrapper = #__navbar_additions + #__content */
+#__content_wrapper {
+  /* for all that matters*/
+  flex-basis: 100%;
+  text-align: center;
+}
+#__navbar_additions {
+}
+/* #__content = {page rendered here} + #copyright */
+#__content {
+}
+#copyright {
+}
+
+
+img {
+  border: 0;
+}
+
+a {
+  text-decoration: none;
+  font: inherit;
+  color: inherit;
+}
+
+ul { /* Unmarked list */
+  margin: 0;
+  padding-left: 1.8em;
+  text-align: left;
+}
+li {
+  padding-top: 0.3em;
+}
+
+h1 {
+  font-size: 2em;
+  border-bottom: none; /* 0 #344566 solid */
+}
+
+input, select, textarea {
+  font: inherit;
+  color: inherit;
+
+  padding-left: 0.3em;
+  padding-right: 0.3em;
+
+  border: 0.1em solid;
+  -o-border-radius: 0.4em;
+  -moz-border-radius: 0.4em;
+  -webkit-border-radius: 0.4em;
+  -khtml-border-radius: 0.4em;
+  border-radius: 0.4em;
+}
+input.button {
+  padding: 0.1em 0.3em;
+}
+textarea {
+  width: 92%;
+  padding: 0;
+}
+textarea.ui-button {
+  padding: 0.4em 1em;
+
+  border: 0.1em solid;
+}
+
+/* Table ======================================================================================================== */
+table {
+  font: inherit;
+  color: inherit;
+
+  margin-left: auto;
+  margin-right: auto;
+}
+
+th, td {
+  padding: 0.3em;
+
+  border: 0.1em solid;
+}
+
+td.l {
+  vertical-align: top;
+  padding: 0.3em;
+}
+
+table table {
+  border: 0;
+}
+
+.noborder, .noborder tr, .noborder th {
+  border: 0;
+}
+
+.markup, .markup > tbody > tr, .markup > tbody > tr > th, .markup > tbody > tr > td {
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+/* jQuery-UI patches ********************************************************************************************* */
+
+/* jQuery-UI Dialogs ================================================================================================ */
+/* Hack: Setting no background and border for dialogs */
+body .ui-dialog {
+  background: transparent;
+  border: none;
+  padding: 0.2em; /* Original */
+}
+/* Turning off headers in dialogs */
+.ui-dialog .ui-dialog-titlebar {
+  display: none;
+}
+/* Turning off resize grapplers */
+.ui-dialog .ui-resizable-se {
+  display: none;
+}
+/* Setting no-padding to content inside dialog */
+.ui-dialog .ui-dialog-content {
+  padding: 0;
+}
+.ui-dialog .ui-dialog-buttonpane {
+  padding: 0.3em 1em 0.5em 0.4em;  /* Original */
+}
+
+.ui-dialog .ui-dialog-titlebar {
+  margin-bottom: 0.2em;
+}
+.ui-dialog .ui-dialog-buttonpane {
+  margin-top: 0.2em;
+}
+
+.ui-button,
+.ui-button .ui-button-text
+{
+  line-height: inherit;
+}
+.ui-textfield {
+  font: inherit;
+  color: inherit;
+  outline: none;
+}
+input[type=button].ui-textfield, input[type=submit].ui-textfield {
+  text-align: inherit;
+}
+input[type=text].ui-textfield, input[type=password].ui-textfield, input[type=file].ui-textfield, textarea.ui-textfield {
+  text-align: left;
+  background-image: none;
+  cursor: text;
+}
+
+input[type=checkbox] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  width: 1.8181818181818em;
+  height: 1.8181818181818em;
+
+  border-radius: 0.4em;
+}
+
+/*  Patching this theme for ui-slider */
+/*.style .ui-slider a:link { width: 1.2em; height: 1.2em; }*/
+/*.style .ui-slider a:hover { width: 1.2em; height: 1.2em; }*/
+
+.ui-button-text-only .ui-button-text {
+  padding: 0.6em 1em;
+}
+
+input.ui-button {
+  padding: 0.6em 1em;
+}
+
+/* jQuery-UI slider patches ========================================================================================= */
+.ui-slider { /* Embedding slider to page */
+  font-size: 125%;
+  margin: 0.75em;
+  padding-right: 4.4em;
+  width: auto;
+  height: 1em;
+}
+.ui-slider .ui-slider-handle { /* Increasing slider a bit */
+  width: 1.4em;
+  height: 1.4em;
+}
+.ui-state-active.ui-slider-handle {
+  box-shadow: none;
+  margin-top: 0;
+  margin-right: 0;
+  margin-bottom: 0;
+}
+
+/* Pseudo button  ********************************************************************************************* */
+/* Main pseudo button magic*/
+.ui-button,
+.button_pseudo
+{
+  box-shadow: 0.3em 0.3em rgba(0,0,0,0.750);
+  margin: 0.5em;
+}
+
+.ui-state-active,
+.button_pseudo_pressed
+{
+  box-shadow: none;
+  margin: 0.8em 0.2em 0.2em 0.8em;
+}
+
+.ui-tabs.ui-widget-content {
+  background-color: transparent;
+  background-image: none;
+}
+
+.button_pseudo {
+  cursor: pointer;
+  border: 0.1em solid;
+}
+
+.button_pseudo_pressed {
+}
+
+/* Text pseudo button */
+.button_pseudo:not(img) {
+  border-radius: 0.4em;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  /*padding: 0.475em 1em 0.475em 1em;*/
+  padding: 0.6em 1em;
+}
+
+/* Image pseudo button */
+img.button_pseudo {
+  filter: alpha(Opacity=50);
+  opacity: 0.5;
+}
+img.button_pseudo:hover {
+  filter: alpha(Opacity=75);
+  opacity: 0.75;
+}
+img.button_pseudo.button_pseudo_pressed {
+  filter: alpha(Opacity=100);
+  opacity: 1;
+}
+
+input[type=text].coordinate {
+  max-width: 3em;
+  padding: 0.363636363636em;
+}
+
+
+
+/* Page layout  ********************************************************************************************* */
+
+/* Left menu ======================================================================================================== */
+#left_menu {
+  margin: 0.5em 1em 0 0.5em;
+  text-align: left;
+  z-index: 999;
+  /*font-weight: bold;*/
+  width: 13em; /* 100% */
+}
+#left_menu.MENU_BIG_BUTTONS {
+  font-size: 150%;
+}
+#left_menu.MENU_ABSOLUTE {
+  position: absolute;
+}
+#left_menu.MENU_START_HIDDEN {
+  display: none;
+}
+
+#left_menu td, #left_menu th {
+  min-height: 1.5em;
+  padding: 0.25em 0.5em 0.25em 0.5em;
+  border: none;
+}
+#left_menu td {
+  padding-left: 1em;
+}
+#left_menu.MENU_NARROW_CELLS td, #left_menu.MENU_NARROW_CELLS th {
+  padding: 0 0.5em;
+  border: 0.1em solid;
+  border-top: none;
+}
+
+#left_menu th {
+  font-size: 1.1em;
+  background-repeat: repeat-x;
+  text-align: center;
+}
+#left_menu th a {
+  width: 80%;
+}
+#left_menu td a {
+  width: 83%;
+}
+#left_menu.MENU_NARROW_CELLS th a {
+  width: 100%;
+}
+#left_menu.MENU_NARROW_CELLS td a {
+  width: 100%;
+}
+
+
+
+#left_menu > tbody > tr > td span, #left_menu > tbody > tr > th span {
+  display: inline-block;
+  vertical-align: top;
+}
+
+#left_menu th a:not(.lm_with_image) {
+  min-height: 1.4em;
+}
+#left_menu a:not(.lm_with_image) {
+  padding: 0.2em 1em;
+  border: 0.1em solid;
+  border-radius: 0.3em;
+
+  height: 100%;
+  display: inline-block;
+}
+#left_menu.MENU_NARROW_CELLS a:not(.lm_with_image) {
+  padding: 0;
+  border: none;
+
+  height: 100%;
+  display: inline-block;
+}
+
+#left_menu_show {
+  z-index: 9999;
+}
+#left_menu_show.MENU_SHOW_HIDE_FIXED {
+  position: fixed;
+}
+#left_menu_show.MENU_SHOW_HIDE_HIDDEN {
+  display: none;
+}
+
+#menu_show_hidden {
+  cursor: pointer;
+}
+
+.menu_visible {
+  width: 1.5em;
+  margin-left: 0.5em;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+
+  cursor: pointer;
+  z-index: 9999;
+}
+
+.menu_drag {
+  margin-right: 0.5em;
+  width: 1.5em;
+  height: 100%;
+  position: absolute;
+  cursor: pointer;
+  left: 0;
+  background-size: contain !important;
+}
+
+#menu_news .fresh {
+  display: inline;
+  float: right;
+}
+
+.i_icon_visible {
+  background-image: url(../../images/icon_eye_visible.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.i_icon_invisible {
+  background-image: url(../../images/icon_eye_invisible.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.menu_icon {
+  margin-right: 0.5em;
+  height: 1.3em;
+  width: 1.3em;
+  /*border: none;*/
+}
+
+
+
+.menu_text_t, .menu_text_b {
+  text-align: center;
+}
+
+#menu_premium .link_b, #menu_premium .menu_icon {
+  float: left;
+}
+
+#menu_admin_server_time, #menu_admin_version_info {
+  text-align: center;
+}
+
+#menu_premium_level {
+  display: inline;
+  float: right;
+}
+
+#global_status_window {
+  max-width: 50em;
+  margin: 0.5em;
+}
+
+#global_status_list {
+  text-align: justify;
+  padding: 0.5em;
+}
+
+#global_status_list > li {
+  margin-left: 1.5em;
+}
+
+/* NavBar ======================================================================================================== */
+
+#navbar_container {
+  /*display: inline-block;*/
+}
+
+#navbar {
+  margin: auto;
+  background-color: transparent;
+  background-image: none;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.navbar-festival_button {
+  display: inline-block;
+
+  margin: 0.5em;
+  width: 5.818181818182em;
+  height: 5.818181818182em;
+}
+
+.navbar-festival_button:hover > a,
+.navbar-festival_button > a:hover {
+  background-color: transparent;
+}
+
+#navbar-blitz-button {
+  margin: 0.5em 0;
+}
+
+#navbar_planet_select {
+  margin: 0.5em 0.5em;
+  flex-grow: 10;
+  font-size: 125%;
+}
+
+#navbar_player_count {
+  margin: 0.5em 0.5em;
+  font-size: 125%;
+}
+
+#navbar-container-time-item {
+  flex-grow: 10;
+}
+
+#navbar-container-button {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+.navbar-container-button-que-empty {
+  position: absolute;
+  left: 0;
+  top: 33.3%;
+
+  width: 100%;
+}
+
+#navbar_resources {
+  margin: 0.5em;
+}
+
+.navbar_button {
+  display: inline-block;
+
+  position: relative;
+
+  width: 5.818181818182em;
+  height: 5.818181818182em;
+
+  margin: 0.25em;
+
+  text-align: center;
+}
+.navbar_button.wide {
+  width: 11.63636363636em;
+}
+
+.navbar_button_image {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  width: 100%;
+}
+.navbar_button_que {
+  position: absolute;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  width: 100%;
+  height: 100%;
+}
+
+.navbar_button_que_current_unit {
+  flex-grow: 1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sn-dialog-confirm {
+  padding: 1em;
+}
+
+#navbar_button_dm_mm.posRB {
+  /*position: absolute;*/
+  /*right: 0;*/
+  bottom: 2.3em;
+}
+
+#navbar_button_dm_dm.posRB {
+  /*position: absolute;*/
+  /*right: 0;*/
+  bottom: 1.2em;
+}
+
+#navbar_button_dm_plus.posLB {
+  /*position: absolute;*/
+  /*right: 0;*/
+  bottom: 1.75em;
+}
+
+.navbar_button_dm_debit_line {
+  border-top: 2px solid;
+}
+
+#navbar_refresh {
+  display: none;
+  margin: 10px 0;
+  text-align: center;
+}
+
+#note_table {
+  margin: 0.5em auto;
+  max-width: 70em;
+}
+
+#note_main_table {
+  max-width: 70em;
+}
+
+/* Page Body ======================================================================================================== */
+#page_body {
+  margin-left: 14em;
+  padding-left: 1em;
+  padding-right: 1em;
+  width: auto;
+}
+
+
+/* Copyright ======================================================================================================== */
+#copyright {
+  text-align: center;
+}
+#copyright #supernova_ws {
+  font-weight: normal;
+}
+#copyright, #copyright #supernova_ws {
+  padding-top: 1em;
+}
+
+
+/* Service Classes  ********************************************************************************************* */
+.link {
+  text-decoration: underline;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.link_b {
+  border-bottom: 0.1em solid;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.link_action {
+  border-bottom: 0.1em dashed;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.link_external {
+  border-bottom: 0.3em double;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+/* TODO DEPRECATED  ======================================================================================================== */
+.left {
+  position: absolute;
+  left: 0;
+}
+.right {
+  position: absolute;
+  right: 0;
+}
+.bottom {
+  position: absolute;
+  bottom: 0;
+}
+.left_top
+{
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.left_bottom
+{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+.right_top {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.right_bottom {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.icon_25per_left_1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 25%;
+  height: 25%
+}
+.icon_25per_left_2 {
+  position: absolute;
+  top: 25%;
+  left: 0;
+  width: 25%;
+  height: 25%
+}
+.icon_25per_left_3 {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 25%;
+  height: 25%;
+}
+.icon_25per_left_4 {
+  position: absolute;
+  top: 75%;
+  left: 0;
+  width: 25%;
+  height: 25%;
+}
+.icon_25per_right_4 {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 25%;
+  height: 25%;
+}
+.icon_25per_top_2 {
+  position: absolute;
+  top: 0;
+  left: 25%;
+  width: 25%;
+  height: 25%;
+}
+.icon_fill {
+  height: 100%;
+  width: 100%;
+  border-style: none;
+  cursor: pointer;
+}
+.fill_parent {
+  height: 100%;
+  width: 100%;
+}
+.va_m {
+  vertical-align: middle;
+}
+.transparent_cell {
+  background-color: transparent;
+  border: 0;
+}
+
+.global_admin_warning{
+  text-align: center;
+  width: 100%;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+
+/* News and Surveys ================================================================================================= */
+#fresh_news_table {
+  margin-top: 1em;
+}
+
+.news_header {
+  padding: 0.6em 1em;
+  margin: 0.2em;
+}
+.news_fresh, .news_future {
+  font-weight: bold;
+}
+.news_text {
+  text-align: justify;
+  padding: 0.6em 1em;
+}
+.news_link {
+  text-decoration: underline;
+  font-weight: bold;
+  cursor: pointer;
+}
+.news_hide {
+  display: none;
+}
+
+.survey_block {
+  text-align: left;
+  margin: 0 1em;
+}
+.survey_block [survey_id] {
+  width: 93%;
+  text-align: left;
+}
+.survey_header, .survey_voted {
+  padding: 0.6em 1em;
+  border: none;
+}
+.survey_voted {
+  text-align: center;
+}
+.survey_confirm {
+  padding: 0 1em;
+  border: none;
+}
+
+.survey_votes {
+  position: relative;
+}
+.survey_votes_text {
+  position: relative;
+  z-index: 1;
+  padding: 0.6em 10em 0.6em 1em;
+}
+.survey_votes_bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+
+  z-index: 0;
+}
+.survey_votes_number, .survey_votes_percent {
+  position: absolute;
+  right: 1em;
+  top: 0.6em;
+  text-align: right;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.survey_votes_number {
+  right: 5em;
+}
+
+.survey_length {
+  padding: 0.6em 1em;
+  border: none;
+}
+
+
+/* Build page ================================================================================================= */
+#build_sort {
+  margin-bottom: 0.5em;
+}
+
+#unit_require li, #unit_grants li {
+  margin: 0;
+  padding: 0;
+}
+
+#unit_info {
+  display: table;
+
+  vertical-align: top;
+  text-align: left;
+
+  width: 100%;
+}
+
+#unit_description_wrapper {
+  display: table-header-group;
+
+  height: 13em;
+  vertical-align: top;
+  margin: 0.5em;
+}
+#unit_description_wrapper_cell {
+  display: table-cell;
+}
+#unit_info_image_outer {
+  vertical-align: top;
+  width: 13em;
+  height: 13em;
+  margin-right: 0.5em;
+  float: left;
+}
+#unit_info_image_wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+#unit_info_image {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+#unit_info_name {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  font-size: 1em;
+  vertical-align: top;
+  text-align: center;
+  width: 100%;
+}
+#unit_info_level {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  font-size: 1em;
+  width: 100%;
+  text-align: center;
+}
+
+#unit_description_wrapper_inner {
+  vertical-align: top;
+  margin-right: 0.5em;
+}
+#unit_info_description {
+  text-align: justify;
+}
+#unit_require_wrapper, #unit_grants_wrapper {
+  font-size: 0.8em;
+}
+#unit_require, #unit_grants {
+  overflow: hidden;
+}
+
+#unit_balance_wrapper {
+  display: table-footer-group;
+
+  vertical-align: top;
+  text-align: center;
+}
+#unit_balance {
+  display: table-cell;
+
+  font-size: 0.8em;
+  height: 13em;
+}
+#unit_balance table {
+  border-spacing: 0.2em;
+}
+#unit_balance td {
+  border-spacing: 0.2em;
+  padding: 0;
+}
+#unit_balance tr > td:not(:first-child) {
+  width: 7em;
+}
+#unit_max {
+  display: none;
+}
+
+
+#form_unit {
+  display: table;
+  width: 100%;
+
+  margin-top: 1em;
+}
+
+#unit_cost_container {
+  display: table-header-group;
+}
+#unit_cost_container > .wrap {
+  display: inline-block;
+}
+#unit_time_div {
+  margin: 1em 0;
+}
+
+#unit_cost_table {
+  border-spacing: 0.5em;
+}
+
+#unit_balance > table {
+  border-spacing: 0.5em;
+}
+
+#unit_balance > table tr:nth-child(odd) td {
+  /*background-color: #233452;*/
+  background-color: rgba(0,0,0,0.5);
+}
+
+
+#unit_create {
+  display: table-row;
+  text-align: center;
+  vertical-align: middle;
+}
+#unit_create_stackable_autoconvert {
+  margin-bottom: 1em;
+}
+#unit_destroy {
+  display: table-footer-group;
+  text-align: center;
+}
+/*#unit_create_button_auto {*/
+  /*margin-left: 5em;*/
+/*}*/
+
+@media only screen and (max-width : 51.9375em) { /* 831px and less*/
+  /*body.no_border_image #unit_table { /!* 3 preview *!/*/
+    /*width: 37em;*/
+  /*}*/
+  /*body:not(.no_border_image) #unit_table { /!* 3 preview *!/*/
+    /*width: 40.3em;*/
+  /*}*/
+  #unit_destroy_resources {
+    margin-top: 1em;
+  }
+  #unit_destroy .unit_destroy {
+    margin-bottom: 1em;
+  }
+}
+@media only screen and (min-width : 52em) { /* 832px */
+  /*body.no_border_image #unit_table { /!* 4 preview *!/*/
+    /*width: 48.5em;*/
+  /*}*/
+  /*body:not(.no_border_image) #unit_table { /!* 4 preview *!/*/
+    /*width: 51.8em;*/
+  /*}*/
+  #unit_create_button_auto {
+    margin-left: 5.1em;
+  }
+  #unit_create_button_auto.ui-state-active {
+    margin-left: 5.4em;
+  }
+  #unit_destroy_resources {
+    margin-top: 1em;
+  }
+  #unit_destroy .unit_destroy {
+    margin-bottom: 1em;
+  }
+
+}
+@media only screen and (min-width : 60em) { /* 960px */
+  /*body.no_border_image #unit_table { /!* 5 preview *!/*/
+    /*width: 60.5em;*/
+  /*}*/
+  /*body:not(.no_border_image) #unit_table { /!* 5 preview *!/*/
+    /*width: 63.8em;*/
+  /*}*/
+  #unit_cost_container.unit_create_stackable {
+    display: table-cell;
+    width: 60%;
+  }
+  #unit_create.unit_create_stackable {
+    display: table-cell;
+    width: 40%;
+  }
+}
+@media only screen and (min-width : 68em) { /* 1088px */
+  /*body.no_border_image #unit_table { /!* 6 preview *!/*/
+    /*width: 72.5em;*/
+  /*}*/
+  /*body:not(.no_border_image) #unit_table { /!* 6 preview *!/*/
+    /*width: 75.8em;*/
+  /*}*/
+
+  #unit_info {
+    display: block;
+  }
+  #unit_description_wrapper {
+    display: block;
+  }
+  #unit_description_wrapper_inner {
+    margin-right: 0;
+  }
+  #unit_description_wrapper_cell {
+    display: block;
+  }
+  #unit_balance_wrapper {
+    display: block;
+    float: right;
+    margin-left: 1em;
+  }
+  #unit_balance {
+    display: inline-block;
+  }
+  #form_unit {
+  }
+  #unit_cost_container {
+    display: table-cell;
+  }
+  #unit_create.unit_create_level {
+    display: table-cell;
+    max-width: 15em;
+  }
+  #unit_create_button_auto {
+  }
+  #unit_create_button_auto {
+    margin-left: 0.1em;
+  }
+  #unit_create_button_auto.ui-state-active {
+    margin-left: 0.4em;
+  }
+  #unit_destroy {
+    display: table-cell;
+    vertical-align: middle;
+  }
+  #unit_destroy_resources {
+    margin-top: 0;
+  }
+  #unit_destroy .unit_destroy {
+    margin-bottom: 0;
+  }
+}
+/*@media only screen and (min-width : 76.5em) { /!* 1224px *!/*/
+  /*body.no_border_image #unit_table { /!* 7 preview *!/*/
+    /*width: 84.5em;*/
+  /*}*/
+  /*body:not(.no_border_image) #unit_table { /!* 7 preview *!/*/
+    /*width: 88em;*/
+  /*}*/
+/*}*/
+
+#off_get_dark_matter {
+  color: #ff8900;
+  font-weight: bold;
+}
+
+/* Fleet send page -------------------------------------------------------------- */
+@media only screen and (max-width : 51.9375em) { /* 831px and less*/
+  #fleet_unit_miniatures_container {
+    max-width: 55em;
+  }
+  body.no_border_image .fleet_2_table { /* Table on Fleet Mission Select*/
+    max-width: 34em;
+  }
+  body:not(.no_border_image) .fleet_2_table { /* Table on Fleet Mission Select*/
+    max-width: 37.3em;
+  }
+}
+@media only screen and (min-width : 52em) { /* 832px */
+  #fleet_unit_miniatures_container {
+    max-width: 66em;
+  }
+  body.no_border_image .fleet_2_table {
+    max-width: 45em;
+  }
+  body:not(.no_border_image) .fleet_2_table {
+    max-width: 48.3em;
+  }
+}
+@media only screen and (min-width : 60em) { /* 960px */
+  #fleet_unit_miniatures_container
+  {
+    max-width: 77em;
+  }
+  body.no_border_image .fleet_2_table { /* Table on Fleet Mission Select*/
+    max-width: 56em;
+  }
+  body:not(.no_border_image) .fleet_2_table { /* Table on Fleet Mission Select*/
+    max-width: 59.3em;
+  }
+}
+@media only screen and (min-width : 68em) { /* 1088px */
+  #fleet_unit_miniatures_container {
+    max-width: 88em;
+  }
+  body.no_border_image .fleet_2_table { /* Table on Fleet Mission Select*/
+    max-width: 67em;
+  }
+  body:not(.no_border_image) .fleet_2_table { /* Table on Fleet Mission Select*/
+    max-width: 70.3em;
+  }
+}
+@media only screen and (min-width : 76.5em) { /* 1224px */
+  #fleet_unit_miniatures_container {
+    max-width: 99em;
+  }
+  body.no_border_image .fleet_2_table { /* Table on Fleet Mission Select*/
+    max-width: 78em;
+  }
+  body:not(.no_border_image) .fleet_2_table { /* Table on Fleet Mission Select*/
+    max-width: 81.3em;
+  }
+}
+@media only screen and (min-width : 82em) { /* 1312px */
+  #fleet_unit_miniatures_container {
+    max-width: 110em;
+  }
+}
+@media only screen and (min-width : 88em) { /* 1408px */
+  #fleet_unit_miniatures_container {
+    max-width: 121em;
+  }
+}
+@media only screen and (min-width : 94em) { /* 1504px */
+  #fleet_unit_miniatures_container {
+    max-width: 132em;
+  }
+}
+@media only screen and (min-width : 100em) { /* 1600px */
+  #fleet_unit_miniatures_container {
+    max-width: 143em;
+  }
+}
+@media only screen and (min-width : 106em) { /* 1696px */
+  #fleet_unit_miniatures_container {
+    max-width: 154em;
+  }
+}
+
+.fleet_mission_button_container {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0.2em;
+  width: 10em;
+  height: 9em;
+}
+
+.fleet_expedition_warning {
+  font-size: 1.5em;
+  margin: 0.5em;
+}
+
+#fleet_unit_miniatures_container {
+  display: inline-block;
+  font-size: 0.8em;
+  text-align: center;
+  align-content: center;
+}
+
+.ship_miniature_container
+{
+  /*display: inline-flex;*/
+  /*font-size: 0.8em;*/
+  /*text-align: center;*/
+  /*align-content: center;*/
+  height: 10em;
+  width: 10em;
+  margin: 0.3em 0.3em;
+
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-content: space-between;
+}
+
+.ship_miniature_container.no_slots {
+  /*font-size: 100%;*/
+}
+
+.ship_miniature_image {
+  height: 1em;
+  width: 1em;
+}
+
+.ship_miniature_name,
+.ship_miniature_amount,
+.ship_miniature_capacity,
+.ship_miniature_consumption,
+.ship_miniature_speed,
+.ship_miniature_data
+{
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.ship_miniature_name {
+  color: #12A3EB;
+}
+.ship_miniature_capacity,
+.ship_miniature_consumption,
+.ship_miniature_speed
+{
+  text-align: right;
+}
+
+.ship_miniature_container.old {
+  background: none !important;
+  display: flex;
+  height: auto;
+  /*width: auto;*/
+  /*flex-wrap: nowrap;*/
+}
+
+.ship_miniature_container.old .ship_miniature_amount
+{
+  display: none;
+}
+
+.icon_1em {
+  height: 1em;
+  width: 1em;
+}
+
+
+.unit_info_level,
+.unit_info_name,
+.unit_info_speed_title,
+.unit_info_speed_value,
+.unit_info_consumption_text,
+.unit_info_consumption_value,
+.unit_info_capacity_text,
+.unit_info_capacity_value,
+.unit_info_is_satellite
+{
+  position: absolute;
+  left: 0;
+
+  font-size: 1em;
+  width: 100%;
+  text-align: left;
+}
+.unit_info_level {
+  bottom: 0;
+  text-align: center;
+}
+.unit_info_name {
+  top: 0;
+  text-align: center;
+}
+.unit_info_is_satellite {
+  top: 5em;
+  text-align: center;
+}
+.unit_info_speed_title {
+  top: 2.5em;
+  text-align: left;
+}
+.unit_info_speed_value {
+  top: 3.5em;
+  text-align: right;
+}
+.unit_info_consumption_text {
+  top: 4.5em;
+  text-align: left;
+}
+.unit_info_consumption_value {
+  top: 5.5em;
+  text-align: right;
+}
+.unit_info_capacity_text {
+  top: 6.5em;
+  text-align: left;
+}
+.unit_info_capacity_value {
+  top: 7.5em;
+  text-align: right;
+}
+
+
+.unit_miniatures_wrapper {
+  margin: 0.3em 0.3em;
+  display: inline-block;
+  /*vertical-align: top;*/
+  height: 10em;
+  width: 10em;
+  position: relative;
+  /*margin: 0.2em;*/
+  /*float: left;*/
+}
+
+.mission_button_image {
+  height: 5.818181818182rem;
+  width: 5.818181818182rem;
+}
+
+.flt-mini-mission {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 125%;
+  flex-wrap: wrap;
+  text-align: left;
+}
+.flt-mini-mission div {
+  margin: 0.5em 0;
+  text-align: center;
+}
+.flt-mini-mission-planet {
+  flex-shrink: 0;
+}
+#fleet_mini_mission {
+  padding: 0 1em;
+  flex-shrink: 1;
+}
+
+
+/* Empire overview -------------------------------------------------------------- */
+[go] {
+  cursor: pointer;
+}
+
+[name=save_production] {
+  float: right;
+}
+
+tr[prod_mode] > th:first-child {
+  text-align: left;
+  position: relative;
+}
+
+tr[prod_mode] > td:first-child {
+  text-align: center;
+}
+
+tr[prod_mode] > th:first-child > span  {
+  position: absolute;
+  top: 0.5em;
+}
+
+tr[prod_mode] > :not(:first-child) {
+  text-align: center;
+  position: relative;
+  z-index: 100;
+}
+/* Production builder filler - i.e. production % for mine etc */
+tr[prod_mode] > :not(:first-child) > span[style] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  z-index: 200;
+}
+
+tr[prod_mode] > [ecs]:not(:first-child) {
+/* Standard single-height empire cell */
+  height: 1.181818em;
+}
+/* Double-height empire cell - i.e. for Mines */
+tr[prod_mode] > [ecd]:not(:first-child), tr[prod_mode] > [ecd]:not(:first-child) > span[style] {
+  height: 3.181818em;
+}
+tr[prod_mode] > :not(:first-child) > span:not([style]) { /* Content of empire cell */
+  z-index: 300;
+  position: relative;
+}
+
+
+/* DarkMatter/MetaMatter --------------------------------------------------------------- */
+#payment_metamatter,  #payment_metamatter_info {
+  max-width: 78em; 
+}
+
+#payment_metamatter_info {
+  margin-bottom: 1em;
+}
+
+#payment_metamatter .border_image_small {
+  margin-top: 1em;
+}
+
+/* Unit purchase --------------------------------------------------------------- */
+#unit_table {
+  max-width: 100em;
+  /*width: 533px; /* == 48.2em */ /* 46.4em + 0.3em*2(padding)*/
+  /*
+    Opera, FF: 529px
+    Chrome: 531px
+    IE: 533px;
+
+    11.6em - .unit_preview width
+    46.4em - .unit_preview width * 4
+
+    533px/11 = 48.5
+
+  */
+   /*width: 48.5em;*/
+}
+
+/* Unit preview box on build pages */
+.unit_preview {
+  display: inline-block;
+
+  position: relative;
+  height: 11em;
+  width: 11em;
+
+  font-size: inherit;
+
+  cursor: pointer;
+
+  border: 0.3em solid;
+  border-radius: 0.3em;
+}
+.unit_preview .unit_preview_image {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  width: 100%;
+  height: 100%;
+
+  border: 0;
+  vertical-align: top;
+}
+.unit_preview .level, .unit_preview .count {
+  position: absolute;
+  top: 0;
+
+  height: 1.45rem;
+
+  font-size: 1em;
+
+  text-align: center;
+  white-space: nowrap;
+}
+.unit_preview .level {
+  left: 15%;
+  width: 70%;
+}
+.unit_preview .count {
+  left: 0;
+  width: 100%;
+}
+.unit_preview .name {
+  position: absolute;
+  left: 0;
+  top: 1.45rem;
+
+  width: 100%;
+  height: 2.9rem;
+
+  font-size: 1em;
+  text-align: center;
+  vertical-align: middle;
+}
+.unit_preview .resource_container {
+  position: absolute;
+  left: 0;
+  top: 4.34rem;
+  width: 100%;
+  text-align: left;
+}
+.unit_preview .restrict {
+  position: absolute;
+  left: 0;
+  bottom: 1.4em;
+  width: 100%;
+  /*height: 20%;*/
+
+  font-size: 0.9em;
+  /*line-height: 90%;*/
+}
+.unit_preview .time {
+  position: absolute;
+  right: 15%;
+  bottom: 0;
+
+  height: 1.2em;
+  width: 70%;
+
+  font-size: 1em;
+
+  text-align: right;
+  white-space: nowrap;
+}
+.unit_preview .icon_plus, .unit_preview .icon_minus, .unit_preview .icon_info, .unit_preview .icon_gather {
+  width: 1.46em;
+  height: 1.46em;
+}
+
+#unit_create_button, #unit_create_button_auto {
+  min-width: 17em;
+  min-height: 3.5em;
+  vertical-align: middle;
+}
+#unit_create_button {
+  min-height: 2em;
+}
+
+.unit_create {
+  font-size: 1em;
+}
+
+.ov_planet_fill_bar {
+  position: relative;
+  width: 100%;
+  height: 1.3em;
+  border: 0.1em solid;
+}
+
+/* Admin interface - userlist ------------------------------------------------ */
+#user_list {
+  white-space: nowrap;
+}
+#user_list th {
+  text-align: center;
+}
+#user_list tr td:first-child, #user_list tr td:nth-child(3) {
+  text-align: right;
+}
+#user_list tr td:first-child, #user_list tr td:nth-child(2), #user_list tr td:last-child {
+  cursor: pointer;
+}
+
+/* Chat ************************************************************************************************************* */
+#chat_box {
+  width: 100%;
+  padding-right: 1.25em;
+}
+
+#shoutbox td {
+  display: block;
+}
+#shoutbox tr  {
+  border: none;
+  border-top: 0.1em dashed;
+}
+#shoutbox tr > td:first-child {
+  margin-top: 0.4em;
+}
+#shoutbox tr > td:last-child {
+  margin-bottom: 0.25em;
+  margin-left: 1em;
+}
+
+#chat_message_inputs #send {
+  float: right;
+}
+#chat_smile_point {
+  display: inline-block;
+}
+#chat_msg_wrapper {
+  width: 100%;
+}
+@media only screen and (min-width : 52em) { /* 832px */
+  #shoutbox tr > td:first-child {
+    float: left;
+  }
+  #shoutbox tr > td:nth-child(2) {
+    margin-top: 0.4em;
+  }
+}
+@media only screen and (min-width : 60em) { /* 960px */
+  #shoutbox td {
+    float: none ;
+    display: table-cell;
+  }
+  #shoutbox tr  {
+    border-top: 0;
+  }
+  #shoutbox td {
+    margin: 0;
+  }
+  #chat_message_inputs {
+    text-align: center;
+  }
+  #chat_msg_wrapper {
+    width: auto;
+  }
+  #chat_smile_point {
+    float: left;
+    display: block;
+  }
+}
+@media only screen and (min-width : 64em) { /* 1024px */
+  #chat_show_extra {
+    display:none;
+  }
+}
+
+.chat_online, #onlinebox td {
+  border: 0;
+  white-space: nowrap;
+  text-align: left;
+  vertical-align: top;
+  font-weight: bold;
+}
+
+.chat_message {
+  text-align: left;
+  font-weight: normal;
+}
+
+/* Shoutbox */
+#shoutbox {
+  overflow-y: hidden;
+}
+#shoutbox img {
+  vertical-align: top;
+  margin: 0 0.1em 0 0;
+}
+#shoutbox .chat_private {
+  font-style: italic;
+}
+#shoutbox span {
+  vertical-align: top;
+}
+/* Chat messages on table */
+#shoutbox > table {
+  border: 0;
+  padding: 0;
+  margin: 0.25em 0;
+  border-collapse: collapse;
+  width: 100%;
+}
+#shoutbox > table > tbody > tr > td {
+  border: 0;
+  padding: 0;
+  text-align: left;
+  vertical-align: top;
+}
+#shoutbox > table > tbody > tr > td:not(:last-child) {
+  white-space: nowrap;
+}
+#shoutbox > table > tbody > tr > td:last-child {
+  width: 100%;
+  padding-left: 0.2em;
+}
+
+/* Chat messages on div */
+#shoutbox > div {
+  margin: 0.2em 0;
+}
+#shoutbox > div:after { /* Float clear */
+  content: '';
+  display: block;
+  clear: both;
+}
+#shoutbox > div > div:not(:last-child) { /* All div except message should float left */
+  float: left;
+}
+#shoutbox > div > div:last-child { /* Message itself */
+  overflow: hidden;
+}
+
+/* Nick colors in chat */
+.chat_nick_whisper, .chat_nick_msg {
+  border-bottom: 0.1em dashed;
+  font-weight: bold;
+  cursor: pointer;
+}
+.player_nick_award, .player_nick_race {
+  cursor: pointer;
+}
+
+/* Input elements - color, smile, text, send button */
+#chat_color_button, #chat_smile_point, #chat_message_inputs #msg, #chat_message_inputs #msg, #chat_message_inputs #send {
+  vertical-align: top;
+  margin: 0 0.5em;
+}
+#chat_color_button {
+  float: left;
+}
+#chat_smile_point {
+  /*float: left;*/
+  /*display: block;*/
+  width: 2.2em;
+  height: 2.2em;
+}
+
+#chat_message_inputs #send {
+  float: right;
+  width: 9em;
+}
+
+#chat_msg_wrapper {
+  display: block;
+  overflow: hidden;
+}
+#chat_msg_wrapper:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+#chat_msg_wrapper #msg {
+  width: 100%;
+}
+
+
+#chat_message_inputs {
+  vertical-align: top;
+}
+#chat_color_button div { /* Colored ABCDEFG */
+  display: inline-block;
+}
+
+
+/* Popups - color select, smile select, tooltip and admin command menu */
+#chat_color_select, #chat_message_smiles2, #chat_command_menu, #chat_muted_tooltip {
+  display: none;
+  vertical-align: top;
+  text-align: center;
+  padding: 0.4em;
+  border: 0.1em solid;
+  -moz-border-radius: 0.4em;
+  -webkit-border-radius: 0.4em;
+  -khtml-border-radius: 0.4em;
+  border-radius: 0.4em;
+}
+#chat_color_select {
+  max-width: 26em;
+}
+#chat_message_smiles2 {
+  max-width: 32.5em;
+}
+#chat_command_menu {
+  max-width: 33em;
+}
+#chat_muted_tooltip {
+  max-width: 27em;
+}
+#chat_muted_tooltip img, #chat_command_menu img {
+  vertical-align: top;
+}
+
+/* Popup internal elements - color buttons, smile buttons, command length buttons */
+#chat_color_select div, #chat_message_smiles2 div, #chat_command_menu div:not(:first-child):not(:last-child) {
+  margin: 0.2em;
+  border: 0.1em solid;
+  vertical-align: top;
+  display: inline-block;
+}
+#chat_message_smiles2 div {
+  width: 4.54545em;
+  height: 3.636363636em;
+
+  -webkit-transform-style: preserve-3d;
+  -moz-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+}
+#chat_message_smiles2 div img {
+  /*  display: inline-block;*/
+  position: relative;
+  top: 50%;
+  -ms-transform: translateY(-51%);
+  -webkit-transform: translateY(-51%);
+  -o-transform: translateY(-51%);
+  -moz-transform: translateY(-51%);
+  transform: translateY(-51%);
+}
+
+
+#chat_command_menu div:not(:first-child):not(:last-child) {
+  width: 7.3em;
+}
+#chat_command_menu div:last-child {
+  margin-top: 0.5em;
+}
+
+
+#chat_color_select div:first-child, #chat_color_button div:first-child {
+  color: cyan;
+}
+#chat_color_select div:nth-child(2), #chat_color_button div:nth-child(2) {
+  color: yellow;
+}
+#chat_color_select div:nth-child(3), #chat_color_button div:nth-child(3) {
+  color: green;
+}
+#chat_color_select div:nth-child(4), #chat_color_button div:nth-child(4) {
+  color: pink;
+}
+#chat_color_select div:nth-child(5), #chat_color_button div:nth-child(5) {
+  color: maroon;
+}
+#chat_color_select div:nth-child(6), #chat_color_button div:nth-child(6) {
+  color: orange;
+}
+#chat_color_select div:nth-child(7), #chat_color_button div:nth-child(7) {
+  color: white;
+}
+
+/* Statistics page ************************************************************************************************************* */
+#stat_cell_min_max {
+  position: relative;
+}
+#stat_cell_min_max > .stat_min, #stat_cell_min_max > .stat_avg, #stat_cell_min_max > .stat_max {
+  text-align: center;
+  width: 100%;
+
+  position: absolute;
+  left: 0;
+}
+#stat_cell_min_max > .stat_max {
+  top: 0;
+}
+#stat_cell_min_max > .stat_avg {
+  top: 45%;
+}
+#stat_cell_min_max > .stat_min {
+  bottom: 0;
+}
+
+.stat_cell, .stat_date_cell {
+  width: 3.63636em;
+}
+
+.stat_cell {
+  height: 18.2em;
+
+  position: relative;
+}
+.stat_cell > .stat_value {
+  text-align: center;
+  width: 100%;
+
+  position: absolute;
+  left: 0;
+  bottom: 1.1em;
+}
+.stat_cell > .stat_delta {
+  text-align: center;
+  width: 100%;
+
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+.stat_bar {
+  width: 100%;
+  height: 0;
+
+  position: absolute;
+  left: 0;
+  bottom: 0;
+}
+
+/* Blitz admin page ************************************************************************************************************* */
+.blitz_admin > div {
+  margin-top: 1.8em;
+}
+
+/* Batch operations ************************************************************************************************************* */
+#batch_fleet_table {
+  width: 10em;
+  border: 0;
+  border-spacing: 0.1em; /* cellspacing="1"  */
+}
+#batch_fleet_results {
+  border: 0;
+  border-spacing: 0.1em; /* cellspacing="1"  */
+  margin-bottom: 1em;
+  vertical-align: top;
+}
+#batch_fleet_table > tbody > tr > td, #batch_fleet_table > tbody > tr > th,
+#batch_fleet_results > tbody > tr > td, #batch_fleet_results > tbody > tr > th
+{
+  padding: 0; /* cellpadding="0" */
+}
+
+#batch_fleet_table th, #batch_fleet_table td {
+  vertical-align: middle;
+}
+#batch_fleet_table > tbody > tr:first-child > th {
+  min-width: 11em;
+  vertical-align: top;
+}
+#batch_fleet_table tr:first-child th {
+  text-align: left;
+}
+/* Первая, вторая и третья ячейки заголовка*/
+#batch_fleet_table tr:first-child th:first-child, #batch_fleet_table tr:first-child th:nth-child(2), #batch_fleet_table tr:first-child th:nth-child(3)  {
+  width: 2em;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+#batch_fleet_table tr:first-child th:nth-child(2)  {
+  text-align: center;
+}
+#batch_fleet_table .batch_resource_header th {
+  width: 2em;
+}
+#batch_fleet_table .batch_fleet_unit_row th:first-child {
+  width: 2em;
+  white-space: nowrap;
+  text-align: left;
+}
+#batch_fleet_table .total_row .tw_shrink {
+  width: 2em;
+  white-space: nowrap;
+}
+
+.qualifier_amount, .qualifier_apply {
+  display: none;
+}
+
+.batch_unit_holder {
+  width: 2em;
+  white-space: nowrap;
+}
+.batch_unit_holder > div {
+  text-align: right;
+  margin-left: 2.2em;
+}
+.batch_unit_holder > div.no_checkbox {
+  margin-left: 0.4em;
+}
+.batch_unit_holder > input {
+  float: left;
+}
+
+
+/* Que list ===================================================================================================== */
+.que_item { /* Que item */
+  cursor: pointer;
+
+  display: inline-block;
+
+  border: solid 0.2em transparent;
+  /*border: 0;*/
+
+  position: relative;
+  height: 6em;
+  width: 6em;
+
+  /*margin-right: 0.2em;*/
+  /*margin-bottom: 0.2em;*/
+  margin: 0.2em;
+
+  font-size: 1em;
+}
+.que_unit_picture { /* Unit picture */
+  border: 0;
+
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  width: 100%;
+  height: 100%;
+}
+.que_unit_level {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 1em;
+
+  font-size: 100%;
+
+  text-align: center;
+}
+.que_unit_slot_bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  height: 1em;
+
+  background-color: rgba(0,0,255,0.75);
+}
+
+.que_slot_time_container {
+  position: relative;
+
+  width: 100%;
+  height: 1em;
+}
+
+.que_unit_time {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  width: 100%;
+  height: 1em;
+
+  font-size: 100%;
+
+  text-align: center;
+}
+.que_item_0 > .que_unit_progress_bar {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  height: 1em;
+  background-color: rgba(0,255,0,0.75);
+}
+.que_unit_time_seconds_0 {
+  position: absolute;
+  bottom: 1em;
+  left: 0;
+  width: 100%;
+  height: 0.5ex;
+  font-size: 100%;
+}
+
+
+.bld_que_container {
+  display: flex;
+  text-align: left;
+  flex-wrap: wrap;
+}
+
+.bld_que_total {
+  /*display: flex;*/
+  /*flex-wrap: wrap;*/
+  /*justify-content: center;*/
+  /*align-content: center;*/
+
+  position: relative;
+
+  width: 11em;
+  /*height: 5.5em;*/
+
+  text-align: center;
+  vertical-align: top;
+}
+.bld_que_total_time_text {
+  /*position: absolute;*/
+  /*left: 0;*/
+  /*top: 0;*/
+  /*height: 50%;*/
+  width: 100%;
+}
+.bld_que_total_bar {
+  width: 100%;
+  position: relative;
+  height: 1em;
+}
+.bld_que_total_progress_bar {
+  position: absolute;
+  left:0;
+  top: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background-color: rgba(197, 201, 9, 0.75);
+}
+.bld_que_total_timer {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  width: 100%;
+  height: 100%;
+
+  color: red;
+
+  background-color: rgba(0,0,0,0.5);
+}
+.bld_que_total_finish {
+  /*position: absolute;*/
+  /*left: 0;*/
+  /*top: 2em;*/
+
+  color: yellow;
+  /*height: 50%;*/
+  /*width: 100%;*/
+}
+.bld_que_total_item {
+  /*position: relative;*/
+  /*display: block;*/
+  /*color: red;*/
+  /*position: absolute;*/
+  /*left: 0;*/
+  /*bottom: 0;*/
+
+  /*width: inherit;*/
+
+  /*text-align: center;*/
+  /*height: 2.5em;*/
+  /*width: 100%;*/
+}
+
+.bld_que_items {
+  display: inline-block;
+  text-align: left;
+}
+.bld_que_buttons {
+  display: flex;
+  justify-content: space-between;
+
+  width: 100%;
+}
+
+.bld_que_container.vertical {
+  max-width: 11em;
+}
+.bld_que_items.vertical {
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+}
+.bld_que_container.vertical .bld_que_buttons {
+  flex-wrap: wrap;
+
+  max-width: 11em;
+}
+
+/* Black market ===================================================================================================== */
+.market_services {
+  max-width: 20em;
+  width: 100%;
+  padding: 0.5em;
+}
+.market_services div:first-child {
+  text-align: justify;
+  margin-bottom: 1em;
+}
+.market_services .button_pseudo {
+  min-width: 15em;
+}
+#market_trader .button_pseudo {
+  width: 10em;
+}
+
+/* Border magic ===================================================================================================== */
+.no_border_image { /* Just placeholder for phpstorm autocomplete */ }
+.border_image_small { /* Just placeholder for phpstorm autocomplete */ }
+.border_image_large { /* Just placeholder for phpstorm autocomplete */ }
+
+body:not(.no_border_image) table:not(.markup):not(.noborder):not(.no_border_image):not(.border_image_small),
+body:not(.no_border_image) div#tab_container,
+body:not(.no_border_image) div.market_services,
+body:not(.no_border_image) .border_image_large
+{
+  border: solid transparent;
+  border-radius: 0.5em;
+
+  border-width: 2.181818181818em 1em 2.272727272727em 2.272727272727em;
+
+  -moz-border-image:    url("../../../design/images/border.png") 24 11 25 25 round round;
+  -o-border-image:      url("../../../design/images/border.png") 24 11 25 25 round round;
+  -webkit-border-image: url("../../../design/images/border.png") 24 11 25 25 round round;
+  border-image:         url("../../../design/images/border.png") 24 11 25 25 round round;
+}
+
+body:not(.no_border_image) .border_image_small:not(.no_border_image), body:not(.no_border_image) .ui-dialog
+{
+  border: solid transparent;
+  border-radius: 0.5em;
+
+  border-width: 1em 1em 1em 1em;
+
+  -moz-border-image:    url("../../../design/images/border_small.png") 11 11 11 11 round round;
+  -o-border-image:      url("../../../design/images/border_small.png") 11 11 11 11 round round;
+  -webkit-border-image: url("../../../design/images/border_small.png") 11 11 11 11 round round;
+  border-image:         url("../../../design/images/border_small.png") 11 11 11 11 round round;
+}
+
+
+/* Title/Black magic ===================================================================================================== */
+/*body.no_border_image [table_title] {*/
+[table_title] {
+  position: relative;
+
+  margin-top: 6em;
+}
+
+/*body.no_border_image [table_title]:before {*/
+[table_title]:before {
+  content: attr(table_title);
+
+  font-size: 2em;
+
+  /*display: block;*/
+  width: 100%;
+  /*height: 5em;*/
+
+  /*margin: 5em;*/
+
+  z-index: 0;
+
+  text-align: center;
+
+  position: absolute;
+
+  top: -2em;
+  left: 0;
+}
+
+body:not(.no_border_image) [table_title] {
+}
+
+body:not(.no_border_image) [table_title]:before {
+  top: -3em;
+}
+
+
+/* Planet List ===================================================================================================== */
+.element_fill_wrap {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%
+}
+.planet_list_wrap {
+  position: relative;
+  border: none;
+  width: inherit;
+}
+.planet_list_wrap > .res_bar {
+  position: absolute;
+  top: 0;
+
+  overflow: hidden;
+
+  width: 0.25em;
+  height: 100%;
+}
+
+.planet_list_top87 {
+  width: 7.75em;  /* 87/11 = 7,909090909091 */
+}
+.planet_list_top87 > .planet_list_wrap {
+  height: 7em; /* 75/11 = 6,818181818182 */
+}
+.planet_list_top87 > .planet_list_wrap > .images {
+  height: 100%;
+  width: 7em; /* 75/11 = 6,818181818182 */
+}
+.planet_list_top87 > .planet_list_wrap > .metal_bar {
+  left: 7em; /* 75/11 = 6,818181818182 */
+}
+.planet_list_top87 > .planet_list_wrap > .crystal_bar {
+  left: 7.25em; /* 75/11 = 6,818181818182 */
+}
+.planet_list_top87 > .planet_list_wrap > .deuterium_bar {
+  left: 7.50em; /* 75/11 = 6,818181818182 */
+}
+.planet_list_top87 > .planet_list_wrap > .images > .icon-gather-wrapper {
+  height: 25%;
+  width: 25%;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+}
+
+.planet_list_top112 {
+  width: 9.75em;
+}
+.planet_list_top112 > .planet_list_wrap {
+  height: 9em;
+}
+.planet_list_top112 > .planet_list_wrap > .images {
+  height: 100%;
+  width: 9em;
+}
+.planet_list_top112 > .planet_list_wrap > .metal_bar {
+  left: 9em;
+}
+.planet_list_top112 > .planet_list_wrap > .crystal_bar {
+  left: 9.25em;
+}
+.planet_list_top112 > .planet_list_wrap > .deuterium_bar {
+  left: 9.50em;
+}
+.planet_list_top112 > .planet_list_wrap > .images > .icon-gather-wrapper {
+  height: 2.25em;
+  width: 2.25em;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+}
+
+.planet_list_fields {
+  position: relative;
+
+  width: 100%;
+  height: 1.1em;
+
+  overflow: hidden;
+
+}
+.planet_list_fields > .numbers {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  width: 100%;
+  height: 100%;
+
+  font-size: 0.9em;
+  font-weight: bold;
+}
+.planet_list_fields > .bar {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  /*width: 100%;*/
+  height: 100%;
+
+  /*font-size: 1.1em;*/
+  font-weight: bold;
+}
+
+.planet_list_bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.ov_struc_timer {
+  white-space: normal;
+}
+
+.planet_list_moon_attack {
+  position: absolute;
+  top: 15%;
+  left: 15%;
+  width: 70%;
+  height: 70%;
+  cursor: pointer;
+}
+.planet_list_submoon_fields {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  top: 100%;
+  height: 10%;
+  overflow: hidden;
+}
+.planet_list_submoon_filler {
+  position: relative;
+  left: 0;
+  height: 100%;
+}
+.planet_list_submoon_attack {
+  position: absolute;
+  top: 26%;
+  left: 26%;
+  width: 48%;
+  height: 48%;
+}
+
+/* Universe/Galaxy ===================================================================================================== */
+#universe_main img {
+  border: 0;
+  cursor: pointer;
+}
+
+.universe_main > tbody > tr > td, .universe_main > tbody > tr > th {
+  white-space: nowrap;
+  vertical-align: middle;
+}
+.uni_show_planet, .uni_show_debris, .uni_show_user, .uni_show_ally {
+  cursor: pointer;
+}
+.uni_show_planet > div, .uni_show_debris > div { /* DIV holder for old view */
+  position: relative;
+  display: inline-block;
+  width: 2.75em;
+  height: 2.75em;
+  margin: auto;
+}
+.uni_show_planet img:first-child, .uni_show_debris img:first-child { /* First image is planet/debris/moon image */
+  position: absolute;
+  top:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.uni_show_debris .uni_debris_percent  { /* % on debris icon - in span inside element */
+  position: absolute;
+  bottom:0;
+  right: 0;
+}
+.uni_own_fleet {
+  position: absolute;
+  bottom:0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.uni_show_user {
+  min-width: 12em;
+}
+
+.uni_scan.uni_planet_row > * {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.uni_scan.button_pseudo  {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.uni_planet_row .uni_object_type { /* Тип объекта - планета/луна/обломки */
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 1.1em;
+  background-color: rgba(0,0,0,0.5);
+}
+.uni_show_planet_new, .uni_show_debris_new { /* Overwrites styles for new Universe look*/
+  position: relative;
+  display: inline-block;
+  width: 6em;
+  height: 6em;
+  max-width: 6em;
+  margin: 0; /* Overwrites auto margin */
+  border: 0.5em solid transparent;
+}
+.uni_show_planet_new .uni_own_fleet { /* Overwrites size of own fleet icon */
+  width: 50%;
+  height: 50%;
+}
+
+.universe_main_new .uni_show_user, .universe_main .uni_show_ally {
+  display: block;
+}
+
+/*div .ui-dialog-content table.legend_template  {*/
+  /*background-color: transparent;*/
+/*}*/
+
+/*div .ui-dialog-content table.planet_template  {*/
+  /*background-color: transparent;*/
+/*}*/
+.planet_template div {
+  display: block;
+  max-width: 11em;
+}
+.planet_template .uni_popup_planet {
+  width: 7em;
+  height: 7em;
+  position: relative;
+  display: inline-block;
+}
+.planet_template .uni_popup_planet img {
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  width: 100%;
+
+  font-size: 1em;
+}
+.planet_template .uni_popup_planet div {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+
+  text-align:center;
+  background-color: rgba(0,0,0,0.50);
+}
+
+/*div .ui-dialog-content table.debris_template  {*/
+  /*background-color: transparent;*/
+/*}*/
+
+.user_template div {
+  display: block;
+  max-width: 20em;
+}
+/*div .ui-dialog-content table.user_template {*/
+  /*background-color: transparent;*/
+/*}*/
+
+.ally_template div {
+  display: block;
+  max-width: 20em;
+}
+/*div .ui-dialog-content table.ally_template {*/
+  /*background-color: transparent;*/
+/*}*/
+
+/* Technology/TechTree page  ===================================================================================================== */
+#tab_tech_tree {
+  font-size: 1em;
+  /*width: 50rem;*/
+  display: none;
+}
+
+#tab_tech_tree .tech_container {
+  display: inline-block;
+  width: 14em;
+  min-height: 11em;
+  margin: 0.5em;
+  padding: 1em;
+
+  vertical-align: top;
+
+  border: 0.1em solid;
+  border-radius: 0.4em;
+}
+
+#tab_tech_tree .tech_image {
+  position: relative;
+
+  width: 11em;
+  height:11em;
+}
+#tab_tech_tree .tech_image img {
+  position: absolute;
+  top: 0;
+  left:0;
+
+  width: 100%;
+  height: 100%;
+}
+#tab_tech_tree .tech_image > span {
+  position: absolute;
+  top: 0;
+  left:0;
+
+  width: 100%;
+  /*height: 4em;*/
+}
+
+#tab_tech_tree .tech_require {
+  text-align: left;
+  font-size: 0.9em;
+}
+
+/* Payment page ===================================================================================================== */
+.payment_mm_amount, .payment_mm_method, .payment_mm_module {
+  display: inline-block;
+  width: 13.63636363636em; /*150px;*/
+  margin: 0.3em;
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Event Halloween */
+.halloween {
+  position: absolute;
+
+  display: none;
+  width: 32px;
+  height: 32px;
+
+  z-index: 10000;
+}
+
+.halloween_result {
+  display: none;
+  width: 32px;
+  height: 32px;
+  /*background-color: white;*/
+
+  position: absolute;
+  z-index: 10001;
+
+  left: 0;
+  top: 0;
+}
+
+/* Planet overview */
+.planet_overview-info {
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+/* Planet manage */
+.planet-manage-governor-hire-container {
+  width: 30%;
+  display: inline-block;
+  padding: 1%;
+}
+
+.planet-manage-governor-hire-image-container {
+  width: 100%;
+  display: inline-block;
+  position: relative;
+}
+
+.planet-manage-sectors-container {
+  font-size: 1.5em;
+
+  position: relative;
+
+  width: 100%;
+  height: 1.3em;
+
+  border: 1px solid rgb(153, 153, 255);
+}
+
+.planet-manage-sectors-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+
+  text-align: center;
+  vertical-align: middle;
+
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+}
+
+.unit-icon-info-container {
+  position: absolute;
+  right: 0;
+  bottom: 1em;
+
+  width: 4em;
+  height: 4em;
+}
+
+.unit_preview_image_icon {
+  /*position: absolute;*/
+  /*right: 0;*/
+  /*bottom: 1em;*/
+
+  width: 1.45454545em;
+  height: 1.45454545em;
+}
+
+/* TEMPLATE BOILERPLATE ********************************************************************************************* */
+.hint {
+  text-align: justify;
+}
+
+#dialog-sector-buy {
+  text-align: center;
+  display: none;
+  padding: 1em;
+}
+
+
+
+
+/* Message & numbers color coding */
+
+.ok, .success, .positive, button.positive, button.ok, .ui-button.ok {
+  color: lime;
+}
+.info, button.info, .ui-button.info {
+  color: #00B7F3;
+}
+.notice, .zero, .neutral, button.neutral, button.zero {
+  color: yellow;
+}
+.warning, button.warning {
+  color: orange;
+}
+.error, .negative, button.negative, button.error {
+  color: red;
+}
+.white, .zero_number {
+  color: white;
+}
+.info_bg {
+  color: #005472;
+}
+.ok_bg, .success_bg, .positive_bg {
+  background-color: #004400;
+}
+.notice_bg, .zero_bg, .neutral_bg {
+  background-color: #AAAA00 !important;
+}
+.warning_bg {
+  background-color: #924200;
+}
+.error_bg, .negative_bg {
+  background-color: darkred;
+}
+.errormessage a, .success a, .notice a, .warning a, .error a {
+  text-decoration: underline;
+}
+
+/* Resources color coding*/
+.metal {
+  color: darkgrey;
+}
+.crystal {
+  color: cyan;
+}
+.deuterium{
+  color: #B000B0;
+}
+.overall{
+  color: white;
+}
+.metamatter {
+  /*color: #cf95ff;*/
+  color: #CC99FF;
+}
+.dark_matter {
+  color: dodgerblue;
+}
+
+.metal_bg{
+  background-color: darkgrey;
+}
+.crystal_bg{
+  background-color: cyan;
+}
+.deuterium_bg {
+  background-color: #800080;
+}
+.overall_bg {
+  background-color: white;
+}
+
+.nick_developer {
+  /*color: purple;*/
+  color: #9900ff;
+}
+.nick_admin {
+  color: #0066FF;
+}
+.nick_operator {
+  color: red;
+}
+.nick_moderator {
+  color: green;
+}
+.nick_premium {
+  color: gold;
+}
+
+.bonus {
+  color: gold;
+}
+
+.same_alliance, .same_player {
+  color: #33CCFF;
+}
+
+
+/* Universe status styles */
+.allymember {
+  color: lime;
+}
+.myplanet {
+  color: red;
+}
+.noob {
+  color: #a0ffa0;
+}
+.protected {
+  color: yellow;
+}
+.strong {
+  color: #ffa0a0;
+}
+.player_active {
+  font-weight: bold;
+}
+.inactive {
+  font-weight: normal;
+}
+.longinactive {
+  font-weight: normal;
+  font-style: italic;
+}
+.banned {
+  text-decoration: line-through;
+}
+.admin {
+  text-decoration: blink;
+  /*color: purple;*/
+  color: #9900ff;
+}
+.birthday:before {
+  content: url(../../images/birthday.png);
+}
+.vacation:before { /* Replaces .birthday ! */
+  content: url(../../images/icon_vacation.png);
+}
+.vacation {
+  color: cyan;
+}
+
+/* Flying fleet & message color coding */
+.flight {
+}
+.return {
+}
+.holding {
+}
+*.ownattack, .mnl_attaque {
+  color: yellow;
+}
+*.ownfederation {
+  color: #33CC00;
+}
+*.owndestroy {
+  color: gold;
+}
+*.ownhold {
+  color: #80a0C0;
+}
+*.ownmissile {
+  color: sienna;
+}
+*.ownespionage, *.mnl_spy, .mnl_spy td {
+  color: orange;
+}
+*.owntransport, .mnl_transport {
+  color: lime;
+}
+*.owndeploy {
+  color: lightgreen;
+}
+*.ownharvest, .mnl_exploit {
+  color: green;
+}
+*.owncolony {
+  color: blue;
+}
+
+.flight .ownattack a, .flight .owncolony a, .flight .owndeploy a, .flight .owndestroy a,
+.flight .ownespionage a, .flight .ownfederation a, .flight .ownharvest a, .flight .ownhold a,
+.flight .ownmissile a, .flight .owntransport a, .flight .ownexpedition a {
+  color: #E6EBFB;
+}
+
+*.attack {
+  color: red;
+}
+*.colony {
+  color: lime;
+}
+*.deploy {
+  color: lime;
+}
+*.destroy {
+  color: gold;
+}
+*.espionage {
+  color: red;
+}
+*.federation {
+  color: #CC0000;
+}
+*.harvest {
+  color: lime;
+}
+*.hold {
+  color: #80a0C0;
+}
+*.missile {
+  color: red;
+}
+*.transport {
+  color: lime;
+}
+
+.flight .attack a, .flight .colony a, .flight .deploy a, .flight .destroy a, .flight .espionage a,
+.flight .federation a, .flight .harvest a, .flight .hold a, .flight .missile a, .flight .transport a {
+  color: #E6EBFB;
+}
+
+.combatreport {
+  color: red;
+}
+
+.espionagereport {
+  color: orange;
+}
+
+.timeremaining {
+  color: orange;
+}
+
+.mnl_outbox, .mnl_outbox * {
+  background-color: #000000;
+}
+.mnl_joueur, .mnl_joueur * {
+  background-color: #114444;
+}
+.mnl_exploit, .mnl_exploit * {
+  /*  background-color: #999999;*/
+}
+*.ownexpedition, .mnl_expedition {
+  color: lightblue;
+}
+.mnl_buildlist, .mnl_buildlist * {
+  color: #000066;
+}
+.mnl_alliance, .mnl_alliance * {
+  background-color: #446666;
+}
+.msg_admin, .msg_admin * {
+  color: #9900ff !important;
+  background-color: #ffffff;
+}
+.new_message, .new_message * {
+  color: #000000;
+  background-color: #ffffff;
+}
+
+.battle_report_link {
+  color: black;
+  background-color: white;
+}
+
+/* Que list ===================================================================================================== */
+.que_item_0 > .que_unit_time {
+  color: lime;
+}
+.que_unit_time_seconds_0 {
+  background-color: green;
+}
+
+/* Note/Bookmark page ===================================================================================================== */
+.note_coordinates {
+  color: #00B7F3;
+}
+
+.note_header {
+  padding: 0.2em;
+  flex-wrap: wrap;
+}
+
+#note_text, #note_title {
+  width: 95%;
+}
+
+/* Emperor page ===================================================================================================== */
+.ov_user_total {
+  color: #FF0000
+}
+.ov_user_rank {
+  color: #FFFF00
+}
+
+
+
+
+
+#tab_admin_settings {
+  font-size: 1em;
+  max-width: 60em;
+  display: none;
+}
+
+#tab_admin_settings > div {
+  text-align: left;
+}
+
+#game_disable_reason {
+  width: 96%;
+  margin-left: 0;
+}
+
+#tab_admin_urls label {
+  flex-shrink: 0;
+}
+
+#tab_admin_urls input {
+  width: 100%;
+  max-width: 40em;
+}
+
+#tab_admin_advertise textarea {
+  width: 100%;
+}
+
+#stats_hide_player_list, #stats_schedule {
+  margin-left: 0;
+  width: 95%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Checkator jQuery Plugin
+ * A plugin for radio and checkbox elements
+ * version 1.1, Dec 20th, 2013
+ * by Ingi P. Jacobsen
+ */
+/* RESET */
+input[type=radio],
+input[type=checkbox] {
+  margin-bottom: 0;
+}
+/* SOURCE ELEMENT (when checkator is enabled on an element) */
+.checkator_source {
+  position: relative;
+  z-index: 2;
+  display: block;
+}
+/* SHARED SETTING */
+.checkator_holder { /* Holder for the new element */
+  display: inline-block;
+  position: relative;
+}
+.checkator_element { /* New element */
+  border: 0.2em solid #abadb3;
+  /*background-color: #fff;*/
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1;
+}
+.checkator_source:checked+.checkator_element:after { /* Checked element dot */
+  /*background-color: #7fa92c;*/
+  background-color: lime;
+  display: block;
+  content: ' ';
+  top: 20%;
+  right: 20%;
+  bottom: 20%;
+  left: 20%;
+  position: absolute;
+}
+/*
+.checkator_source:focus+.checkator_element { /!* Focused element *!/
+  border: 0.2em solid #cc0;
+}
+*/
+.checkator_source:hover+.checkator_element { /* Hovered element */
+  /* Bug: There is a bug in chrome preventing this from working correctly */
+  /*background-color: #def;*/
+  /*border: 0.2em solid #79b;*/
+  border: 0.2em solid #dfeafd;
+}
+/* RADIO SETTINGS */
+.checkator_element.radio {
+  border-radius: 50% !important;
+}
+.checkator_element.radio:after {
+  border-radius: 50% !important;
+}
+/* CHECKBOX SETTINGS */
+.checkator_element.checkbox { /* New element */
+  border: 0.2em solid #abadb3;
+}
+
+/* Skinnable items ************************************************************************************************** */
+body {
+  color: #E6EBFB;
+}
+.ui-dialog-titlebar.ui-widget-header {
+  color: #E6EBFB;
+}
+.ui-widget-content {
+  color: #E6EBFB;
+}
+
+input[type=checkbox]:checked {
+  background-color: green;
+  color: green;
+}
+
+.ui-slider-range { /* Coloring Slider Range */
+  background-image: none;
+  background: #f6a828;
+}
+
+input,
+select,
+textarea,
+textarea.ui-button,
+th,
+td,
+.td,
+.cell,
+.th
+{
+  border-color: #415680;
+  background-color: #344566;
+}
+
+.subheader, tr.subheader > td, tr.subheader > th {
+  background-color: #233452;
+}
+.th, .header {
+  background-color:  #132544; /*rgba(0,0,0,0.35);*/
+}
+
+div.header {
+  padding: 0.5em 0.5em;
+  font-size: 110%;
+}
+
+div.cell {
+  padding: 0.1em 0.5em;
+}
+
+
+input[type=checkbox] {
+  background-image: none;
+  background-color: #222D42; /*rgba(0,0,0,0.35);*/
+  color: #222D42;
+}
+.ui-button.ui-input-text {
+  background-color: #415680;
+}
+
+/* Setting dialog content background - which is 'transparent' in jQuery-UI */
+.ui-dialog .ui-dialog-content {
+  background-image: none;
+  background-color: #344566;
+}
+
+.button_pseudo {
+  border-color: #415680;
+}
+.button_pseudo:not(img) {
+  background-color: #222D42; /*rgba(0,0,0,0.35);*/
+}
+.button_pseudo:not(img):hover, .button_pseudo_pressed:not(img) {
+  background-color: #415680; /* rgba(65,86,128,1) */
+}
+#left_menu.MENU_NARROW_CELLS td, #left_menu.MENU_NARROW_CELLS th {
+  border-color: #415680;
+}
+#left_menu th {
+  color: goldenrod;/*#63698c;*/
+  background-color: #212c42;
+}
+#left_menu td a:hover, #left_menu th a:hover, #left_menu.MENU_NARROW_CELLS td a:hover, #left_menu.MENU_NARROW_CELLS th a:hover {
+  background-color: #415680;
+}
+#left_menu a:not(.lm_with_image) {
+  background-color: rgba(35, 52, 82, 0.5); /*#233452;*/
+  border-color: #415680;
+}
+
+#left_menu.MENU_NARROW_CELLS a:not(.lm_with_image)
+{
+  background-color: rgba(35, 52, 82, 0); /*#233452;*/
+}
+#left_menu #server_name {
+  color: #00FF00;
+}
+#menu_show_hidden {
+  color: yellow;
+}
+#menu_news .fresh {
+  color: red;
+}
+#menu_admin_exit {
+  color: red;
+}
+#menu_premium {
+  color: gold;
+}
+
+#menu_premium_level {
+  color: gold;
+}
+.global_admin_warning {
+  color:red;
+}
+/* News and Surveys ================================================================================================= */
+.news_header {
+  background-color: #233452;
+}
+.news_date {
+  color: yellow;
+}
+.news_publisher {
+}
+.news_fresh, .news_future {
+  color: red;
+}
+.news_link {
+  color: green;
+}
+.survey_header, .survey_voted {
+  background-color: #233452;
+}
+.survey_confirm {
+  background-color: #233452;
+}
+.survey_votes_bar {
+  background-color: darkgreen;
+}
+
+.income_with_fleet {
+  color: #80a0C0;
+}
+
+td[go]:hover { /* Skin specific */
+  background-color: #415680;
+}
+
+
+/* Unit purchase --------------------------------------------------------------- */
+.unit_preview {
+  border-color: #344566;
+}
+.ov_planet_fill_bar {
+  border-color: rgb(153, 153, 255);
+}
+.unit_border_selected {
+  border-color: #6B90D3;  /* Reserved for unit_preview border color */
+}
+#user_list tr:hover {
+  color: yellow;
+}
+
+/* Chat ************************************************************************************************************* */
+#shoutbox tr  {
+  border-color:  #233452;
+}
+.chat_online, #onlinebox td {
+  background-color: black;
+}
+.chat_message {
+  background-color: black;
+  color:white;
+}
+#shoutbox {
+  background-color: black;
+}
+#shoutbox .chat_private {
+  color: lightblue;
+}
+#shoutbox > table {
+  background-color: black;
+}
+#shoutbox > table > tbody > tr {
+  background-color: black;
+}
+#shoutbox > table > tbody > tr > td {
+  background-color: black;
+}
+#chat_msg_wrapper #msg {
+  background-color: black;
+}
+#chat_color_select, #chat_message_smiles2, #chat_command_menu, #chat_muted_tooltip {
+  background-color: #233452;
+}
+/* Batch operations ************************************************************************************************************* */
+.unit_change {
+  color: #80a0C0;
+}
+
+/* Black market ===================================================================================================== */
+.market_services {
+  background-color: #344566;
+}
+
+/* Planet List ===================================================================================================== */
+.planet_list_fields {
+  background-color: #344566;
+}
+.ov_struc_timer {
+  background-color: #344566;
+}
+.planet_list_submoon_fields {
+  background-color: #344566;
+}
+
+/* Technology/TechTree page  ===================================================================================================== */
+#tab_tech_tree .tech_container {
+  border-color: #415680;
+}
+
+.planet-manage-governor-hire-container {
+  border-color: #415680;
+}
+
+td.error_message {
+  background-color: #415680;
+}
+
+
+
+.ui-dialog-titlebar-show {
+  display: block !important;
+}
+#tutorial_block {
+  /*display: none;*/
+}
+#tutorial_container {
+  padding: 0.5em;
+  max-width: 40em;
+  min-width: 40em;
+  display: inline-block;
+}
+#tutorial_header, .tutorial_dialog_title {
+  padding: 0.5em;
+  font-size: 130%;
+}
+#tutorial_text {
+  padding: 0.5em;
+  text-align: justify;
+}
+#tutorial_text_adviser {
+  float: left;
+}
+#tutorial_text::after {
+  clear: both;
+}
+#tutorial_buttons {
+  padding: 0.5em;
+  text-align: center;
+}
+#tutorial_button_next {
+  margin-left: auto;
+}
+#tutorial_button_window, #tutorial_button_window_off {
+  margin: 0 auto;
+}
+#tutorial_button_close {
+}
+#tutorial_footer {
+  padding: 0.5em;
+  text-align: center;
+}
+
+[go_url] {
+  cursor: pointer;
+}
+
+
+
+
+/* Hiding resource tooltip pattern */
+#navbar_resource_flex_tooltip_pattern, #navbar_resource_flex_tooltip_pattern_energy
+{
+  display: none;
+}
+
+#navbar_container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+}
+#navbar_container.resbar_v {
+  flex-direction: row;
+
+  align-items: flex-start;
+  justify-content: center;
+
+  text-align: left;
+}
+#navbar.resbar_v {
+  display: flex;
+  flex-wrap: nowrap;
+
+  margin:0;
+}
+
+.navbar_resources_flex {
+  display: flex;
+  flex-wrap: wrap;
+  flex-grow: 1;
+  justify-content: center;
+}
+.navbar_resources_flex.resbar_v {
+  flex-direction: column;
+}
+
+.navbar_resources_flex_title {
+  display: flex;
+  align-items: center;
+}
+.navbar_resources_flex.resbar_v .navbar_resources_flex_title {
+  display: block;
+}
+
+.navbar_resbar_flex_wrap2 {
+  display: flex;
+  flex-grow: 1;
+  flex-wrap: wrap;
+}
+.navbar_resources_flex.resbar_v .navbar_resbar_flex_wrap2 {
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.navbar_resbar_flex_wrap1 {
+  display: flex;
+  flex-grow: 1;
+  flex-wrap: wrap;
+}
+.navbar_resources_flex.resbar_v .navbar_resbar_flex_wrap1 {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+}
+
+.navbar_resources_flex_resource.cell {
+  cursor: pointer;
+
+  margin: 0 0.2em;
+  /* Overriding .cell padding */
+  padding: 0.1em 0.2em;
+  border-radius: 0.4em;
+
+  border: 1px solid green;
+
+  display: flex;
+  flex-grow: 1;
+
+  flex-basis: 0.1%;
+}
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  /* IE10+ CSS styles go here */
+  .navbar_resources_flex_resource.cell {
+    flex-basis: auto;
+  }
+}
+
+.navbar_resources_flex.resbar_v .navbar_resources_flex_resource {
+  flex-grow: 0;
+  margin: 0;
+  flex-basis: auto;
+}
+
+.navbar_resources_flex_resource > div {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  flex-direction: column;
+}
+.navbar_resources_flex_resource > div:not(.navbar_resource_image) {
+  flex-grow: 1;
+}
+
+
+
+
+
+
+#navbar_container {
+  /*border: 5px solid #5a70ff;*/
+}
+#__content_wrapper {
+  /*border: 5px solid yellow;*/
+}
+#__navbar_wrapper {
+  /*border: 5px dashed teal;*/
+}
+#__page {
+  /*border: 5px solid white;*/
+}
+#__menu {
+  /*border: 5px solid red;*/
+}
+#__navbar_additions {
+  /*border: 5px solid purple;*/
+}
+#__content {
+  /*border: 5px solid white;*/
+}
+#copyright {
+  /*border: 5px solid green;*/
+}
+
+
+
+.quest_list
+{
+  max-width: 70em;
+}
+
+.quest_filter_wrapper
+{
+  padding: 1em;
+  font-size: 120%;
+}
+
+.quest_admin_wrapper {
+  margin: 0.5em;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.quest_admin_buttons
+{
+  margin: 0;
+  flex-shrink: 100;
+  flex-grow: 0.01;
+  flex-basis: 1%;
+}
+
+.quest_wrapper
+{
+  flex-shrink: 1;
+  flex-grow: 1;
+  flex-basis: 1%;
+}
+
+.quest_header.header
+{
+  font-size: 120%;
+  margin: 0.5em;
+  padding: 0.5em;
+}
+
+.quest_name
+{
+
+}
+
+.quest_status
+{
+
+}
+
+.quest_description.cell
+{
+  text-align: justify;
+  margin: 0.5em;
+  padding: 0.5em;
+}
+
+.quest_details
+{
+  flex-wrap: wrap;
+  align-items: stretch;
+}
+
+.quest_details > div
+{
+  flex-grow: 1;
+  margin: 0.5em;
+  padding: 0.5em;
+}
+
+.quest_details ul
+{
+  padding-left: 0;
+}
+
+.quest_details li
+{
+  margin-left: 2em;
+}
+
+
+.admin_message_box {
+  display: inline-block;
+
+  text-align: center;
+
+  max-width: 50em;
+
+  margin: 1em auto;
+}
+
+.admin_message_box .cell, .admin_message_box .header, .admin_message_box .subheader {
+  padding: 0.5em;
+}
